@@ -19,7 +19,7 @@ public class DBFacade implements Facade {
             String password = "frb150195";
             String IP = "localhost";
             String PORT = "3306";
-            String DATABASE = "mario";
+            String DATABASE = "delfinen";
             String url = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
                     + "?useUnicode=true&useJDBCcompliantTimezoneShift=true&"
                     + "useLegacyDatetimeCode=false&"
