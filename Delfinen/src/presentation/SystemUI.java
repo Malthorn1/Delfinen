@@ -44,7 +44,7 @@ public class SystemUI implements UI {
     }
     
     @Override
-    public void opretBrugerDB() {
+    public void opretMedlem() {
         DBFacade db = new DBFacade();
         System.out.println("Indtast medlemmes navn: ");
         Scanner scan = new Scanner(System.in);
