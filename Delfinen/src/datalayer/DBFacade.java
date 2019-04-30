@@ -50,8 +50,26 @@ public class DBFacade implements Facade {
             System.out.print(", Medlemsnummer: " + medlemsnummer + "\n");
         }
         }catch(SQLException e){
-                        System.out.println(e);
+         System.out.println(e);
                 }
+    }
+    
+    @Override
+    public void printTrænere() throws SQLException {
+        Connection connection = connector();
+        try{
+        Statement statement = connection.createStatement();
+        ResultSet result = statement.executeQuery("SELECT * FROM TRÆNER");
+        while (result.next()) {
+            String træner_navn = result.getNString(2);
+            int træner_id = result.getInt(1);
+            System.out.print("Navn: " + træner_navn);
+            System.out.print(", Medlemsnummer: " + træner_id + "\n");
+            
+        }
+        }catch(SQLException e){
+         System.out.println(e);
+    }
     }
     
     @Override
