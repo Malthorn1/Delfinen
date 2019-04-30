@@ -1,15 +1,11 @@
-DROP TABLE if exists BUTTERFLY;
-DROP TABLE if exists CRAWL;
-DROP TABLE if exists RYGCRAWL;
-DROP TABLE if exists BRYSTSVØMNING;
+DROP TABLE if exists DISCIPLIN;
+DROP TABLE if exists MEDLEM_DISCIPLIN;
 DROP TABLE if exists MEDLEMMER;
 
 
-
-
 CREATE TABLE MEDLEMMER (  
-    ALDER INTEGER not null, 
-    NAVN VARCHAR(30), 
+	NAVN VARCHAR(30),
+    ALDER INTEGER not null,
     TELEFONNUMMER INTEGER not null,
     MEDLEMSNUMMER INTEGER not null AUTO_INCREMENT,
     DATOOPRETTET TIMESTAMP,
@@ -23,28 +19,22 @@ insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, 
 values ("Robert", 57, 55555555, 1, now(), 1, 1, "Hans Erik");
 
 
-CREATE TABLE BUTTERFLY (
-    TID time,
-    MEDLEMSNUMMER int not null auto_increment,
-    FOREIGN KEY (MEDLEMSNUMMER) REFERENCES MEDLEMMER(MEDLEMSNUMMER)
+CREATE TABLE DISCIPLIN (
+	navn varchar(15),
+    disciplinID INT NOT NULL
 );
 
-CREATE TABLE CRAWL (
-    TID time,
-    MEDLEMSNUMMER int not null auto_increment,
-    FOREIGN KEY (MEDLEMSNUMMER) REFERENCES MEDLEMMER(MEDLEMSNUMMER)
-);
+insert INTO DISCIPLIN (navn, disciplinID) values ("Crawl", 1);
+insert INTO DISCIPLIN (navn, disciplinID) values ("Rygcrawl", 2);
+insert INTO DISCIPLIN (navn, disciplinID) values ("Brystsvømning", 3);
+insert INTO DISCIPLIN (navn, disciplinID) values ("Butterfly", 4);
 
-CREATE TABLE RYGCRAWL (
-    TID time,
-    MEDLEMSNUMMER int not null auto_increment,
-    FOREIGN KEY (MEDLEMSNUMMER) REFERENCES MEDLEMMER(MEDLEMSNUMMER)
-);
-
-CREATE TABLE BRYSTSVØMNING (
-    TID time,
-    MEDLEMSNUMMER int not null auto_increment,
-    FOREIGN KEY (MEDLEMSNUMMER) REFERENCES MEDLEMMER(MEDLEMSNUMMER)
+CREATE TABLE MEDLEM_DISCIPLIN (
+bedstetid int,
+MEDLEMSNUMMER int,
+DISCIPLIN int,
+disciplinID int,
+FOREIGN KEY (MEDLEMSNUMMER) REFERENCES MEDLEMMER(MEDLEMSNUMMER)
 );
 
 
