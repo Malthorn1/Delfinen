@@ -13,10 +13,12 @@ public interface UI {
 
     public void visHovedMenu();
 
-    public String hovedMenuValg();   
+    public String hovedMenuValg(); 
     
     public void administrerBrugere();
     
     public void administrerBetaling();
+    
+    public void opretBrugerDB();
     
 }
