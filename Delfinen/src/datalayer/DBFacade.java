@@ -16,7 +16,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "frb150195";
+            String password = "rootprejler";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -36,6 +36,7 @@ public class DBFacade implements Facade {
     @Override
     public void printMedlemmer() throws SQLException {
         Connection connection = connector();
+        try{
         Statement statement = connection.createStatement();
         ResultSet result = statement.executeQuery("SELECT * FROM MEDLEMMER");
         while (result.next()) {
@@ -48,6 +49,9 @@ public class DBFacade implements Facade {
             System.out.print(telefonnummer + " ");
             System.out.print(medlemsnummer + "\n");
         }
+        }catch(SQLException e){
+                        System.out.println(e);
+                }
     }
     
     @Override
