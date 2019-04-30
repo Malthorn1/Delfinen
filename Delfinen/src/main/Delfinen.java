@@ -1,15 +1,21 @@
 package main;
 
 import businesslogic.Controller;
+import businesslogic.Medlem;
 import datalayer.DBFacade;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import presentation.SystemUI;
 
 public class Delfinen {
 
 
     public static void main(String[] args) throws SQLException {
-        DBFacade db = new DBFacade();
-        db.printMedlemmer();
+        ArrayList<Medlem> medlemmer = new ArrayList();
+        SystemUI ui = new SystemUI();
+        Controller ctrl = new Controller(ui, medlemmer);
+        
+        ui.opretMedlem();
     }
 
 }

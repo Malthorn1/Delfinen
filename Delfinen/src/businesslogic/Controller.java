@@ -4,8 +4,10 @@ import datalayer.Facade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import presentation.UI;
+
 
 /**
  *
@@ -15,12 +17,11 @@ import presentation.UI;
 public class Controller {
     private Facade facade;
     private UI ui;
-    private int currentOrderNum;
-
-    public Controller(UI ui) {
+    private ArrayList<Medlem> medlemmer;
+    public Controller(UI ui, ArrayList<Medlem> medlemmer) {
         this.facade=facade;
         this.ui = ui;
-        currentOrderNum = 1;
+        medlemmer = new ArrayList<Medlem>();
     }
 
     public void start() {
@@ -30,7 +31,7 @@ public class Controller {
             String brugerInput = ui.hovedMenuValg();
             switch (brugerInput) {
                 case "1":
-                    //visMenukort();
+                    opretMedlem();
                     break;
                 case "2":
                     //opretBestilling();
@@ -54,5 +55,9 @@ public class Controller {
 
     }
 
+    
+    public void opretMedlem(){
+        ui.opretMedlem();
+    }
 
 }

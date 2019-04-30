@@ -19,6 +19,6 @@ public interface UI {
     
     public void administrerBetaling();
     
-    public void opretBrugerDB();
+    public void opretMedlem();
     
 }

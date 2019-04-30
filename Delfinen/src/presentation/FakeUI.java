@@ -37,7 +37,7 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public void opretBrugerDB() {
+    public void opretMedlem() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

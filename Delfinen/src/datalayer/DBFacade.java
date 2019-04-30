@@ -16,7 +16,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "frb150195";
+            String password = "rootprejler";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -54,7 +54,7 @@ public class DBFacade implements Facade {
                 }
     }
     
-    @Override
+    
     public void printTrænere() throws SQLException {
         Connection connection = connector();
         try{
@@ -71,13 +71,33 @@ public class DBFacade implements Facade {
          System.out.println(e);
     }
     }
-    
+    /*
+    opretMedlem metoden tager variablerne fra et medlemsobjekt som argument,
+    og bruger herefter disse variabler i prepared statements
+    */
     @Override
-    public void opretBruger() throws SQLException {
+    public void opretMedlem(String navn, int alder, int telefonnummer, boolean betalt) throws SQLException {
     DBFacade db = new DBFacade();
     Connection connection = db.connector();
     
     try {
+        Statement st = connection.createStatement();
+            String sql = "INSERT INTO MEDLEMMER(NAVN, ALDER, TELEFONNUMMER, BETALT)VALUES(?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,navn);
+            statement.setInt(2, alder);
+            statement.setInt(3, telefonnummer);
+            statement.setBoolean(4, betalt);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+}
+
+/*
+try {
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery("select * from aktiveordrer");
         if (rs.next()) {
@@ -98,9 +118,4 @@ public class DBFacade implements Facade {
             statement.setBoolean(5, konkurrencesvømmer);
             statement.setString(6, træner);
         } 
-    } catch (SQLException e) {
-            System.out.println(e);
-        }
-}
-    
-}
+*/

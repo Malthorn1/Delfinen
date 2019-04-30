@@ -1,5 +1,6 @@
 package presentation;
 
+import businesslogic.Medlem;
 import datalayer.DBFacade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -43,17 +44,39 @@ public class SystemUI implements UI {
         System.out.println("q: Afslut");
     }
     
+    /*
+    Metoden laver et medlemsobjekt med variabler fra scanner input. 
+    Herefter opretter vi på samme tid medlemmet i databasen som tager scanner variablerne som argumenter. 
+    
+    */
     @Override
     public void opretMedlem() {
         DBFacade db = new DBFacade();
+        boolean betalt = false;
         System.out.println("Indtast medlemmes navn: ");
         Scanner scan = new Scanner(System.in);
-        //db.opretBruger();
-        System.out.println("Skriv pizzanummeret kunden har valgt: ");
-        int brugerInput = scan.nextInt();
-        visHovedMenu();
+        String medlemNavn = scan.nextLine();
+        System.out.println("Hvor gammel er medlem? ");
+        int alder = scan.nextInt();
+        System.out.println("Hvad er medlemmets telefon nummer? ");
+        int telefonnummer = scan.nextInt();
+        System.out.println("Har brugeren betalt? y/n");
+        String input = scan.nextLine();
+        if(input.contains("y")){
+            betalt = true;
+        }else if (input.contains("n")){
+        betalt = false;
         }
-
+        Medlem medlem = new Medlem(medlemNavn, alder, telefonnummer, betalt);
+        
+        try {
+            db.opretMedlem(medlemNavn, alder, telefonnummer, betalt);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        System.out.println(medlem.toString());
+        }
+        
     @Override
     public String hovedMenuValg() {
         Scanner scan = new Scanner(System.in);

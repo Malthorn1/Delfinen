@@ -34,7 +34,10 @@ public class Medlem {
         return betalt;
     }
 
-   
+   @Override
+   public String toString(){
+       return "Medlem oprettet: Navn: "+navn+" Alder: " + age + " Telefon nummer: " + telefonnummer + " Medlem har betalt: " + betalt;
+   }
 
     
     
