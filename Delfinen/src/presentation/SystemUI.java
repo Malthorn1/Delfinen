@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -28,8 +30,7 @@ public class SystemUI implements UI {
         System.out.println("");
         System.out.println("Vælg en af følgende valgmuligheder: ");
         System.out.println("1: Opret bruger");
-        System.out.println("2: Slet bruger");
-        System.out.println("3: Rediger bruger");
+        System.out.println("2: Rediger bruger");
         System.out.println("q: Afslut");
     }
     
@@ -37,10 +38,21 @@ public class SystemUI implements UI {
     public void administrerBetaling() {
         System.out.println("");
         System.out.println("Vælg en af følgende valgmuligheder: ");
-        System.out.println("1: Administrer brugere");
-        System.out.println("2: Administrer betaling");
+        System.out.println("1: Tilføj ny betaling");
+        System.out.println("2: Annuler abonnement");
         System.out.println("q: Afslut");
     }
+    
+    @Override
+    public void opretBrugerDB() {
+        DBFacade db = new DBFacade();
+        System.out.println("Indtast medlemmes navn: ");
+        Scanner scan = new Scanner(System.in);
+        //db.opretBruger();
+        System.out.println("Skriv pizzanummeret kunden har valgt: ");
+        int brugerInput = scan.nextInt();
+        visHovedMenu();
+        }
 
     @Override
     public String hovedMenuValg() {
@@ -61,7 +73,5 @@ public class SystemUI implements UI {
         }
         return "";
     }
-
-
-
+    
 }
