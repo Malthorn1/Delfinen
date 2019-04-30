@@ -47,7 +47,7 @@ public class DBFacade implements Facade {
             System.out.print("Navn: " + navn);
             System.out.print(", Alder: " + alder);
             System.out.print(", Telefonnummer: " + telefonnummer);
-            System.out.print(" Medlemsnummer: " + medlemsnummer + "\n");
+            System.out.print(", Medlemsnummer: " + medlemsnummer + "\n");
         }
         }catch(SQLException e){
                         System.out.println(e);
