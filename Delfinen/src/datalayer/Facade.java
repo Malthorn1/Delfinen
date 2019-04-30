@@ -10,5 +10,7 @@ import java.sql.SQLException;
 public interface Facade {
     
      public void printMedlemmer() throws SQLException;
+     
+     public void opretBruger() throws SQLException;
     
 }
