@@ -20,10 +20,21 @@ values ("Robert", 57, 55555555, 1, now(), 1, 1);
 
 CREATE TABLE TRÆNER (
 	træner_ID INTEGER not null AUTO_INCREMENT,
-	træner_navn VARCHAR(30)
+	træner_navn VARCHAR(30),
+    primary key (træner_ID)
 );
 
-insert into TRÆNER (træner_ID, træner_navn) values (1, "Robert Junor");
+ALTER TABLE TRÆNER AUTO_INCREMENT = 1000;
+insert into TRÆNER (træner_navn) values ("Robert Junor");
+insert into TRÆNER (træner_navn) values ("Robert Junor");
+insert into TRÆNER (træner_navn) values ("Robert Junor");
+insert into TRÆNER (træner_navn) values ("Robert Junor");
+insert into TRÆNER (træner_navn) values ("Robert Junor");
+insert into TRÆNER (træner_navn) values ("Robert Junor");
+insert into TRÆNER (træner_navn) values ("Robert Junor");
+insert into TRÆNER (træner_navn) values ("Robert Junor");
+insert into TRÆNER (træner_navn) values ("Robert Junor");
+
 
 
 CREATE TABLE DISCIPLIN (
