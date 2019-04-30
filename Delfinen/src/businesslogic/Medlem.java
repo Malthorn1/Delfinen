@@ -10,16 +10,12 @@ public class Medlem {
     private int age;
     private int telefonnummer;
     private boolean betalt;
-    private boolean konkurrencesvømmer;
-    private String træner;
 
-    public Medlem(String navn, int age, int telefonnummer, boolean betalt, boolean konkurrencesvømmer, String træner) {
+    public Medlem(String navn, int age, int telefonnummer, boolean betalt) {
         this.navn = navn;
         this.age = age;
         this.telefonnummer = telefonnummer;
         this.betalt = betalt;
-        this.konkurrencesvømmer = konkurrencesvømmer;
-        this.træner = træner;
     }
 
     public String getNavn() {
@@ -38,13 +34,9 @@ public class Medlem {
         return betalt;
     }
 
-    public boolean isKonkurrencesvømmer() {
-        return konkurrencesvømmer;
-    }
+   
 
-    public String getTræner() {
-        return træner;
-    }
+    
     
     
 }
