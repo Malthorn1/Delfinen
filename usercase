@@ -1,0 +1,40 @@
+<body>
+
+Use case example Opret Medlem:
+Primær aktør Formand.
+
+<b>Precondition:</b>
+Vi har stamdata for personen der vil melde sig ind.
+
+Post condition:
+Medlemmet er blevet oprettet i svømmeklubben.
+
+Main success scenario:
+Der bliver oprettet et medlem ud fra stamdata. Medlem bliver lagt i en database.
+
+
+Use case example: Kontingent betaling
+Primær aktør Kasserer.
+
+Precondition: Medlem er oprettet. Vi har en unik metode at identificere medlem på.
+
+Post condition: Kasseren registrere i systemet at medlem har betalt kontingent. 
+
+Main success scenario: 
+Medlem findes frem og betaling bliver registreret i databasen. Samt en dato. 
+
+
+Use case example: Restance statistik
+Primær aktør Kasserer.
+Precondition:
+Kontingent for sidste betaling er udløbet. 
+Post condition:
+Vi har en oversigt over hvilke medlemmer der er i restance. 
+Main success scenario:
+Viser en liste over medlemmer der ikke har betalt sin seneste kontingent. 
+
+
+</body>
+	
+
+
