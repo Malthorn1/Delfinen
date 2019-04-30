@@ -75,10 +75,10 @@ public class DBFacade implements Facade {
             statement.setBoolean(4, betalt);
             statement.setBoolean(5, konkurrencesvømmer);
             statement.setString(6, træner);
-        } catch (SQLException e) {
+        } 
+    } catch (SQLException e) {
             System.out.println(e);
         }
-    }
 }
     
 }
