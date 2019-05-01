@@ -9,13 +9,16 @@ public class Medlem {
     private String navn;
     private int age;
     private int telefonnummer;
-    private boolean betalt;
+    private boolean restance;
+    private boolean konkurrencesvømmer;
+    
 
-    public Medlem(String navn, int age, int telefonnummer, boolean betalt) {
+    public Medlem(String navn, int age, int telefonnummer, boolean restance, boolean konkurrencesvømmer) {
         this.navn = navn;
         this.age = age;
         this.telefonnummer = telefonnummer;
-        this.betalt = betalt;
+        this.restance = restance;
+        this.konkurrencesvømmer = konkurrencesvømmer;
     }
 
     public String getNavn() {
@@ -31,12 +34,12 @@ public class Medlem {
     }
 
     public boolean isBetalt() {
-        return betalt;
+        return restance;
     }
 
    @Override
    public String toString(){
-       return "Medlem oprettet: Navn: "+navn+" Alder: " + age + " Telefon nummer: " + telefonnummer + " Medlem har betalt: " + betalt;
+       return "Medlem oprettet: Navn: "+navn+" Alder: " + age + " Telefon nummer: " + telefonnummer + " Medlem har betalt: " + restance;
    }
 
     

@@ -53,6 +53,8 @@ public class SystemUI implements UI {
     public void opretMedlem() {
         DBFacade db = new DBFacade();
         boolean betalt = false;
+        boolean konkurrencesvømmer = false;
+        int trænerid = 0;
         System.out.println("Indtast medlemmes navn: ");
         Scanner scan = new Scanner(System.in);
         String medlemNavn = scan.nextLine();
@@ -62,15 +64,26 @@ public class SystemUI implements UI {
         int telefonnummer = scan.nextInt();
         System.out.println("Har brugeren betalt? y/n");
         String input = scan.nextLine();
-        if(input.contains("y")){
+        if(input.equals("y")){
             betalt = true;
-        }else if (input.contains("n")){
+        }else if (input.equals("n")){
         betalt = false;
         }
-        Medlem medlem = new Medlem(medlemNavn, alder, telefonnummer, betalt);
+        System.out.println("Skal medlem være konkurrencesvømmer? y/n");
+        String input2 = scan.nextLine();
+        if(input2.equals("y")){
+            konkurrencesvømmer = true;
+            System.out.println("Indtast trænerID på den træner de skal have: ");
+            int input3 = scan.nextInt();
+            trænerid = input3;
+        }else if(input2.equals("n")){
+            konkurrencesvømmer = false;
+            trænerid = 0;
+        }
+        Medlem medlem = new Medlem(medlemNavn, alder, telefonnummer, betalt, konkurrencesvømmer);
         
         try {
-            db.opretMedlem(medlemNavn, alder, telefonnummer, betalt);
+            db.opretMedlem(medlemNavn, alder, telefonnummer, betalt, konkurrencesvømmer);
         } catch (SQLException ex) {
             System.out.println(ex);
         }

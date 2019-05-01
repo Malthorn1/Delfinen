@@ -16,12 +16,13 @@ public class Delfinen {
         DBFacade DB = new DBFacade(); 
         Controller ctrl = new Controller(ui, medlemmer);
         
-        //ui.opretMedlem();
+        ui.opretMedlem();
         
         //ui.restance();
         
         //DB.printRestance();
-        DB.printLeaderboard();;
+        //DB.printLeaderboard();;
+        
     }
 
 }

@@ -16,7 +16,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "mixe91decoys";
+            String password = "rootprejler";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -75,20 +75,21 @@ public class DBFacade implements Facade {
     og bruger herefter disse variabler i prepared statements
      */
     @Override
-    public void opretMedlem(String navn, int alder, int telefonnummer, boolean betalt) throws SQLException {
+    public void opretMedlem(String navn, int alder, int telefonnummer, boolean restance, boolean konkurrencesvømmer) throws SQLException {
         DBFacade db = new DBFacade();
         Connection connection = db.connector();
 
         try {
             Statement st = connection.createStatement();
-            String sql = "INSERT INTO MEDLEMMER(NAVN, ALDER, TELEFONNUMMER, BETALT, DATOOPRETTET)VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO MEDLEMMER(NAVN, ALDER, TELEFONNUMMER, RESTANCE, DATOOPRETTET, KONKURRENCESVØMMER)VALUES(?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, navn);
             statement.setInt(2, alder);
             statement.setInt(3, telefonnummer);
-            statement.setBoolean(4, betalt);
+            statement.setBoolean(4, restance);
             java.sql.Timestamp  sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
             statement.setTimestamp(5, sqlDate);
+            statement.setBoolean(6, konkurrencesvømmer);
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
