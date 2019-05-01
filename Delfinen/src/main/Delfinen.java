@@ -20,7 +20,8 @@ public class Delfinen {
         
         //ui.restance();
         
-        DB.printRestance();
+        //DB.printRestance();
+        DB.printLeaderboard();;
     }
 
 }

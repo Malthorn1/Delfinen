@@ -14,5 +14,7 @@ public interface Facade {
      public void opretMedlem(String navn, int alder, int telefonnummer, boolean betalt) throws SQLException;
      
      public void printRestance() throws SQLException; 
+     
+    public void printLeaderboard() throws SQLException; 
     
 }

@@ -109,7 +109,9 @@ public class DBFacade implements Facade {
                 } else if (medlem_alder >=18 && medlem_alder <60)  {
                     gæld =1600; 
                 } else if (medlem_alder >=60) {
-                    gæld = (1200);
+                    gæld = 1200;
+                }else {
+                    gæld = 500; 
                 }
                 
                 System.out.print("Navn: " + medlems_navn);
@@ -117,6 +119,66 @@ public class DBFacade implements Facade {
                 System.out.print(", Skyldigt beløb : " + gæld + "\n");
             }
 
+        } catch (SQLException e) {
+            System.out.println(e);
+
+        }
+        
+    }
+
+    @Override
+    public void printLeaderboard() throws SQLException {       
+        Connection connection = connector();
+    
+        try {
+            Statement statement = connection.createStatement();
+            
+            ResultSet crawlresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '1' order by bedstetid ASC LIMIT 5;");
+            while (crawlresult.next()) {
+                int bedstetid = crawlresult.getInt(1);
+                int medlems_Nummer = crawlresult.getInt(2);
+                String Disciplin = crawlresult.getNString(3); 
+                
+                System.out.print("Disciplin: " + Disciplin );
+                System.out.print(", Tid: " + bedstetid);
+                System.out.print(" Medlemsnummer: " + medlems_Nummer+ "\n");
+
+            }
+            
+            ResultSet rygresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '2' order by bedstetid ASC LIMIT 5;");
+            while (rygresult.next()) {
+                int bedstetid = rygresult.getInt(1);
+                int medlems_Nummer = rygresult.getInt(2);
+                String Disciplin = rygresult.getNString(3); 
+                
+                        
+               System.out.print("Disciplin: " + Disciplin );
+                System.out.print(", Tid: " + bedstetid);
+                System.out.print(" Medlemsnummer: " + medlems_Nummer+ "\n");
+            }
+            
+            ResultSet brystresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '3' order by bedstetid ASC LIMIT 5;");
+            while (brystresult.next()) {
+                int bedstetid = brystresult.getInt(1);
+                int medlems_Nummer = brystresult.getInt(2);
+                String Disciplin = brystresult.getNString(3); 
+                
+                        
+               System.out.print("Disciplin: " + Disciplin );
+                System.out.print(", Tid: " + bedstetid);
+                System.out.print(" Medlemsnummer: " + medlems_Nummer+ "\n");
+            }
+            ResultSet flyresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '4' order by bedstetid ASC LIMIT 5;");
+                while (flyresult.next()) {
+                int bedstetid = flyresult.getInt(1);
+                int medlems_Nummer = flyresult.getInt(2);
+                String Disciplin = flyresult.getNString(3); 
+                
+                        
+               System.out.print("Disciplin: " + Disciplin );
+                System.out.print(", Tid: " + bedstetid);
+                System.out.print(" Medlemsnummer: " + medlems_Nummer+ "\n");
+            }
         } catch (SQLException e) {
             System.out.println(e);
 
