@@ -16,7 +16,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "rootprejler";
+            String password = "mixe91decoys";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -135,7 +135,7 @@ public class DBFacade implements Facade {
         try {
             Statement statement = connection.createStatement();
             
-            ResultSet crawlresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '1' order by bedstetid ASC LIMIT 5;");
+            ResultSet crawlresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '1' group by medlemsnummer order by bedstetid ASC LIMIT 5");
             while (crawlresult.next()) {
                 int bedstetid = crawlresult.getInt(1);
                 int medlems_Nummer = crawlresult.getInt(2);
@@ -147,7 +147,7 @@ public class DBFacade implements Facade {
 
             }
             
-            ResultSet rygresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '2' order by bedstetid ASC LIMIT 5;");
+            ResultSet rygresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '2' group by medlemsnummer order by bedstetid ASC LIMIT 5");
             while (rygresult.next()) {
                 int bedstetid = rygresult.getInt(1);
                 int medlems_Nummer = rygresult.getInt(2);
@@ -159,7 +159,7 @@ public class DBFacade implements Facade {
                 System.out.print(" Medlemsnummer: " + medlems_Nummer+ "\n");
             }
             
-            ResultSet brystresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '3' order by bedstetid ASC LIMIT 5;");
+            ResultSet brystresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '3' group by medlemsnummer order by bedstetid ASC LIMIT 5");
             while (brystresult.next()) {
                 int bedstetid = brystresult.getInt(1);
                 int medlems_Nummer = brystresult.getInt(2);
@@ -170,7 +170,7 @@ public class DBFacade implements Facade {
                 System.out.print(", Tid: " + bedstetid);
                 System.out.print(" Medlemsnummer: " + medlems_Nummer+ "\n");
             }
-            ResultSet flyresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '4' order by bedstetid ASC LIMIT 5;");
+            ResultSet flyresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '4' group by medlemsnummer order by bedstetid ASC LIMIT 5");
                 while (flyresult.next()) {
                 int bedstetid = flyresult.getInt(1);
                 int medlems_Nummer = flyresult.getInt(2);
