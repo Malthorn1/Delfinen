@@ -82,6 +82,8 @@ public class SystemUI implements UI {
         Scanner scan = new Scanner(System.in);
         return scan.nextLine();
     }
+    
+ 
 
 
     public String getQ() {
@@ -95,6 +97,14 @@ public class SystemUI implements UI {
             return getQ();
         }
         return "";
+    }
+
+    @Override
+    public void restance() {
+        
+        
+        
+        
     }
     
 }

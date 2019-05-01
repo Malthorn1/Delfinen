@@ -16,7 +16,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "rootprejler";
+            String password = "mixe91decoys";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -36,55 +36,54 @@ public class DBFacade implements Facade {
     @Override
     public void printMedlemmer() throws SQLException {
         Connection connection = connector();
-        try{
-        Statement statement = connection.createStatement();
-        ResultSet result = statement.executeQuery("SELECT * FROM MEDLEMMER");
-        while (result.next()) {
-            String navn = result.getNString(1);
-            int alder = result.getInt(2);
-            int telefonnummer = result.getInt(3);
-            int medlemsnummer = result.getInt(4);
-            System.out.print("Navn: " + navn);
-            System.out.print(", Alder: " + alder);
-            System.out.print(", Telefonnummer: " + telefonnummer);
-            System.out.print(", Medlemsnummer: " + medlemsnummer + "\n");
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM MEDLEMMER");
+            while (result.next()) {
+                String navn = result.getNString(1);
+                int alder = result.getInt(2);
+                int telefonnummer = result.getInt(3);
+                int medlemsnummer = result.getInt(4);
+                System.out.print("Navn: " + navn);
+                System.out.print(", Alder: " + alder);
+                System.out.print(", Telefonnummer: " + telefonnummer);
+                System.out.print(", Medlemsnummer: " + medlemsnummer + "\n");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
         }
-        }catch(SQLException e){
-         System.out.println(e);
-                }
     }
-    
-    
+
     public void printTrænere() throws SQLException {
         Connection connection = connector();
-        try{
-        Statement statement = connection.createStatement();
-        ResultSet result = statement.executeQuery("SELECT * FROM TRÆNER");
-        while (result.next()) {
-            String træner_navn = result.getNString(2);
-            int træner_id = result.getInt(1);
-            System.out.print("Navn: " + træner_navn);
-            System.out.print(", Medlemsnummer: " + træner_id + "\n");
-            
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM TRÆNER");
+            while (result.next()) {
+                String træner_navn = result.getNString(2);
+                int træner_id = result.getInt(1);
+                System.out.print("Navn: " + træner_navn);
+                System.out.print(", Medlemsnummer: " + træner_id + "\n");
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
         }
-        }catch(SQLException e){
-         System.out.println(e);
-    }
     }
     /*
     opretMedlem metoden tager variablerne fra et medlemsobjekt som argument,
     og bruger herefter disse variabler i prepared statements
-    */
+     */
     @Override
     public void opretMedlem(String navn, int alder, int telefonnummer, boolean betalt) throws SQLException {
-    DBFacade db = new DBFacade();
-    Connection connection = db.connector();
-    
-    try {
-        Statement st = connection.createStatement();
+        DBFacade db = new DBFacade();
+        Connection connection = db.connector();
+
+        try {
+            Statement st = connection.createStatement();
             String sql = "INSERT INTO MEDLEMMER(NAVN, ALDER, TELEFONNUMMER, BETALT)VALUES(?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,navn);
+            statement.setString(1, navn);
             statement.setInt(2, alder);
             statement.setInt(3, telefonnummer);
             statement.setBoolean(4, betalt);
@@ -93,9 +92,40 @@ public class DBFacade implements Facade {
             System.out.println(e);
         }
     }
-    
-}
 
+    @Override
+    public void printRestance() throws SQLException {
+        Connection connection = connector();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.medlemmer where MEDLEMSKAB = '0';");
+            while (result.next()) {
+                String medlems_navn = result.getNString(1);
+                int medlems_Nummer = result.getInt(4); 
+                int medlem_alder = result.getInt(2);
+                int gæld = 0;
+                if (medlem_alder < 18) {
+                    gæld =1000;  
+                } else if (medlem_alder >=18 && medlem_alder <60)  {
+                    gæld =1600; 
+                } else if (medlem_alder >=60) {
+                    gæld = (1200);
+                }
+                
+                System.out.print("Navn: " + medlems_navn);
+                System.out.print(", Medlemsnummer: " + medlems_Nummer);
+                System.out.print(", Skyldigt beløb : " + gæld + "\n");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+
+        }
+
+    }
+
+}
+    
 /*
 try {
         Statement st = connection.createStatement();

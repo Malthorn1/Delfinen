@@ -21,4 +21,6 @@ public interface UI {
     
     public void opretMedlem();
     
+    public void restance(); 
+    
 }
