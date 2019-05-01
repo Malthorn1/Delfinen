@@ -188,6 +188,38 @@ public class DBFacade implements Facade {
 
     }
 
+    @Override
+    public void PrintSvømmeHold() throws SQLException {
+          Connection connection = connector();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.medlemmer where KONKURRENCESVØMMER = '1' order by alder asc;");
+            while (result.next()) {
+                String medlems_navn = result.getNString(1);
+                int medlems_Nummer = result.getInt(4); 
+                int medlem_alder = result.getInt(2);
+                String Hold =""; 
+                if (medlem_alder < 18) {
+                    Hold ="U18";  
+                } else if (medlem_alder >=18)  {
+                    Hold ="VoksenHold"; 
+                }
+                
+                
+                System.out.print("Navn: " + medlems_navn);
+                System.out.print(", Medlemsnummer: " + medlems_Nummer);
+                System.out.print(", Svømmehold: " + Hold + "\n");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+
+        }
+        
+        
+        
+    }
+
 }
     
 /*
