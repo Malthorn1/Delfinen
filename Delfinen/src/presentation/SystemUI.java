@@ -74,7 +74,7 @@ public class SystemUI implements UI {
         System.out.println("Indtast medlemmes navn: ");
         Scanner scan = new Scanner(System.in);
         String medlemNavn = scan.nextLine();
-        if(!medlemNavn.matches("[a-z]")){
+        if(medlemNavn.matches(".*[1-9].*")){
         System.err.print("Fejl ved indtastning af navn. Fejl: Der blev indtasted andet end bokstaver.");
             try {
                 TimeUnit.SECONDS.sleep(1);
@@ -83,6 +83,8 @@ public class SystemUI implements UI {
             }
             System.out.println("\n" + "Indtast medlemmes navn: ");
             medlemNavn = scan.nextLine();
+        } else {
+            System.out.print("");
         }
         
         System.out.println("Hvor gammel er medlem? ");
