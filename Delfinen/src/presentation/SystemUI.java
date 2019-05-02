@@ -1,5 +1,6 @@
 package presentation;
 
+import businesslogic.Medlem;
 import datalayer.DBFacade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -43,22 +44,59 @@ public class SystemUI implements UI {
         System.out.println("q: Afslut");
     }
     
+    /*
+    Metoden laver et medlemsobjekt med variabler fra scanner input. 
+    Herefter opretter vi på samme tid medlemmet i databasen som tager scanner variablerne som argumenter. 
+    
+    */
     @Override
-    public void opretBrugerDB() {
+    public void opretMedlem() {
         DBFacade db = new DBFacade();
+        boolean betalt = false;
+        boolean konkurrencesvømmer = false;
+        int trænerid = 0;
         System.out.println("Indtast medlemmes navn: ");
         Scanner scan = new Scanner(System.in);
-        //db.opretBruger();
-        System.out.println("Skriv pizzanummeret kunden har valgt: ");
-        int brugerInput = scan.nextInt();
-        visHovedMenu();
+        String medlemNavn = scan.nextLine();
+        System.out.println("Hvor gammel er medlem? ");
+        int alder = scan.nextInt();
+        System.out.println("Hvad er medlemmets telefon nummer? ");
+        int telefonnummer = scan.nextInt();
+        System.out.println("Har brugeren betalt? y/n");
+        String input = scan.nextLine();
+        if(input.equals("y")){
+            betalt = true;
+        }else if (input.equals("n")){
+        betalt = false;
         }
-
+        System.out.println("Skal medlem være konkurrencesvømmer? y/n");
+        String input2 = scan.nextLine();
+        if(input2.equals("y")){
+            konkurrencesvømmer = true;
+            System.out.println("Indtast trænerID på den træner de skal have: ");
+            int input3 = scan.nextInt();
+            trænerid = input3;
+        }else if(input2.equals("n")){
+            konkurrencesvømmer = false;
+            trænerid = 0;
+        }
+        Medlem medlem = new Medlem(medlemNavn, alder, telefonnummer, betalt, konkurrencesvømmer);
+        
+        try {
+            db.opretMedlem(medlemNavn, alder, telefonnummer, betalt, konkurrencesvømmer);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        System.out.println(medlem.toString());
+        }
+        
     @Override
     public String hovedMenuValg() {
         Scanner scan = new Scanner(System.in);
         return scan.nextLine();
     }
+    
+ 
 
 
     public String getQ() {
@@ -72,6 +110,14 @@ public class SystemUI implements UI {
             return getQ();
         }
         return "";
+    }
+
+    @Override
+    public void restance() {
+        
+        
+        
+        
     }
     
 }
