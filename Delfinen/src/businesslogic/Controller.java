@@ -31,7 +31,7 @@ public class Controller {
             String brugerInput = ui.hovedMenuValg();
             switch (brugerInput) {
                 case "1":
-                    opretMedlem();
+                    ui.administrerBrugere();
                     break;
                 case "2":
                     //opretBestilling();

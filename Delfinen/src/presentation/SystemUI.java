@@ -32,7 +32,22 @@ public class SystemUI implements UI {
         System.out.println("Vælg en af følgende valgmuligheder: ");
         System.out.println("1: Opret bruger");
         System.out.println("2: Rediger bruger");
-        System.out.println("q: Afslut");
+        System.out.println("q: Tryk q for at gå tilbage");
+                Scanner scan = new Scanner(System.in);
+        String brugerInput = scan.nextLine();
+        switch(brugerInput){
+            case "1":
+                opretMedlem();
+                break;
+            case "2":
+                //
+                break;
+            case "q":
+                visHovedMenu();
+                break;
+            default:
+                System.err.print("Input forkert, prøv igen: ");
+        } 
     }
     
     @Override
@@ -96,6 +111,9 @@ public class SystemUI implements UI {
             System.out.println(ex);
         }
         System.out.println(medlem.toString());
+        System.out.println("\n");
+        administrerBrugere();
+        
         }
         
     @Override
