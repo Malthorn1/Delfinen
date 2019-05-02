@@ -16,7 +16,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "rootprejler";
+            String password = "mixe91decoys";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -101,7 +101,7 @@ public class DBFacade implements Facade {
         Connection connection = connector();
         try {
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.medlemmer where MEDLEMSKAB = '0';");
+            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.medlemmer where restance = '0';");
             while (result.next()) {
                 String medlems_navn = result.getNString(1);
                 int medlems_Nummer = result.getInt(4); 
