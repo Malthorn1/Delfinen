@@ -5,21 +5,21 @@ DROP TABLE if exists TRÆNER;
 
 
 CREATE TABLE TRÆNER (
-	træner_ID INTEGER not null AUTO_INCREMENT,
+	træner_ID INTEGER not null,
 	træner_navn VARCHAR(30),
     primary key (træner_ID)
 );
 
-ALTER TABLE TRÆNER AUTO_INCREMENT = 1000;
-insert into TRÆNER (træner_navn) values ("Robert Junor");
-insert into TRÆNER (træner_navn) values ("Robert Junor");
-insert into TRÆNER (træner_navn) values ("Robert Junor");
-insert into TRÆNER (træner_navn) values ("Robert Junor");
-insert into TRÆNER (træner_navn) values ("Robert Junor");
-insert into TRÆNER (træner_navn) values ("Robert Junor");
-insert into TRÆNER (træner_navn) values ("Robert Junor");
-insert into TRÆNER (træner_navn) values ("Robert Junor");
-insert into TRÆNER (træner_navn) values ("Robert Junor");
+
+insert into TRÆNER (træner_navn, træner_ID) values ("Robert Junor", 10001);
+insert into TRÆNER (træner_navn, træner_ID) values ("Robert Junor", 10002);
+insert into TRÆNER (træner_navn, træner_ID) values ("Robert Junor", 10003);
+insert into TRÆNER (træner_navn, træner_ID) values ("Robert Junor", 10004);
+insert into TRÆNER (træner_navn, træner_ID) values ("Robert Junor", 10005);
+insert into TRÆNER (træner_navn, træner_ID) values ("Robert Junor", 10006);
+insert into TRÆNER (træner_navn, træner_ID) values ("Robert Junor", 10007);
+insert into TRÆNER (træner_navn, træner_ID) values ("Robert Junor", 10008);
+insert into TRÆNER (træner_navn, træner_ID) values ("Robert Junor", 10009);
 
 
 CREATE TABLE MEDLEMMER (  
