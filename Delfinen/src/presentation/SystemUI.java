@@ -74,21 +74,43 @@ public class SystemUI implements UI {
         System.out.println("Indtast medlemmes navn: ");
         Scanner scan = new Scanner(System.in);
         String medlemNavn = scan.nextLine();
-        if(medlemNavn.matches(".*[1-9].*")){
-        System.err.print("Fejl ved indtastning af navn. Fejl: Der blev indtasted andet end bokstaver.");
-            try {
+            boolean isString;
+            do {
+                if (medlemNavn.matches(".*[1-9].*")) {
+                    System.err.print("Fejl ved indtastning af navn. Fejl: Der blev indtasted andet end bokstaver.");
+                    try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException ex) {
                 Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("\n" + "Indtast medlemmes navn: ");
-            medlemNavn = scan.nextLine();
-        } else {
-            System.out.print("");
-        }
+                    System.out.println("\n" + "Indtast medlemmes navn: "); 
+                    medlemNavn = scan.nextLine();
+                isString = false;
+            }else { 
+                    isString = true;
+                    }
+            } while (!(isString));
+            System.out.println("");
         
         System.out.println("Hvor gammel er medlem? ");
         int alder = scan.nextInt();
+//        boolean isNumber;
+//        do {
+//            System.out.println("Hvor gammel er medlem? ");
+//            if (alder.matches(".*[a-z].*")) {
+//                System.err.print("Fejl ved indtastning af alder. Fejl: Der blev indtasted andet end tal.");
+//                try {
+//                    TimeUnit.SECONDS.sleep(1);
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                alder = scan.nextInt();
+//                isNumber = false;
+//            } else {
+//                isNumber = true;
+//            }
+//        } while (!(isNumber));
+        
         System.out.println("Hvad er medlemmets telefon nummer? ");
         int telefonnummer = scan.nextInt();
         System.out.println("Har brugeren betalt? y/n");
