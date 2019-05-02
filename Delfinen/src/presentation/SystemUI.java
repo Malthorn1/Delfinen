@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -73,6 +74,17 @@ public class SystemUI implements UI {
         System.out.println("Indtast medlemmes navn: ");
         Scanner scan = new Scanner(System.in);
         String medlemNavn = scan.nextLine();
+        if(!medlemNavn.matches("[a-z]")){
+        System.err.print("Fejl ved indtastning af navn. Fejl: Der blev indtasted andet end bokstaver.");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("\n" + "Indtast medlemmes navn: ");
+            medlemNavn = scan.nextLine();
+        }
+        
         System.out.println("Hvor gammel er medlem? ");
         int alder = scan.nextInt();
         System.out.println("Hvad er medlemmets telefon nummer? ");
