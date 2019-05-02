@@ -63,17 +63,25 @@ public class SystemUI implements UI {
         System.out.println("Hvad er medlemmets telefon nummer? ");
         int telefonnummer = scan.nextInt();
         System.out.println("Har brugeren betalt? y/n");
-        String input = scan.nextLine();
+        String input = scan.next();
+        
         if(input.equals("y")){
             betalt = true;
         }else if (input.equals("n")){
         betalt = false;
         }
+        
         System.out.println("Skal medlem være konkurrencesvømmer? y/n");
-        String input2 = scan.nextLine();
+        String input2 = scan.next();
         if(input2.equals("y")){
             konkurrencesvømmer = true;
+            try {
+                db.printTrænere();
+            } catch (SQLException ex) {
+                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
             System.out.println("Indtast trænerID på den træner de skal have: ");
+            
             int input3 = scan.nextInt();
             trænerid = input3;
         }else if(input2.equals("n")){
@@ -83,7 +91,7 @@ public class SystemUI implements UI {
         Medlem medlem = new Medlem(medlemNavn, alder, telefonnummer, betalt, konkurrencesvømmer);
         
         try {
-            db.opretMedlem(medlemNavn, alder, telefonnummer, betalt, konkurrencesvømmer);
+            db.opretMedlem(medlemNavn, alder, telefonnummer, betalt, konkurrencesvømmer, trænerid);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
