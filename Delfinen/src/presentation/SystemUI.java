@@ -142,7 +142,7 @@ public class SystemUI implements UI {
         Medlem medlem = new Medlem(medlemNavn, alder, telefonnummer, betalt, konkurrencesvømmer);
         
         try {
-            db.opretMedlem(medlemNavn, alder, telefonnummer, betalt, konkurrencesvømmer, trænerid);
+            db.opretMedlem(medlem, trænerid);
         } catch (SQLException ex) {
             System.out.println(ex);
         }

@@ -11,7 +11,7 @@ public class Medlem {
     private int telefonnummer;
     private boolean restance;
     private boolean konkurrencesvømmer;
-    
+    private int medlemsnummer;
 
     public Medlem(String navn, int age, int telefonnummer, boolean restance, boolean konkurrencesvømmer) {
         this.navn = navn;
@@ -41,6 +41,18 @@ public class Medlem {
    public String toString(){
        return "Medlem oprettet: Navn: "+navn+" Alder: " + age + " Telefon nummer: " + telefonnummer + " Medlem har betalt: " + restance;
    }
+
+    public boolean isRestance() {
+        return restance;
+    }
+
+    public boolean isKonkurrencesvømmer() {
+        return konkurrencesvømmer;
+    }
+
+    public int getMedlemsnummer() {
+        return medlemsnummer;
+    }
 
     
     

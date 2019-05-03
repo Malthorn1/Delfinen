@@ -1,7 +1,9 @@
 package datalayer;
 
 //import businesslogic.Pizza;
+import businesslogic.Medlem;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -11,11 +13,11 @@ public interface Facade {
     
      public void printMedlemmer() throws SQLException;
      
-     public void opretMedlem(String navn, int alder, int telefonnummer, boolean restance, boolean konkurrencesvømmer, int trænerid) throws SQLException;
+     public void opretMedlem(Medlem medlem, int trænerid) throws SQLException;
      
      public void printRestance() throws SQLException; 
      
     public void printLeaderboard() throws SQLException; 
     
-    public void PrintSvømmeHold() throws SQLException;
+    public ArrayList<Medlem> hentSvømmeHold() throws SQLException;
 }
