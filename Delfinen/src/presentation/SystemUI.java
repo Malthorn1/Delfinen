@@ -97,25 +97,25 @@ public class SystemUI implements UI {
 //        boolean isNumber;
 //        do {
 //            System.out.println("Hvor gammel er medlem? ");
-//            if (alder.matches(".*[a-z].*")) {
+//            if (alder.nextInt()) {
+//                alder = scan.nextInt();
+//                isNumber = true;
+//            } else {
 //                System.err.print("Fejl ved indtastning af alder. Fejl: Der blev indtasted andet end tal.");
 //                try {
 //                    TimeUnit.SECONDS.sleep(1);
 //                } catch (InterruptedException ex) {
 //                    Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
 //                }
-//                alder = scan.nextInt();
 //                isNumber = false;
-//            } else {
-//                isNumber = true;
 //            }
 //        } while (!(isNumber));
         
         System.out.println("Hvad er medlemmets telefon nummer? ");
         int telefonnummer = scan.nextInt();
+        
         System.out.println("Har brugeren betalt? y/n");
         String input = scan.next();
-        
         if(input.equals("y")){
             betalt = true;
         }else if (input.equals("n")){
