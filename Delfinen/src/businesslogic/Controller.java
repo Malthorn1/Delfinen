@@ -29,7 +29,7 @@ public class Controller {
         medlemmer = new ArrayList<Medlem>();
     }
 
-    public void start() {
+    public void start() throws SQLException {
         boolean quite = false;
         ui.visHovedMenu();
         do {
@@ -39,7 +39,7 @@ public class Controller {
                     administrerBrugere();
                     break;
                 case "2":
-                    //opretBestilling();
+                    ui.printtrænere();
                     break;
                 case "3":
                     //redigerBestilling();
@@ -61,7 +61,7 @@ public class Controller {
     }
 
     
-    public void opretMedlem(){
+    public void opretMedlem() throws SQLException{
         boolean isKonkurrencesvømmer = false;
         boolean isRestance = false;
         int trænerID = 0;
@@ -74,6 +74,7 @@ public class Controller {
         }
         String konkurrencesvømmer = ui.getBoolean("Skal medlem være konkurrencesvømmer? y/n");
         if(konkurrencesvømmer.contains("y")){
+            ui.printtrænere();
             trænerID = ui.getInt("Indtast ID på trænernen");
             isKonkurrencesvømmer = true;
         }
@@ -92,13 +93,9 @@ public class Controller {
     }
 
     
-    public void administrerBrugere() {
+    public void administrerBrugere() throws SQLException {
           int brugerInput =  ui.getInt(" \n" + "vælg en af følgende valgmuligheder: " + "\n 1: Opret bruger" + "\n 2: Rediger bruger" + "\n q: Tryk q for at gå tilbage") ;
-//        System.out.println("");
-//        System.out.println("Vælg en af følgende valgmuligheder: ");
-//        System.out.println("1: Opret bruger");
-//        System.out.println("2: Rediger bruger");
-//        System.out.println("q: Tryk q for at gå tilbage");
+
         switch (brugerInput) {
             case 1:
                 opretMedlem();

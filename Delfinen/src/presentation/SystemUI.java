@@ -2,6 +2,7 @@ package presentation;
 
 import businesslogic.Controller;
 import businesslogic.Medlem;
+import businesslogic.Træner;
 import datalayer.DBFacade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -40,25 +41,29 @@ public class SystemUI implements UI {
 
     @Override
     public void administrerBrugere() {
-        System.out.println("");
-        System.out.println("Vælg en af følgende valgmuligheder: ");
-        System.out.println("1: Opret bruger");
-        System.out.println("2: Rediger bruger");
-        System.out.println("q: Tryk q for at gå tilbage");
-        Scanner scan = new Scanner(System.in);
-        String brugerInput = scan.nextLine();
-        switch (brugerInput) {
-            case "1":
-                ctrl.opretMedlem();
-                break;
-            case "2":
-                //
-                break;
-            case "q":
-                visHovedMenu();
-                break;
-            default:
-                System.err.print("Input forkert, prøv igen: ");
+        try {
+            System.out.println("");
+            System.out.println("Vælg en af følgende valgmuligheder: ");
+            System.out.println("1: Opret bruger");
+            System.out.println("2: Rediger bruger");
+            System.out.println("q: Tryk q for at gå tilbage");
+            Scanner scan = new Scanner(System.in);
+            String brugerInput = scan.nextLine();
+            switch (brugerInput) {
+                case "1":
+                    ctrl.opretMedlem();
+                    break;
+                case "2":
+                    //
+                    break;
+                case "q":
+                    visHovedMenu();
+                    break;
+                default:
+                    System.err.print("Input forkert, prøv igen: ");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -213,4 +218,22 @@ public class SystemUI implements UI {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void printtrænere() throws SQLException {
+        ArrayList<Træner> trænere = new ArrayList(); 
+        trænere = db.hentTrænere(); 
+        Træner træner  ; 
+        for (int i = 0; i < trænere.size(); i++) {
+            træner = trænere.get(i);
+        String træner_navn = træner.getNavn();
+        int træner_id = træner.gettræner_Id();
+        
+        System.out.print("Træner navn: "+ træner_navn);
+        System.out.print(" Træner ID: " + træner_id + " \n");
+        
+        
+        
+    }
+
+}
 }

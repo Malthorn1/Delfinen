@@ -28,4 +28,6 @@ public interface UI {
     public int getInt(String str);
 
     public String getBoolean(String str);
+    
+    public void printtrænere() throws SQLException;
 }

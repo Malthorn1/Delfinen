@@ -63,8 +63,14 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public boolean getBoolean(String str) {
+    public String getBoolean(String str) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void printtrænere() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
+

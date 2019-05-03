@@ -2,6 +2,7 @@ package datalayer;
 
 //import businesslogic.Pizza;
 import businesslogic.Medlem;
+import businesslogic.Træner;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -19,7 +20,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "rootprejler";
+            String password = "mixe91decoys";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -57,22 +58,7 @@ public class DBFacade implements Facade {
         }
     }
 
-    public void printTrænere() throws SQLException {
-        Connection connection = connector();
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM TRÆNER");
-            while (result.next()) {
-                String træner_navn = result.getNString(2);
-                int træner_id = result.getInt(1);
-                System.out.print("Navn: " + træner_navn);
-                System.out.print(", Medlemsnummer: " + træner_id + "\n");
 
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
 
     /*
     opretMedlem metoden tager variablerne fra et medlemsobjekt som argument,
@@ -195,7 +181,7 @@ public class DBFacade implements Facade {
     
 
     @Override
-    public ArrayList<Medlem> hentSvømmeHold() throws SQLException {
+    public  ArrayList<Medlem> hentSvømmeHold() throws SQLException {
         Connection connection = connector();
         ArrayList<Medlem> svømmehold = new ArrayList();
         try {
@@ -224,6 +210,26 @@ public class DBFacade implements Facade {
 
         }
         return svømmehold;
+    }
+    
+        public ArrayList<Træner> hentTrænere() throws SQLException {
+        Connection connection = connector();
+        ArrayList<Træner> trænere = new ArrayList();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM TRÆNER");
+            while (result.next()) {
+                String træner_navn = result.getNString(2);
+                int træner_id = result.getInt(1);
+                Træner træner = new Træner(træner_navn, træner_id);
+                
+                trænere.add(træner);
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return trænere;
     }
 
 }
