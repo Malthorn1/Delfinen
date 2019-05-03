@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class DBFacade implements Facade {
 
@@ -18,7 +19,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "frb150195";
+            String password = "rootprejler";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -94,6 +95,7 @@ public class DBFacade implements Facade {
             statement.setTimestamp(5, sqlDate);
             statement.setBoolean(6, medlem.isKonkurrencesvømmer());
             statement.setInt(7, trænerid);
+            
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -200,19 +202,21 @@ public class DBFacade implements Facade {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM delfinen.medlemmer where KONKURRENCESVØMMER = '1' order by alder asc;");
             while (result.next()) {
-                String medlems_navn = result.getNString(1);
-                int medlems_Nummer = result.getInt(4);
-                int medlem_alder = result.getInt(2);
-                String Hold = "";
-                if (medlem_alder < 18) {
-                    Hold = "U18";
-                } else if (medlem_alder >= 18) {
-                    Hold = "VoksenHold";
-                }
-
-                System.out.print("Navn: " + medlems_navn);
-                System.out.print(", Medlemsnummer: " + medlems_Nummer);
-                System.out.print(", Svømmehold: " + Hold + "\n");
+                String medlemsNavn = result.getNString(1);
+                int alder = result.getInt(2);
+                int telefonnummer = result.getInt(3);
+                int medlemsNummer = result.getInt(4);
+                Timestamp datoprettet = result.getTimestamp(5);
+                boolean restance = result.getBoolean(6);
+                boolean konkurrencesvømmer = result.getBoolean(7);
+                int trænerid = result.getInt(8);
+                
+                
+                Medlem medlem = new Medlem(medlemsNavn, alder, telefonnummer, restance, konkurrencesvømmer);
+                medlem.setMedlemsnummer(medlemsNummer);
+                
+                svømmehold.add(medlem);
+                
             }
 
         } catch (SQLException e) {
