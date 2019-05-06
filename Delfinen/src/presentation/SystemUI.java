@@ -32,7 +32,6 @@ public class SystemUI implements UI {
         System.out.println("Vælg en af følgende valgmuligheder: ");
         System.out.println("1: Administrer brugere");
         System.out.println("2: Administrer betaling");
-        System.out.println("3: printleadeboard");
         System.out.println("q: Afslut");
     }
 
@@ -49,6 +48,7 @@ public class SystemUI implements UI {
             System.out.println("Vælg en af følgende valgmuligheder: ");
             System.out.println("1: Opret bruger");
             System.out.println("2: Rediger bruger");
+            System.out.println("3: Udskriv trænere");
             System.out.println("q: Tryk q for at gå tilbage");
             Scanner scan = new Scanner(System.in);
             String brugerInput = scan.nextLine();
@@ -59,6 +59,15 @@ public class SystemUI implements UI {
                 case "2":
                     //
                     break;
+                case "3":
+                    printtrænere();
+                    System.out.println("Skriv q for at gå tilbage");
+                    String nextInput = scan.nextLine();
+                    if (nextInput == "q"){
+                        administrerBrugere();
+                    } else {
+                    System.err.print("Input forkert, prøv igen: ");
+                    }
                 case "q":
                     visHovedMenu();
                     break;
@@ -76,6 +85,9 @@ public class SystemUI implements UI {
         System.out.println("Vælg en af følgende valgmuligheder: ");
         System.out.println("1: Tilføj ny betaling");
         System.out.println("2: Annuler abonnement");
+        System.out.println("3: Udskriv restance");
+        System.out.println("4: Tilføj restance til et medlem");
+        System.out.println("5: Fjern restance fra et medlem");
         System.out.println("q: Afslut");
     }
 
