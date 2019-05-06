@@ -73,7 +73,7 @@ public class DBFacade implements Facade {
 
         try {
             Statement st = connection.createStatement();
-            String sql = "INSERT INTO MEDLEMMER(NAVN, ALDER, TELEFONNUMMER, RESTANCE, DATOOPRETTET, KONKURRENCESVØMMER, træner_ID)VALUES(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO MEDLEMMER(NAVN, ALDER, TELEFONNUMMER, RESTANCE, DATOOPRETTET, KONKURRENCESVØMMER)VALUES(?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, medlem.getNavn());
             statement.setInt(2, medlem.getAge());
@@ -82,8 +82,6 @@ public class DBFacade implements Facade {
             java.sql.Timestamp sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
             statement.setTimestamp(5, sqlDate);
             statement.setBoolean(6, medlem.isKonkurrencesvømmer());
-            statement.setInt(7, trænerid);
-            
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
