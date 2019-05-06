@@ -15,7 +15,7 @@ public interface UI {
 
     public String hovedMenuValg();
 
-    public void administrerBrugere(Controller ctrl);
+    public void administrerBrugere();
 
     public void administrerBetaling();
 
@@ -40,4 +40,6 @@ public interface UI {
     public ArrayList<Leaderboard> getBryst() throws SQLException;
 
     public ArrayList<Leaderboard> getFly() throws SQLException;
+    
+    public void opretMedlem1() throws SQLException;
 }

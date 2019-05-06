@@ -27,7 +27,6 @@ public class SystemUI implements UI {
 
     DBFacade db = new DBFacade();
     Scanner scan = new Scanner(System.in);
-    //Controller ctrl = new Controller();
 
     @Override
     public void visHovedMenu() {
@@ -46,44 +45,38 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public void administrerBrugere(Controller ctrl) {
+    public void administrerBrugere() {
         try {
-            System.out.println("");
-            System.out.println("Vælg en af følgende valgmuligheder: ");
-            System.out.println("1: Opret bruger");
-            System.out.println("2: Rediger bruger");
-            System.out.println("3: Udskriv trænere");
-            System.out.println("4: Udskriv svømmehold");
-            System.out.println("q: Tryk q for at gå tilbage");
+            udskrivAdministrerBrugere();
             Scanner scan = new Scanner(System.in);
             String brugerInput = scan.nextLine();
             switch (brugerInput) {
                 case "1":
-                    ctrl.opretMedlem();
+                    opretMedlem1();
                     break;
                 case "2":
                     //
                     break;
                 case "3":
                     printtrænere();
-                    System.out.println("Skriv q for at gå tilbage");
+                    skrivQForAtKommeTilbage();
                     String nextInput = scan.next();
                     if (nextInput == "q"){
-                        administrerBrugere(ctrl);
+                        administrerBrugere();
                     }
                 case "4":
                     printSvømmehold();
-                    System.out.println("Skriv q for at gå tilbage");
+                    skrivQForAtKommeTilbage();
                     String nextInput1 = scan.next();
                     if (nextInput1 == "q"){
-                        administrerBrugere(ctrl);
+                        administrerBrugere();
                         break;
                     }
                 case "q":
                     visHovedMenu();
                     break;
                 default:
-                    System.err.print("Input forkert, prøv igen: ");
+                    forkertInput();
             }
         } catch (SQLException ex) {
             Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -314,9 +307,58 @@ public class SystemUI implements UI {
             System.out.print(", medlemsnummer: " + medlemsnummer + "\n");
 }
     
-    
+        public void opretMedlem1() throws SQLException{
+        boolean isRestance = false;
+        int trænerID = 0;
+        String navn = getString("Indtast medlemmes navn: ");
+        int age = getInt("Indtast medlemmets alder: ");
+        int telefonnummer = getInt("Indtast medlemmets telefonnummer: ");
+        String restance = getBoolean("Har medlem betalt? y/n ");
+        if(restance.contains("y")){
+            isRestance = true;
+        }
+        String isKonkurrencesvømmer = getBoolean("Skal medlem være konkurrencesvømmer? y/n");
+        if(isKonkurrencesvømmer.contains("y")){
+            printtrænere();
+            trænerID = getInt("Indtast ID på trænernen");
+            Medlem medlem = new Medlem(navn, age, telefonnummer, isRestance);
+            Konkurrencesvømmer konkurrencesvømmer = new Konkurrencesvømmer(navn, age , telefonnummer, isRestance, trænerID);
+            db.opretKonkurrenceSvømmer(konkurrencesvømmer);
+            
+            
+        }
+        
+        
+        Medlem medlem = new Medlem(navn, age, telefonnummer, isRestance);
 
-
+        try {
+            db.opretMedlem(medlem);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        System.out.println(medlem.toString());
+        System.out.println("\n");
+        administrerBrugere();
+    }
+        
+        public void skrivQForAtKommeTilbage() {
+            System.out.println("Skriv q for at gå tilbage");
+        }
+        
+        public void forkertInput() {
+            System.err.print("Input forkert, prøv igen: ");
+        }
+        
+        public void udskrivAdministrerBrugere() {
+                System.out.println("");
+            System.out.println("Vælg en af følgende valgmuligheder: ");
+            System.out.println("1: Opret bruger");
+            System.out.println("2: Rediger bruger");
+            System.out.println("3: Udskriv trænere");
+            System.out.println("4: Udskriv svømmehold");
+            System.out.println("q: Tryk q for at gå tilbage");
+}
+        
     }
 
 

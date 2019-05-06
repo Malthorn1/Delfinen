@@ -30,7 +30,7 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public void administrerBrugere(Controller ctrl) {
+    public void administrerBrugere() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -91,6 +91,11 @@ public class FakeUI implements UI {
 
     @Override
     public void printRestance() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void opretMedlem1() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
