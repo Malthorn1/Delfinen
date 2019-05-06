@@ -78,22 +78,56 @@ public class SystemUI implements UI {
                 default:
                     forkertInput();
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
         }
     }
 
     @Override
     public void administrerBetaling() {
-        System.out.println("");
-        System.out.println("Vælg en af følgende valgmuligheder: ");
-        System.out.println("1: Tilføj ny betaling");
-        System.out.println("2: Annuler abonnement");
-        System.out.println("3: Udskriv restance");
-        System.out.println("4: Tilføj restance til et medlem");
-        System.out.println("5: Fjern restance fra et medlem");
-        System.out.println("q: Afslut");
+       try {
+            udskrivAdministrerBetaling();
+            Scanner scan = new Scanner(System.in);
+            String brugerInput = scan.nextLine();
+            switch (brugerInput) {
+                case "1":
+                    //
+                    break;
+                case "2":
+                    //
+                    break;
+                case "3":
+                    //
+                case "4":
+                    setRestanceTilJa();
+                    skrivQForAtKommeTilbage();
+                    String nextInput1 = scan.next();
+                    if (nextInput1 == "q"){
+                        administrerBetaling();
+                        break;
+                    }
+                case "5":
+                    setRestanceTilNej();
+                    skrivQForAtKommeTilbage();
+                    String nextInput2 = scan.next();
+                    if (nextInput2 == "q"){
+                        administrerBetaling();
+                        break;
+                    }
+                case "q":
+                    visHovedMenu();
+                    break;
+                default:
+                    forkertInput();
+            }
+        } catch(Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
     }
+    
+    
 
     /*
     Metoden laver et medlemsobjekt med variabler fra scanner input. 
@@ -199,9 +233,9 @@ public class SystemUI implements UI {
                 System.out.print(", Medlemsnummer: " + medlems_Nummer);
                 System.out.print(", Skyldigt beløb : " + gæld + "\n");
         
-    }
+                }
 
-}
+    }
     
 
     @Override
@@ -289,24 +323,21 @@ public class SystemUI implements UI {
     ArrayList<Leaderboard> Leaderboard = new ArrayList();
     Leaderboard = db.hentLeaderboardBryst();
     return Leaderboard;
-}
+    }
 
     @Override
     public ArrayList<Leaderboard> getFly() throws SQLException {  
         ArrayList<Leaderboard> Leaderboard = new ArrayList();
         Leaderboard = db.hentLeaderboardFly();
         return Leaderboard;
-        
     }
     
     public void printLnsvømmetid (LocalTime bedsteTid, String disciplin, int disciplinId, int medlemsnummer) {
-    
-                System.out.print("Bedste tid:" + bedsteTid);
+            System.out.print("Bedste tid:" + bedsteTid);
             System.out.print(", disciplin: " + disciplin);
             System.out.print(", disciplinID: " + disciplinId);
             System.out.print(", medlemsnummer: " + medlemsnummer + "\n");
 }
-    
         public void opretMedlem1() throws SQLException{
         boolean isRestance = false;
         int trænerID = 0;
@@ -323,14 +354,9 @@ public class SystemUI implements UI {
             trænerID = getInt("Indtast ID på trænernen");
             Medlem medlem = new Medlem(navn, age, telefonnummer, isRestance);
             Konkurrencesvømmer konkurrencesvømmer = new Konkurrencesvømmer(navn, age , telefonnummer, isRestance, trænerID);
-            db.opretKonkurrenceSvømmer(konkurrencesvømmer);
-            
-            
+            db.opretKonkurrenceSvømmer(konkurrencesvømmer); 
         }
-        
-        
         Medlem medlem = new Medlem(navn, age, telefonnummer, isRestance);
-
         try {
             db.opretMedlem(medlem);
         } catch (SQLException ex) {
@@ -339,7 +365,20 @@ public class SystemUI implements UI {
         System.out.println(medlem.toString());
         System.out.println("\n");
         administrerBrugere();
-    }
+        }
+        
+        public void setRestanceTilJa() {
+            int medlemsnummer = getInt("Indtast medlemmets nummer");
+            db.sætMedlemRestanceJa(medlemsnummer); 
+            administrerBrugere();
+        }
+        
+        public void setRestanceTilNej() {
+            int medlemsnummer = getInt("Indtast medlemmets nummer");
+            db.sætMedlemRestanceNej(medlemsnummer); 
+            administrerBrugere();
+        }
+        
         
         public void skrivQForAtKommeTilbage() {
             System.out.println("Skriv q for at gå tilbage");
@@ -350,14 +389,25 @@ public class SystemUI implements UI {
         }
         
         public void udskrivAdministrerBrugere() {
-                System.out.println("");
+            System.out.println("");
             System.out.println("Vælg en af følgende valgmuligheder: ");
             System.out.println("1: Opret bruger");
             System.out.println("2: Rediger bruger");
             System.out.println("3: Udskriv trænere");
             System.out.println("4: Udskriv svømmehold");
             System.out.println("q: Tryk q for at gå tilbage");
-}
+        }
+        
+        public void udskrivAdministrerBetaling() {
+        System.out.println("");
+        System.out.println("Vælg en af følgende valgmuligheder: ");
+        System.out.println("1: Tilføj ny betaling");
+        System.out.println("2: Annuler abonnement");
+        System.out.println("3: Udskriv medlemmere i restance");
+        System.out.println("4: Tilføj restance til et medlem");
+        System.out.println("5: Fjern restance fra et medlem");
+        System.out.println("q: Afslut");
+        }
         
     }
 

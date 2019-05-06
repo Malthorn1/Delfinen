@@ -378,28 +378,33 @@ public class DBFacade implements Facade {
             System.out.println(e);
         }
     }
+    public void sætMedlemRestanceJa(int medlemsnummer) {
+        Connection connection = connector();
+        try{
+            Statement st = connection.createStatement();
+            String query = "update medlemmer set RESTANCE = ? where MEDLEMSNUMMER = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(2, medlemsnummer);
+            statement.setBoolean(1, true);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+    }
+    
+    public void sætMedlemRestanceNej(int medlemsnummer) {
+        Connection connection = connector();
+        try{
+            Statement st = connection.createStatement();
+            String query = "update medlemmer set RESTANCE = ? where MEDLEMSNUMMER = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(2, medlemsnummer);
+            statement.setBoolean(1, false);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+    }
 }
-
-/*
-try {
-        Statement st = connection.createStatement();
-        ResultSet rs = st.executeQuery("select * from aktiveordrer");
-        if (rs.next()) {
-            String navn = rs.getString("NAVN");
-            int alder = rs.getInt("ALDER");
-            int telefonnummer = rs.getInt("TELEFONNUMMER");
-            //Vi springer første medlemsnummeret over da den er sat til AUTO_INCREMENT i SQL.
-            Timestamp DATOOPRETTET = rs.getTimestamp("DATOOPRETTET");
-            boolean betalt = rs.getBoolean("BETALT");
-            boolean konkurrencesvømmer = rs.getBoolean("KONKURRENCESVØMMER");
-            String træner = rs.getString("TRÆNER");
-            String sql = "INSERT INTO MEDLEMMER(NAVN, ALDER, TELEFONNUMMER, DATOOPRETTET, BETALT, KONKURRENCESVØMMER, TRÆNER)VALUES(?,?,?,?,?,?,?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,navn);
-            statement.setInt(2, alder);
-            statement.setTimestamp(3, DATOOPRETTET);
-            statement.setBoolean(4, betalt);
-            statement.setBoolean(5, konkurrencesvømmer);
-            statement.setString(6, træner);
-        } 
- */
