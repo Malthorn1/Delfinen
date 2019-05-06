@@ -22,11 +22,18 @@ public interface Facade {
 
     public void printRestance() throws SQLException;
 
-    public void printLeaderboard() throws SQLException;
+//    public void printLeaderboard() throws SQLException;
 
     public ArrayList<Medlem> hentSvømmeHold() throws SQLException;
 
     public ArrayList<Træner> hentTrænere() throws SQLException;
+
     
-    public ArrayList<String> hentLeaderboard () throws SQLException; 
+        public ArrayList<Leaderboard> hentLeaderboardCrawl() throws SQLException;
+
+    public ArrayList<Leaderboard> hentLeaderboardRyg() throws SQLException;
+
+    public ArrayList<Leaderboard> hentLeaderboardBryst() throws SQLException;
+
+    public ArrayList<Leaderboard> hentLeaderboardFly() throws SQLException;
 }

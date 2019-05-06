@@ -145,62 +145,62 @@ public class DBFacade implements Facade {
 
     }
 
-    @Override
-    public void printLeaderboard() throws SQLException {
-        Connection connection = connector();
-
-        try {
-            Statement statement = connection.createStatement();
-
-            ResultSet crawlresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '1' group by medlemsnummer order by bedstetid ASC LIMIT 5");
-            while (crawlresult.next()) {
-                int bedstetid = crawlresult.getInt(1);
-                int medlems_Nummer = crawlresult.getInt(2);
-                String Disciplin = crawlresult.getNString(3);
-
-                System.out.print("Disciplin: " + Disciplin);
-                System.out.print(", Tid: " + bedstetid);
-                System.out.print(" Medlemsnummer: " + medlems_Nummer + "\n");
-
-            }
-
-            ResultSet rygresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '2' group by medlemsnummer order by bedstetid ASC LIMIT 5");
-            while (rygresult.next()) {
-                int bedstetid = rygresult.getInt(1);
-                int medlems_Nummer = rygresult.getInt(2);
-                String Disciplin = rygresult.getNString(3);
-
-                System.out.print("Disciplin: " + Disciplin);
-                System.out.print(", Tid: " + bedstetid);
-                System.out.print(" Medlemsnummer: " + medlems_Nummer + "\n");
-            }
-
-            ResultSet brystresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '3' group by medlemsnummer order by bedstetid ASC LIMIT 5");
-            while (brystresult.next()) {
-                int bedstetid = brystresult.getInt(1);
-                int medlems_Nummer = brystresult.getInt(2);
-                String Disciplin = brystresult.getNString(3);
-
-                System.out.print("Disciplin: " + Disciplin);
-                System.out.print(", Tid: " + bedstetid);
-                System.out.print(" Medlemsnummer: " + medlems_Nummer + "\n");
-            }
-            ResultSet flyresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '4' group by medlemsnummer order by bedstetid ASC LIMIT 5");
-            while (flyresult.next()) {
-                int bedstetid = flyresult.getInt(1);
-                int medlems_Nummer = flyresult.getInt(2);
-                String Disciplin = flyresult.getNString(3);
-
-                System.out.print("Disciplin: " + Disciplin);
-                System.out.print(", Tid: " + bedstetid);
-                System.out.print(" Medlemsnummer: " + medlems_Nummer + "\n");
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-
-        }
-
-    }
+//    @Override
+//    public void printLeaderboard() throws SQLException {
+//        Connection connection = connector();
+//
+//        try {
+//            Statement statement = connection.createStatement();
+//
+//            ResultSet crawlresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '1' group by medlemsnummer order by bedstetid ASC LIMIT 5");
+//            while (crawlresult.next()) {
+//                int bedstetid = crawlresult.getInt(1);
+//                int medlems_Nummer = crawlresult.getInt(2);
+//                String Disciplin = crawlresult.getNString(3);
+//
+//                System.out.print("Disciplin: " + Disciplin);
+//                System.out.print(", Tid: " + bedstetid);
+//                System.out.print(" Medlemsnummer: " + medlems_Nummer + "\n");
+//
+//            }
+//
+//            ResultSet rygresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '2' group by medlemsnummer order by bedstetid ASC LIMIT 5");
+//            while (rygresult.next()) {
+//                int bedstetid = rygresult.getInt(1);
+//                int medlems_Nummer = rygresult.getInt(2);
+//                String Disciplin = rygresult.getNString(3);
+//
+//                System.out.print("Disciplin: " + Disciplin);
+//                System.out.print(", Tid: " + bedstetid);
+//                System.out.print(" Medlemsnummer: " + medlems_Nummer + "\n");
+//            }
+//
+//            ResultSet brystresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '3' group by medlemsnummer order by bedstetid ASC LIMIT 5");
+//            while (brystresult.next()) {
+//                int bedstetid = brystresult.getInt(1);
+//                int medlems_Nummer = brystresult.getInt(2);
+//                String Disciplin = brystresult.getNString(3);
+//
+//                System.out.print("Disciplin: " + Disciplin);
+//                System.out.print(", Tid: " + bedstetid);
+//                System.out.print(" Medlemsnummer: " + medlems_Nummer + "\n");
+//            }
+//            ResultSet flyresult = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '4' group by medlemsnummer order by bedstetid ASC LIMIT 5");
+//            while (flyresult.next()) {
+//                int bedstetid = flyresult.getInt(1);
+//                int medlems_Nummer = flyresult.getInt(2);
+//                String Disciplin = flyresult.getNString(3);
+//
+//                System.out.print("Disciplin: " + Disciplin);
+//                System.out.print(", Tid: " + bedstetid);
+//                System.out.print(" Medlemsnummer: " + medlems_Nummer + "\n");
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//
+//        }
+//
+//    }
 
     
 
@@ -222,7 +222,7 @@ public class DBFacade implements Facade {
                 int trænerid = result.getInt(8);
                 
                 
-                Medlem medlem = new Medlem(medlemsNavn, alder, telefonnummer, restance, konkurrencesvømmer);
+                Medlem medlem = new Medlem(medlemsNavn, alder, telefonnummer, restance);
                 medlem.setMedlemsnummer(medlemsNummer);
                 
                 svømmehold.add(medlem);
@@ -256,8 +256,59 @@ public class DBFacade implements Facade {
         return trænere;
     }
         
+    
+            @Override
+        public ArrayList<Leaderboard> hentLeaderboardCrawl () throws SQLException {
+        Connection connection = connector();
+        ArrayList<Leaderboard> leaderboards = new ArrayList();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '1' group by medlemsnummer order by bedstetid ASC LIMIT 5");
+            while (result.next()) {
+                String disciplin = result.getNString(3);
+                int bedsteTid = result.getInt(1); 
+                int medlemsNummer = result.getInt(2);
+                int disciplinId = result.getInt(4);
+                Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
+                
+                leaderboards.add(leaderboard1); 
+                
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return leaderboards;
+
+}
+
     @Override
-        public ArrayList<Leaderboard> hentLeaderboard () throws SQLException {
+    public ArrayList<Leaderboard> hentLeaderboardRyg() throws SQLException {
+        Connection connection = connector();
+        ArrayList<Leaderboard> leaderboards = new ArrayList();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '2' group by medlemsnummer order by bedstetid ASC LIMIT 5");
+            while (result.next()) {
+                String disciplin = result.getNString(3);
+                int bedsteTid = result.getInt(1); 
+                int medlemsNummer = result.getInt(2);
+                int disciplinId = result.getInt(4);
+                Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
+                
+                leaderboards.add(leaderboard1); 
+                
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return leaderboards;
+
+    }
+
+    @Override
+    public ArrayList<Leaderboard> hentLeaderboardBryst() throws SQLException {
         Connection connection = connector();
         ArrayList<Leaderboard> leaderboards = new ArrayList();
         try {
@@ -279,7 +330,32 @@ public class DBFacade implements Facade {
         }
         return leaderboards;
 
-}
+    }
+
+    @Override
+    public ArrayList<Leaderboard> hentLeaderboardFly() throws SQLException {
+        Connection connection = connector();
+        ArrayList<Leaderboard> leaderboards = new ArrayList();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '4' group by medlemsnummer order by bedstetid ASC LIMIT 5");
+            while (result.next()) {
+                String disciplin = result.getNString(3);
+                int bedsteTid = result.getInt(1); 
+                int medlemsNummer = result.getInt(2);
+                int disciplinId = result.getInt(4);
+                Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
+                
+                leaderboards.add(leaderboard1); 
+                
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return leaderboards;
+
+    }
 }
 /*
 try {

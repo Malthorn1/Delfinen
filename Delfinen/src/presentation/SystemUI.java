@@ -23,7 +23,6 @@ public class SystemUI implements UI {
     DBFacade db = new DBFacade();
     Scanner scan = new Scanner(System.in);
     Controller ctrl = new Controller();
-    
 
     @Override
     public void visHovedMenu() {
@@ -222,44 +221,102 @@ public class SystemUI implements UI {
 
     @Override
     public void printtrænere() throws SQLException {
-        ArrayList<Træner> trænere = new ArrayList(); 
-        trænere = db.hentTrænere(); 
-        Træner træner  ; 
+        ArrayList<Træner> trænere = new ArrayList();
+        trænere = db.hentTrænere();
+        Træner træner;
         for (int i = 0; i < trænere.size(); i++) {
             træner = trænere.get(i);
-        String træner_navn = træner.getNavn();
-        int træner_id = træner.gettræner_Id();
-        
-        System.out.print("Træner navn: "+ træner_navn);
-        System.out.print(" Træner ID: " + træner_id + " \n");
-        
-        
-        
-    }
+            String træner_navn = træner.getNavn();
+            int træner_id = træner.gettræner_Id();
 
-}
+            System.out.print("Træner navn: " + træner_navn);
+            System.out.print(" Træner ID: " + træner_id + " \n");
+
+        }
+
+    }
 
     @Override
     public void printLeaderboard() throws SQLException {
-        ArrayList<Leaderboard> Leaderboard = new ArrayList(); 
-        
-        Leaderboard = db.hentLeaderboard(); 
-        Leaderboard leaderboard1  ; 
+        ArrayList<Leaderboard> Leaderboard = new ArrayList();
+
+        //Leaderboard = db.hentLeaderboardCrawl(); 
+        Leaderboard = getCrawl();
+
+        Leaderboard leaderboard1;
         for (int i = 0; i < Leaderboard.size(); i++) {
             leaderboard1 = Leaderboard.get(i);
-        String disciplin = leaderboard1.getDisciplin();
-        int disciplinId = leaderboard1.getDisciplinId(); 
-        int bedsteTid = leaderboard1.getBedsteTId(); 
-        int medlemsnummer = leaderboard1.getMedlemsnummer();
+            String disciplin = leaderboard1.getDisciplin();
+            int disciplinId = leaderboard1.getDisciplinId();
+            int bedsteTid = leaderboard1.getBedsteTId();
+            int medlemsnummer = leaderboard1.getMedlemsnummer();
+            printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
+        }
+        Leaderboard = getRyg();
+        Leaderboard leaderboard2;
+        for (int i = 0; i < Leaderboard.size(); i++) {
+            leaderboard2 = Leaderboard.get(i);
+            String disciplin = leaderboard2.getDisciplin();
+            int disciplinId = leaderboard2.getDisciplinId();
+            int bedsteTid = leaderboard2.getBedsteTId();
+            int medlemsnummer = leaderboard2.getMedlemsnummer();
+            printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
+        }
+        Leaderboard = getBryst();
+        Leaderboard leaderboard3;
+        for (int i = 0; i < Leaderboard.size(); i++) {
+            leaderboard3 = Leaderboard.get(i);
+            String disciplin = leaderboard3.getDisciplin();
+            int disciplinId = leaderboard3.getDisciplinId();
+            int bedsteTid = leaderboard3.getBedsteTId();
+            int medlemsnummer = leaderboard3.getMedlemsnummer();
+            printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
+        }
+        Leaderboard = getFly();
+        Leaderboard leaderboard4;
+        for (int i = 0; i < Leaderboard.size(); i++) {
+            leaderboard4 = Leaderboard.get(i);
+            String disciplin = leaderboard4.getDisciplin();
+            int disciplinId = leaderboard4.getDisciplinId();
+            int bedsteTid = leaderboard4.getBedsteTId();
+            int medlemsnummer = leaderboard4.getMedlemsnummer();
+            printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
+        }
+    }
+
+    public ArrayList<Leaderboard> getCrawl() throws SQLException {
+        ArrayList<Leaderboard> Leaderboard = new ArrayList();
+        Leaderboard = db.hentLeaderboardCrawl();
+        return Leaderboard;
+    }
+
+    public ArrayList<Leaderboard> getRyg() throws SQLException {
+        ArrayList<Leaderboard> Leaderboard = new ArrayList();
+        Leaderboard = db.hentLeaderboardRyg();
+        return Leaderboard;
+    }
+
+    @Override
+    public ArrayList<Leaderboard> getBryst() throws SQLException {
+    ArrayList<Leaderboard> Leaderboard = new ArrayList();
+    Leaderboard = db.hentLeaderboardBryst();
+    return Leaderboard;
+}
+
+    @Override
+    public ArrayList<Leaderboard> getFly() throws SQLException {  
+        ArrayList<Leaderboard> Leaderboard = new ArrayList();
+        Leaderboard = db.hentLeaderboardFly();
+        return Leaderboard;
         
-            System.out.print("Bedste tid:" + bedsteTid);
+    }
+    
+    public void printLnsvømmetid (int bedsteTid, String disciplin, int disciplinId, int medlemsnummer) {
+    
+                System.out.print("Bedste tid:" + bedsteTid);
             System.out.print(", disciplin: " + disciplin);
             System.out.print(", disciplinID: " + disciplinId);
             System.out.print(", medlemsnummer: " + medlemsnummer + "\n");
-                
-        
-      
-    }
-}
 }
 
+}
