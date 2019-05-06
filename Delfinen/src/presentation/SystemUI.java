@@ -242,6 +242,7 @@ public class SystemUI implements UI {
             int disciplinId = leaderboard1.getDisciplinId();
             LocalTime bedsteTid = leaderboard1.getBedsteTid();
             int medlemsnummer = leaderboard1.getMedlemsnummer();
+            bedsteTid = bedsteTid.minusHours(1);
             printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
         }
         Leaderboard = getRyg();
@@ -271,6 +272,7 @@ public class SystemUI implements UI {
             String disciplin = leaderboard4.getDisciplin();
             int disciplinId = leaderboard4.getDisciplinId();
             LocalTime bedsteTid = leaderboard4.getBedsteTid();
+            bedsteTid = bedsteTid.minusHours(1);
             
             int medlemsnummer = leaderboard4.getMedlemsnummer();
             printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);

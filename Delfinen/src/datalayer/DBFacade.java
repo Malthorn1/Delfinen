@@ -64,6 +64,8 @@ public class DBFacade implements Facade {
         }
     }
 
+
+
     /*
     opretMedlem metoden tager variablerne fra et medlemsobjekt som argument,
     og bruger herefter disse variabler i prepared statements
@@ -89,7 +91,7 @@ public class DBFacade implements Facade {
             System.out.println(e);
         }
     }
-
+    
     @Override
     public void opretKonkurrenceSvømmer(Konkurrencesvømmer konkurrencesvømmer) throws SQLException {
         DBFacade db = new DBFacade();
@@ -107,7 +109,7 @@ public class DBFacade implements Facade {
             statement.setTimestamp(5, sqlDate);
             statement.setBoolean(6, true);
             statement.setInt(7, konkurrencesvømmer.getTrænerID());
-
+            
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -115,18 +117,18 @@ public class DBFacade implements Facade {
     }
 
     @Override
-    public ArrayList<Restance> hentRestance() throws SQLException {
-        Connection connection = connector();
-        ArrayList<Restance> restance1 = new ArrayList();
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.medlemmer where restance = '0';");
-            while (result.next()) {
-                String medlems_navn = result.getNString(1);
-                int medlems_Nummer = result.getInt(4);
-                int medlem_alder = result.getInt(2);
-                int gæld = 0;
-                if (medlem_alder < 18) {
+        public ArrayList<Restance> hentRestance() throws SQLException {
+            Connection connection = connector();
+            ArrayList<Restance> restance1 = new ArrayList();
+            try {
+                Statement statement = connection.createStatement();
+                ResultSet result = statement.executeQuery("SELECT * FROM delfinen.medlemmer where restance = '0';");
+                while (result.next()) {
+                    String medlems_navn = result.getNString(1);
+                    int medlems_Nummer = result.getInt(4);
+                    int medlem_alder = result.getInt(2);
+                    int gæld = 0;
+                    if (medlem_alder < 18) {
                     gæld = 1000;
                 } else if (medlem_alder >= 18 && medlem_alder < 60) {
                     gæld = 1600;
@@ -135,14 +137,15 @@ public class DBFacade implements Facade {
                 } else {
                     gæld = 500;
                 }
-                Restance restance = new Restance(medlems_navn, medlems_Nummer, medlem_alder);
-                restance1.add(restance);
-            }
-        } catch (SQLException e) {
+                    Restance restance = new Restance(medlems_navn, medlems_Nummer, medlem_alder);
+                    restance1.add(restance);
+                }
+            }catch (SQLException e) {
             System.out.println(e);
         }
-        return restance1;
-    }
+            return restance1;
+        }
+
 
 //    @Override
 //    public void printLeaderboard() throws SQLException {
@@ -200,8 +203,11 @@ public class DBFacade implements Facade {
 //        }
 //
 //    }
+
+    
+
     @Override
-    public ArrayList<Konkurrencesvømmer> hentSvømmeHold() throws SQLException {
+    public  ArrayList<Konkurrencesvømmer> hentSvømmeHold() throws SQLException {
         Connection connection = connector();
         ArrayList<Konkurrencesvømmer> svømmehold = new ArrayList();
         try {
@@ -216,11 +222,11 @@ public class DBFacade implements Facade {
                 boolean restance = result.getBoolean(6);
                 boolean isKonkurrencesvømmer = result.getBoolean(7);
                 int trænerid = result.getInt(8);
-
-                Konkurrencesvømmer konkurrencesvømmer = new Konkurrencesvømmer(medlemsNavn, alder, telefonnummer, restance, trænerid);
+                
+                Konkurrencesvømmer konkurrencesvømmer = new Konkurrencesvømmer (medlemsNavn, alder, telefonnummer, restance, trænerid);
                 konkurrencesvømmer.setMedlemsnummer(medlemsNummer);
                 svømmehold.add(konkurrencesvømmer);
-
+                
             }
 
         } catch (SQLException e) {
@@ -229,8 +235,8 @@ public class DBFacade implements Facade {
         }
         return svømmehold;
     }
-
-    public ArrayList<Træner> hentTrænere() throws SQLException {
+    
+        public ArrayList<Træner> hentTrænere() throws SQLException {
         Connection connection = connector();
         ArrayList<Træner> trænere = new ArrayList();
         try {
@@ -240,18 +246,19 @@ public class DBFacade implements Facade {
                 String træner_navn = result.getNString(2);
                 int træner_id = result.getInt(1);
                 Træner træner = new Træner(træner_navn, træner_id);
-
+                
                 trænere.add(træner);
-
+                
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
         return trænere;
     }
-
-    @Override
-    public ArrayList<Leaderboard> hentLeaderboardCrawl() throws SQLException {
+        
+    
+            @Override
+        public ArrayList<Leaderboard> hentLeaderboardCrawl () throws SQLException {
         Connection connection = connector();
         ArrayList<Leaderboard> leaderboards = new ArrayList();
         try {
@@ -264,16 +271,17 @@ public class DBFacade implements Facade {
                 int medlemsNummer = result.getInt(2);
                 int disciplinId = result.getInt(4);
                 Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
-
-                leaderboards.add(leaderboard1);
-
+                
+                leaderboards.add(leaderboard1); 
+                
+                
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
         return leaderboards;
 
-    }
+}
 
     @Override
     public ArrayList<Leaderboard> hentLeaderboardRyg() throws SQLException {
@@ -289,9 +297,10 @@ public class DBFacade implements Facade {
                 int medlemsNummer = result.getInt(2);
                 int disciplinId = result.getInt(4);
                 Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
-
-                leaderboards.add(leaderboard1);
-
+                
+                leaderboards.add(leaderboard1); 
+                
+                
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -314,9 +323,10 @@ public class DBFacade implements Facade {
                 int medlemsNummer = result.getInt(2);
                 int disciplinId = result.getInt(4);
                 Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
-
-                leaderboards.add(leaderboard1);
-
+                
+                leaderboards.add(leaderboard1); 
+                
+                
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -339,9 +349,10 @@ public class DBFacade implements Facade {
                 int medlemsNummer = result.getInt(2);
                 int disciplinId = result.getInt(4);
                 Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
-
-                leaderboards.add(leaderboard1);
-
+                
+                leaderboards.add(leaderboard1); 
+                
+                
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -349,7 +360,7 @@ public class DBFacade implements Facade {
         return leaderboards;
 
     }
-    
+        
     public void indtastTræningstid(int medlemsnummer, Time tid, String disciplin) {
 
         Connection connection = connector();
@@ -369,3 +380,26 @@ public class DBFacade implements Facade {
     }
 }
 
+/*
+try {
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery("select * from aktiveordrer");
+        if (rs.next()) {
+            String navn = rs.getString("NAVN");
+            int alder = rs.getInt("ALDER");
+            int telefonnummer = rs.getInt("TELEFONNUMMER");
+            //Vi springer første medlemsnummeret over da den er sat til AUTO_INCREMENT i SQL.
+            Timestamp DATOOPRETTET = rs.getTimestamp("DATOOPRETTET");
+            boolean betalt = rs.getBoolean("BETALT");
+            boolean konkurrencesvømmer = rs.getBoolean("KONKURRENCESVØMMER");
+            String træner = rs.getString("TRÆNER");
+            String sql = "INSERT INTO MEDLEMMER(NAVN, ALDER, TELEFONNUMMER, DATOOPRETTET, BETALT, KONKURRENCESVØMMER, TRÆNER)VALUES(?,?,?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,navn);
+            statement.setInt(2, alder);
+            statement.setTimestamp(3, DATOOPRETTET);
+            statement.setBoolean(4, betalt);
+            statement.setBoolean(5, konkurrencesvømmer);
+            statement.setString(6, træner);
+        } 
+ */
