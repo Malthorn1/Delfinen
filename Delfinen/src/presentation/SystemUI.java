@@ -32,6 +32,7 @@ public class SystemUI implements UI {
         System.out.println("Vælg en af følgende valgmuligheder: ");
         System.out.println("1: Administrer brugere");
         System.out.println("2: Administrer betaling");
+        System.out.println("3: Udskriv scoreboard for konkurrence svømmere");
         System.out.println("q: Afslut");
     }
 
@@ -49,6 +50,7 @@ public class SystemUI implements UI {
             System.out.println("1: Opret bruger");
             System.out.println("2: Rediger bruger");
             System.out.println("3: Udskriv trænere");
+            System.out.println("4: Udskriv svømmehold");
             System.out.println("q: Tryk q for at gå tilbage");
             Scanner scan = new Scanner(System.in);
             String brugerInput = scan.nextLine();
@@ -62,11 +64,17 @@ public class SystemUI implements UI {
                 case "3":
                     printtrænere();
                     System.out.println("Skriv q for at gå tilbage");
-                    String nextInput = scan.nextLine();
+                    String nextInput = scan.next();
                     if (nextInput == "q"){
                         administrerBrugere();
-                    } else {
-                    System.err.print("Input forkert, prøv igen: ");
+                    }
+                case "4":
+                    printSvømmehold();
+                    System.out.println("Skriv q for at gå tilbage");
+                    String nextInput1 = scan.next();
+                    if (nextInput1 == "q"){
+                        administrerBrugere();
+                        break;
                     }
                 case "q":
                     visHovedMenu();

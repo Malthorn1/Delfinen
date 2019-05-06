@@ -39,7 +39,7 @@ public class Controller {
                     ui.administrerBrugere();
                     break;
                 case "2":
-                    ui.printtrænere();
+                    ui.administrerBetaling();
                     break;
                 case "3":
                     ui.printLeaderboard();
