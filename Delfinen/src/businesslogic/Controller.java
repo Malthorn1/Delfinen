@@ -62,7 +62,6 @@ public class Controller {
 
     
     public void opretMedlem() throws SQLException{
-        boolean isKonkurrencesvømmer = false;
         boolean isRestance = false;
         int trænerID = 0;
         String navn = ui.getString("Indtast medlemmes navn: ");
@@ -72,18 +71,22 @@ public class Controller {
         if(restance.contains("y")){
             isRestance = true;
         }
-        String konkurrencesvømmer = ui.getBoolean("Skal medlem være konkurrencesvømmer? y/n");
-        if(konkurrencesvømmer.contains("y")){
+        String isKonkurrencesvømmer = ui.getBoolean("Skal medlem være konkurrencesvømmer? y/n");
+        if(isKonkurrencesvømmer.contains("y")){
             ui.printtrænere();
             trænerID = ui.getInt("Indtast ID på trænernen");
-            isKonkurrencesvømmer = true;
+            Medlem medlem = new Medlem(navn, age, telefonnummer, isRestance);
+            Konkurrencesvømmer konkurrencesvømmer = new Konkurrencesvømmer(navn, age , telefonnummer, isRestance, trænerID);
+            db.opretKonkurrenceSvømmer(konkurrencesvømmer);
+            
+            
         }
         
         
-        Medlem medlem = new Medlem(navn, age, telefonnummer, isRestance, isKonkurrencesvømmer);
+        Medlem medlem = new Medlem(navn, age, telefonnummer, isRestance);
 
         try {
-            db.opretMedlem(medlem, trænerID);
+            db.opretMedlem(medlem);
         } catch (SQLException ex) {
             System.out.println(ex);
         }

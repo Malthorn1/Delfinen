@@ -1,6 +1,7 @@
 package datalayer;
 
 //import businesslogic.Pizza;
+import businesslogic.Konkurrencesvømmer;
 import businesslogic.Leaderboard;
 import businesslogic.Medlem;
 import businesslogic.Træner;
@@ -15,7 +16,9 @@ public interface Facade {
 
     public void printMedlemmer() throws SQLException;
 
-    public void opretMedlem(Medlem medlem, int trænerid) throws SQLException;
+    public void opretMedlem(Medlem medlem) throws SQLException;
+    
+    public void opretKonkurrenceSvømmer(Konkurrencesvømmer konkurrencesvømmer) throws SQLException;
 
     public void printRestance() throws SQLException;
 
@@ -25,5 +28,5 @@ public interface Facade {
 
     public ArrayList<Træner> hentTrænere() throws SQLException;
     
-    public ArrayList<Leaderboard> hentLeaderboard () throws SQLException; 
+    public ArrayList<String> hentLeaderboard () throws SQLException; 
 }

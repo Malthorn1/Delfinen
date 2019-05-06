@@ -1,6 +1,7 @@
 package datalayer;
 
 //import businesslogic.Pizza;
+import businesslogic.Konkurrencesvømmer;
 import businesslogic.Leaderboard;
 import businesslogic.Medlem;
 import businesslogic.Træner;
@@ -66,7 +67,7 @@ public class DBFacade implements Facade {
     og bruger herefter disse variabler i prepared statements
      */
     @Override
-    public void opretMedlem(Medlem medlem, int trænerid) throws SQLException {
+    public void opretMedlem(Medlem medlem) throws SQLException {
         DBFacade db = new DBFacade();
         Connection connection = db.connector();
 
@@ -82,6 +83,30 @@ public class DBFacade implements Facade {
             statement.setTimestamp(5, sqlDate);
             statement.setBoolean(6, medlem.isKonkurrencesvømmer());
             statement.setInt(7, trænerid);
+            
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    @Override
+    public void opretKonkurrenceSvømmer(Konkurrencesvømmer konkurrencesvømmer) throws SQLException {
+        DBFacade db = new DBFacade();
+        Connection connection = db.connector();
+
+        try {
+            Statement st = connection.createStatement();
+            String sql = "INSERT INTO MEDLEMMER(NAVN, ALDER, TELEFONNUMMER, RESTANCE, DATOOPRETTET, KONKURRENCESVØMMER, træner_ID)VALUES(?,?,?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, konkurrencesvømmer.getNavn());
+            statement.setInt(2, konkurrencesvømmer.getAge());
+            statement.setInt(3, konkurrencesvømmer.getTelefonnummer());
+            statement.setBoolean(4, konkurrencesvømmer.isRestance());
+            java.sql.Timestamp sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
+            statement.setTimestamp(5, sqlDate);
+            statement.setBoolean(6, true);
+            statement.setInt(7, konkurrencesvømmer.getTrænerID());
             
             statement.executeUpdate();
         } catch (SQLException e) {

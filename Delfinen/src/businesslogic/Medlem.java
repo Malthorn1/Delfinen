@@ -12,6 +12,18 @@ public class Medlem {
     private boolean restance;
     private boolean konkurrencesvømmer;
     private int medlemsnummer;
+    
+    public Medlem(String navn, int age, int telefonnummer, boolean restance) {
+        this.navn = navn;
+        this.age = age;
+        this.telefonnummer = telefonnummer;
+        this.restance = restance;
+    }
+    
+     public Medlem() {
+        // tom constructor
+    }
+
 
     public void setNavn(String navn) {
         this.navn = navn;
@@ -42,18 +54,9 @@ public class Medlem {
     }
     private Træner træner;
 
-    public Medlem() {
-        // tom constructor
-    }
+   
 
-    public Medlem(String navn, int age, int telefonnummer, boolean restance, boolean konkurrencesvømmer) {
-        this.navn = navn;
-        this.age = age;
-        this.telefonnummer = telefonnummer;
-        this.restance = restance;
-        this.konkurrencesvømmer = konkurrencesvømmer;
-    }
-
+    
     public String getNavn() {
         return navn;
     }
