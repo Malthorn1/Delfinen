@@ -10,6 +10,8 @@ import datalayer.DBFacade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -164,6 +166,18 @@ public class SystemUI implements UI {
     public String getBoolean(String str) {
         System.out.println(str);
         return scan.next();
+    }
+    
+    public void indtastTræningstid() throws ParseException {
+        System.out.println("Indtast medlemsnummeret på konkurrenesvømmer:  ");
+        int medlemsnummer = scan.nextInt();
+        System.out.print("Indtast træningstid HH:MM:SS: ");
+        String strTid = scan.next();
+        Time tid = Time.valueOf(strTid);
+        System.out.println("Indtast navn på Disciplin");
+        String disciplin = scan.next();
+        db.indtastTræningstid(medlemsnummer, tid, disciplin);
+
     }
 
     @Override
