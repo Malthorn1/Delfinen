@@ -10,6 +10,8 @@ import datalayer.DBFacade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.ParseException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -33,7 +35,7 @@ public class SystemUI implements UI {
         System.out.println("Vælg en af følgende valgmuligheder: ");
         System.out.println("1: Administrer brugere");
         System.out.println("2: Administrer betaling");
-        System.out.println("3: printleadeboard");
+        System.out.println("3: Udskriv scoreboard for konkurrence svømmere");
         System.out.println("q: Afslut");
     }
 
@@ -50,6 +52,8 @@ public class SystemUI implements UI {
             System.out.println("Vælg en af følgende valgmuligheder: ");
             System.out.println("1: Opret bruger");
             System.out.println("2: Rediger bruger");
+            System.out.println("3: Udskriv trænere");
+            System.out.println("4: Udskriv svømmehold");
             System.out.println("q: Tryk q for at gå tilbage");
             Scanner scan = new Scanner(System.in);
             String brugerInput = scan.nextLine();
@@ -60,6 +64,21 @@ public class SystemUI implements UI {
                 case "2":
                     //
                     break;
+                case "3":
+                    printtrænere();
+                    System.out.println("Skriv q for at gå tilbage");
+                    String nextInput = scan.next();
+                    if (nextInput == "q"){
+                        administrerBrugere();
+                    }
+                case "4":
+                    printSvømmehold();
+                    System.out.println("Skriv q for at gå tilbage");
+                    String nextInput1 = scan.next();
+                    if (nextInput1 == "q"){
+                        administrerBrugere();
+                        break;
+                    }
                 case "q":
                     visHovedMenu();
                     break;
@@ -77,6 +96,9 @@ public class SystemUI implements UI {
         System.out.println("Vælg en af følgende valgmuligheder: ");
         System.out.println("1: Tilføj ny betaling");
         System.out.println("2: Annuler abonnement");
+        System.out.println("3: Udskriv restance");
+        System.out.println("4: Tilføj restance til et medlem");
+        System.out.println("5: Fjern restance fra et medlem");
         System.out.println("q: Afslut");
     }
 
@@ -85,77 +107,7 @@ public class SystemUI implements UI {
     Herefter opretter vi på samme tid medlemmet i databasen som tager scanner variablerne som argumenter. 
     
      */
-    @Override
-    public void opretMedlem() {
-//        DBFacade db = new DBFacade();
-//        boolean betalt = false;
-//        boolean konkurrencesvømmer = false;
-//        int trænerid = 0;
-//        
-//        
-//        boolean isNumber;
-//        do {
-//            System.out.println("Hvor gammel er medlem? ");
-//            if () {
-//                System.err.print("Fejl ved indtastning af alder. Fejl: Der blev indtasted andet end tal.");
-//                try {
-//                    TimeUnit.SECONDS.sleep(1);
-//                } catch (InterruptedException ex) {
-//                    Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                alder = scan.nextInt();
-//                isNumber = false;
-//            } else {
-//                isNumber = true;
-//            }
-//        } while (!(isNumber));
-//
-//        System.out.println("Hvad er medlemmets telefon nummer? ");
-//        int telefonnummer = scan.nextInt();
-//        System.out.println("Har brugeren betalt? y/n");
-//        String input = scan.next();
-//
-//        if (input.equals("y")) {
-//            betalt = true;
-//        } else if (input.equals("n")) {
-//            betalt = false;
-//        }
-//
-//        System.out.println("Skal medlem være konkurrencesvømmer? y/n");
-//        String input2 = scan.next();
-//        if (input2.equals("y")) {
-//            konkurrencesvømmer = true;
-//            try {
-//                db.printTrænere();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            System.out.println("Indtast trænerID på den træner de skal have: ");
-//
-//            int input3 = scan.nextInt();
-//            trænerid = input3;
-//        } else if (input2.equals("n")) {
-//            konkurrencesvømmer = false;
-//            trænerid = 0;
-//        }
-//        Medlem medlem = new Medlem(medlemNavn, alder, telefonnummer, betalt, konkurrencesvømmer);
-//
-//        try {
-//            db.opretMedlem(medlem, trænerid);
-//        } catch (SQLException ex) {
-//            System.out.println(ex);
-//        }
-//        System.out.println(medlem.toString());
-//        System.out.println("\n");
-//        administrerBrugere();
-//
-//    }
-//
-//    
-//
 
-//
-    }
 
     @Override
     public void printSvømmehold() throws SQLException {
@@ -215,6 +167,18 @@ public class SystemUI implements UI {
     public String getBoolean(String str) {
         System.out.println(str);
         return scan.next();
+    }
+    
+    public void indtastTræningstid() throws ParseException {
+        System.out.println("Indtast medlemsnummeret på konkurrenesvømmer:  ");
+        int medlemsnummer = scan.nextInt();
+        System.out.print("Indtast træningstid HH:MM:SS: ");
+        String strTid = scan.next();
+        Time tid = Time.valueOf(strTid);
+        System.out.println("Indtast navn på Disciplin");
+        String disciplin = scan.next();
+        db.indtastTræningstid(medlemsnummer, tid, disciplin);
+
     }
 
     @Override

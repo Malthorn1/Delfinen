@@ -36,10 +36,10 @@ public class Controller {
             String brugerInput = ui.hovedMenuValg();
             switch (brugerInput) {
                 case "1":
-                    administrerBrugere();
+                    ui.administrerBrugere();
                     break;
                 case "2":
-                    ui.printtrænere();
+                    ui.administrerBetaling();
                     break;
                 case "3":
                     ui.printLeaderboard();
@@ -96,21 +96,21 @@ public class Controller {
     }
 
     
-    public void administrerBrugere() throws SQLException {
-          int brugerInput =  ui.getInt(" \n" + "vælg en af følgende valgmuligheder: " + "\n 1: Opret bruger" + "\n 2: Rediger bruger" + "\n q: Tryk q for at gå tilbage") ;
-
-        switch (brugerInput) {
-            case 1:
-                opretMedlem();
-                break;
-            case 2:
-                //
-                break;
-            case 3:
-                ui.visHovedMenu();
-                break;
-            default:
-                System.err.print("Input forkert, prøv igen: ");
-        }
-    }
+//    public void administrerBrugere() throws SQLException {
+//          int brugerInput =  ui.getInt(" \n" + "vælg en af følgende valgmuligheder: " + "\n 1: Opret bruger" + "\n 2: Rediger bruger" + "\n q: Tryk q for at gå tilbage") ;
+//
+//        switch (brugerInput) {
+//            case 1:
+//                opretMedlem();
+//                break;
+//            case 2:
+//                //
+//                break;
+//            case 3:
+//                ui.visHovedMenu();
+//                break;
+//            default:
+//                System.err.print("Input forkert, prøv igen: ");
+//        }
+//    }
 }
