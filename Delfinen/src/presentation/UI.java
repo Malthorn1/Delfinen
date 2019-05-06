@@ -18,8 +18,6 @@ public interface UI {
 
     public void administrerBetaling();
 
-    public void opretMedlem();
-
     public void printSvømmehold() throws SQLException;
 
     public String getString(String str);

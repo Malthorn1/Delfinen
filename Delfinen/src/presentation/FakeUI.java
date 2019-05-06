@@ -39,11 +39,6 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public void opretMedlem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void printSvømmehold() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

@@ -83,77 +83,7 @@ public class SystemUI implements UI {
     Herefter opretter vi på samme tid medlemmet i databasen som tager scanner variablerne som argumenter. 
     
      */
-    @Override
-    public void opretMedlem() {
-//        DBFacade db = new DBFacade();
-//        boolean betalt = false;
-//        boolean konkurrencesvømmer = false;
-//        int trænerid = 0;
-//        
-//        
-//        boolean isNumber;
-//        do {
-//            System.out.println("Hvor gammel er medlem? ");
-//            if () {
-//                System.err.print("Fejl ved indtastning af alder. Fejl: Der blev indtasted andet end tal.");
-//                try {
-//                    TimeUnit.SECONDS.sleep(1);
-//                } catch (InterruptedException ex) {
-//                    Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                alder = scan.nextInt();
-//                isNumber = false;
-//            } else {
-//                isNumber = true;
-//            }
-//        } while (!(isNumber));
-//
-//        System.out.println("Hvad er medlemmets telefon nummer? ");
-//        int telefonnummer = scan.nextInt();
-//        System.out.println("Har brugeren betalt? y/n");
-//        String input = scan.next();
-//
-//        if (input.equals("y")) {
-//            betalt = true;
-//        } else if (input.equals("n")) {
-//            betalt = false;
-//        }
-//
-//        System.out.println("Skal medlem være konkurrencesvømmer? y/n");
-//        String input2 = scan.next();
-//        if (input2.equals("y")) {
-//            konkurrencesvømmer = true;
-//            try {
-//                db.printTrænere();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            System.out.println("Indtast trænerID på den træner de skal have: ");
-//
-//            int input3 = scan.nextInt();
-//            trænerid = input3;
-//        } else if (input2.equals("n")) {
-//            konkurrencesvømmer = false;
-//            trænerid = 0;
-//        }
-//        Medlem medlem = new Medlem(medlemNavn, alder, telefonnummer, betalt, konkurrencesvømmer);
-//
-//        try {
-//            db.opretMedlem(medlem, trænerid);
-//        } catch (SQLException ex) {
-//            System.out.println(ex);
-//        }
-//        System.out.println(medlem.toString());
-//        System.out.println("\n");
-//        administrerBrugere();
-//
-//    }
-//
-//    
-//
 
-//
-    }
 
     @Override
     public void printSvømmehold() throws SQLException {
