@@ -1,6 +1,7 @@
 package datalayer;
 
 //import businesslogic.Pizza;
+import businesslogic.Leaderboard;
 import businesslogic.Medlem;
 import businesslogic.Træner;
 import java.sql.SQLException;
@@ -23,4 +24,6 @@ public interface Facade {
     public ArrayList<Medlem> hentSvømmeHold() throws SQLException;
 
     public ArrayList<Træner> hentTrænere() throws SQLException;
+    
+    public ArrayList<Leaderboard> hentLeaderboard () throws SQLException; 
 }

@@ -42,7 +42,7 @@ public class Controller {
                     ui.printtrænere();
                     break;
                 case "3":
-                    //redigerBestilling();
+                    ui.printLeaderboard();
                     break;
                 case "4":
                     //visAktiveOrdrer();

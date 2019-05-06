@@ -1,6 +1,7 @@
 package presentation;
 
 import businesslogic.Controller;
+import businesslogic.Leaderboard;
 import businesslogic.Medlem;
 import businesslogic.Træner;
 import datalayer.DBFacade;
@@ -30,6 +31,7 @@ public class SystemUI implements UI {
         System.out.println("Vælg en af følgende valgmuligheder: ");
         System.out.println("1: Administrer brugere");
         System.out.println("2: Administrer betaling");
+        System.out.println("3: printleadeboard");
         System.out.println("q: Afslut");
     }
 
@@ -236,4 +238,28 @@ public class SystemUI implements UI {
     }
 
 }
+
+    @Override
+    public void printLeaderboard() throws SQLException {
+        ArrayList<Leaderboard> Leaderboard = new ArrayList(); 
+        
+        Leaderboard = db.hentLeaderboard(); 
+        Leaderboard leaderboard1  ; 
+        for (int i = 0; i < Leaderboard.size(); i++) {
+            leaderboard1 = Leaderboard.get(i);
+        String disciplin = leaderboard1.getDisciplin();
+        int disciplinId = leaderboard1.getDisciplinId(); 
+        int bedsteTid = leaderboard1.getBedsteTId(); 
+        int medlemsnummer = leaderboard1.getMedlemsnummer();
+        
+            System.out.print("Bedste tid:" + bedsteTid);
+            System.out.print(", disciplin: " + disciplin);
+            System.out.print(", disciplinID: " + disciplinId);
+            System.out.print(", medlemsnummer: " + medlemsnummer + "\n");
+                
+        
+      
+    }
 }
+}
+

@@ -1,6 +1,7 @@
 package datalayer;
 
 //import businesslogic.Pizza;
+import businesslogic.Leaderboard;
 import businesslogic.Medlem;
 import businesslogic.Træner;
 import java.sql.Connection;
@@ -231,9 +232,32 @@ public class DBFacade implements Facade {
         }
         return trænere;
     }
+        
+    @Override
+        public ArrayList<Leaderboard> hentLeaderboard () throws SQLException {
+        Connection connection = connector();
+        ArrayList<Leaderboard> leaderboards = new ArrayList();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '3' group by medlemsnummer order by bedstetid ASC LIMIT 5");
+            while (result.next()) {
+                String disciplin = result.getNString(3);
+                int bedsteTid = result.getInt(1); 
+                int medlemsNummer = result.getInt(2);
+                int disciplinId = result.getInt(4);
+                Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
+                
+                leaderboards.add(leaderboard1); 
+                
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return leaderboards;
 
 }
-
+}
 /*
 try {
         Statement st = connection.createStatement();
