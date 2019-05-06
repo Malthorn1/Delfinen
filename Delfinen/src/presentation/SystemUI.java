@@ -311,5 +311,11 @@ public class SystemUI implements UI {
             System.out.print(", disciplinID: " + disciplinId);
             System.out.print(", medlemsnummer: " + medlemsnummer + "\n");
 }
+    
+    
 
-}
+
+    }
+
+
+
