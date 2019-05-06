@@ -4,6 +4,7 @@ import businesslogic.Controller;
 import businesslogic.Leaderboard;
 import businesslogic.Medlem;
 import businesslogic.Træner;
+import businesslogic.Restance;
 import datalayer.DBFacade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -215,9 +216,34 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public void restance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void printRestance() throws SQLException {
+        ArrayList<Restance> Restance = new ArrayList();
+        Restance = db.hentRestance();
+        Restance restance1;
+                for (int i = 0; i < Restance.size(); i++) {           
+                restance1 = Restance.get(i);
+                String medlems_navn = restance1.getMedlems_navn();
+                int medlems_Nummer = restance1.getMedlems_Nummer();
+                int medlem_alder = restance1.getMedlem_alder();
+                int gæld = 0;
+                if (medlem_alder < 18) {
+                    gæld = 1000;
+                } else if (medlem_alder >= 18 && medlem_alder < 60) {
+                    gæld = 1600;
+                } else if (medlem_alder >= 60) {
+                    gæld = 1200;
+                } else {
+                    gæld = 500;
+                }
+
+                System.out.print("Navn: " + medlems_navn);
+                System.out.print(", Medlemsnummer: " + medlems_Nummer);
+                System.out.print(", Skyldigt beløb : " + gæld + "\n");
+        
     }
+
+}
+    
 
     @Override
     public void printtrænere() throws SQLException {

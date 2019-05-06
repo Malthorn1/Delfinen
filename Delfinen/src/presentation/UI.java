@@ -20,8 +20,6 @@ public interface UI {
 
     public void opretMedlem();
 
-    public void restance();
-
     public void printSvømmehold() throws SQLException;
 
     public String getString(String str);
@@ -33,6 +31,8 @@ public interface UI {
     public void printtrænere() throws SQLException;
 
     public void printLeaderboard() throws SQLException;
+    
+    public void printRestance() throws SQLException;
 
     public ArrayList<Leaderboard> getCrawl() throws SQLException;
 

@@ -5,6 +5,7 @@ import businesslogic.Konkurrencesvømmer;
 import businesslogic.Leaderboard;
 import businesslogic.Medlem;
 import businesslogic.Træner;
+import businesslogic.Restance;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -22,7 +23,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "mixe91decoys";
+            String password = "frb150195";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -113,17 +114,18 @@ public class DBFacade implements Facade {
     }
 
     @Override
-    public void printRestance() throws SQLException {
-        Connection connection = connector();
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.medlemmer where restance = '0';");
-            while (result.next()) {
-                String medlems_navn = result.getNString(1);
-                int medlems_Nummer = result.getInt(4);
-                int medlem_alder = result.getInt(2);
-                int gæld = 0;
-                if (medlem_alder < 18) {
+        public ArrayList<Restance> hentRestance() throws SQLException {
+            Connection connection = connector();
+            ArrayList<Restance> restance1 = new ArrayList();
+            try {
+                Statement statement = connection.createStatement();
+                ResultSet result = statement.executeQuery("SELECT * FROM delfinen.medlemmer where restance = '0';");
+                while (result.next()) {
+                    String medlems_navn = result.getNString(1);
+                    int medlems_Nummer = result.getInt(4);
+                    int medlem_alder = result.getInt(2);
+                    int gæld = 0;
+                    if (medlem_alder < 18) {
                     gæld = 1000;
                 } else if (medlem_alder >= 18 && medlem_alder < 60) {
                     gæld = 1600;
@@ -132,18 +134,15 @@ public class DBFacade implements Facade {
                 } else {
                     gæld = 500;
                 }
-
-                System.out.print("Navn: " + medlems_navn);
-                System.out.print(", Medlemsnummer: " + medlems_Nummer);
-                System.out.print(", Skyldigt beløb : " + gæld + "\n");
-            }
-
-        } catch (SQLException e) {
+                    Restance restance = new Restance(medlems_navn, medlems_Nummer, medlem_alder);
+                    restance1.add(restance);
+                }
+            }catch (SQLException e) {
             System.out.println(e);
-
+        }
+            return restance1;
         }
 
-    }
 
 //    @Override
 //    public void printLeaderboard() throws SQLException {

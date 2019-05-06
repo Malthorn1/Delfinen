@@ -4,6 +4,7 @@ package datalayer;
 import businesslogic.Konkurrencesvømmer;
 import businesslogic.Leaderboard;
 import businesslogic.Medlem;
+import businesslogic.Restance;
 import businesslogic.Træner;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public interface Facade {
     
     public void opretKonkurrenceSvømmer(Konkurrencesvømmer konkurrencesvømmer) throws SQLException;
 
-    public void printRestance() throws SQLException;
+    public ArrayList<Restance> hentRestance() throws SQLException;
 
 //    public void printLeaderboard() throws SQLException;
 
