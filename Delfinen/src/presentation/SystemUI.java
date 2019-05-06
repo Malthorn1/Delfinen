@@ -10,6 +10,7 @@ import datalayer.DBFacade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -275,7 +276,7 @@ public class SystemUI implements UI {
             leaderboard1 = Leaderboard.get(i);
             String disciplin = leaderboard1.getDisciplin();
             int disciplinId = leaderboard1.getDisciplinId();
-            int bedsteTid = leaderboard1.getBedsteTId();
+            LocalTime bedsteTid = leaderboard1.getBedsteTid();
             int medlemsnummer = leaderboard1.getMedlemsnummer();
             printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
         }
@@ -285,7 +286,7 @@ public class SystemUI implements UI {
             leaderboard2 = Leaderboard.get(i);
             String disciplin = leaderboard2.getDisciplin();
             int disciplinId = leaderboard2.getDisciplinId();
-            int bedsteTid = leaderboard2.getBedsteTId();
+            LocalTime bedsteTid = leaderboard2.getBedsteTid();
             int medlemsnummer = leaderboard2.getMedlemsnummer();
             printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
         }
@@ -295,7 +296,7 @@ public class SystemUI implements UI {
             leaderboard3 = Leaderboard.get(i);
             String disciplin = leaderboard3.getDisciplin();
             int disciplinId = leaderboard3.getDisciplinId();
-            int bedsteTid = leaderboard3.getBedsteTId();
+            LocalTime bedsteTid = leaderboard3.getBedsteTid();
             int medlemsnummer = leaderboard3.getMedlemsnummer();
             printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
         }
@@ -305,7 +306,8 @@ public class SystemUI implements UI {
             leaderboard4 = Leaderboard.get(i);
             String disciplin = leaderboard4.getDisciplin();
             int disciplinId = leaderboard4.getDisciplinId();
-            int bedsteTid = leaderboard4.getBedsteTId();
+            LocalTime bedsteTid = leaderboard4.getBedsteTid();
+            
             int medlemsnummer = leaderboard4.getMedlemsnummer();
             printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
         }
@@ -338,7 +340,7 @@ public class SystemUI implements UI {
         
     }
     
-    public void printLnsvømmetid (int bedsteTid, String disciplin, int disciplinId, int medlemsnummer) {
+    public void printLnsvømmetid (LocalTime bedsteTid, String disciplin, int disciplinId, int medlemsnummer) {
     
                 System.out.print("Bedste tid:" + bedsteTid);
             System.out.print(", disciplin: " + disciplin);

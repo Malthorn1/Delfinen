@@ -13,9 +13,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
+
 
 public class DBFacade implements Facade {
 
@@ -260,10 +263,11 @@ public class DBFacade implements Facade {
         ArrayList<Leaderboard> leaderboards = new ArrayList();
         try {
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '1' group by medlemsnummer order by bedstetid ASC LIMIT 5");
+            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '1' group by medlemsnummer order by tid ASC LIMIT 5");
             while (result.next()) {
                 String disciplin = result.getNString(3);
-                int bedsteTid = result.getInt(1); 
+                Time tid = result.getTime(1); 
+                LocalTime bedsteTid = tid.toLocalTime();
                 int medlemsNummer = result.getInt(2);
                 int disciplinId = result.getInt(4);
                 Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
@@ -285,10 +289,11 @@ public class DBFacade implements Facade {
         ArrayList<Leaderboard> leaderboards = new ArrayList();
         try {
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '2' group by medlemsnummer order by bedstetid ASC LIMIT 5");
+            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '2' group by medlemsnummer order by tid ASC LIMIT 5");
             while (result.next()) {
                 String disciplin = result.getNString(3);
-                int bedsteTid = result.getInt(1); 
+                Time tid = result.getTime(1); 
+                LocalTime bedsteTid = tid.toLocalTime();
                 int medlemsNummer = result.getInt(2);
                 int disciplinId = result.getInt(4);
                 Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
@@ -310,10 +315,11 @@ public class DBFacade implements Facade {
         ArrayList<Leaderboard> leaderboards = new ArrayList();
         try {
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '3' group by medlemsnummer order by bedstetid ASC LIMIT 5");
+            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '3' group by medlemsnummer order by tid ASC LIMIT 5");
             while (result.next()) {
                 String disciplin = result.getNString(3);
-                int bedsteTid = result.getInt(1); 
+                Time tid = result.getTime(1); 
+                LocalTime bedsteTid = tid.toLocalTime();
                 int medlemsNummer = result.getInt(2);
                 int disciplinId = result.getInt(4);
                 Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
@@ -335,10 +341,11 @@ public class DBFacade implements Facade {
         ArrayList<Leaderboard> leaderboards = new ArrayList();
         try {
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '4' group by medlemsnummer order by bedstetid ASC LIMIT 5");
+            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '4' group by medlemsnummer order by tid ASC LIMIT 5");
             while (result.next()) {
                 String disciplin = result.getNString(3);
-                int bedsteTid = result.getInt(1); 
+                Time tid = result.getTime(1); 
+                LocalTime bedsteTid = tid.toLocalTime();
                 int medlemsNummer = result.getInt(2);
                 int disciplinId = result.getInt(4);
                 Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);

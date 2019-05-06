@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package businesslogic;
+import java.time.LocalTime;
 import java.util.ArrayList;
 /**
  *
@@ -13,18 +14,12 @@ public class Leaderboard {
     private int disciplinId; 
     private int medlemsnummer; 
     private String disciplin; 
-    private int bedsteTid; 
+    private LocalTime bedsteTid; 
     private ArrayList<Medlem> medlemmer;
 
-    public int getBedsteTId() {
-        return bedsteTid;
-    }
-
-    public void setBedsteTId(int bedsteTId) {
-        this.bedsteTid = bedsteTid;
-    }
+   
     
-    public Leaderboard (int bedsteTid, int medlemsnummer, String disciplin, int disciplinId) {
+    public Leaderboard (LocalTime bedsteTid, int medlemsnummer, String disciplin, int disciplinId) {
         this.disciplinId = disciplinId; 
         this.disciplin = disciplin;
         this.medlemsnummer = medlemsnummer; 
@@ -56,6 +51,22 @@ public class Leaderboard {
 
     public void setDisciplin(String disciplin) {
         this.disciplin = disciplin;
+    }
+
+    public LocalTime getBedsteTid() {
+        return bedsteTid;
+    }
+
+    public void setBedsteTid(LocalTime bedsteTid) {
+        this.bedsteTid = bedsteTid;
+    }
+
+    public ArrayList<Medlem> getMedlemmer() {
+        return medlemmer;
+    }
+
+    public void setMedlemmer(ArrayList<Medlem> medlemmer) {
+        this.medlemmer = medlemmer;
     }
     
     
