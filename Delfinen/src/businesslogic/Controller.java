@@ -36,7 +36,7 @@ public class Controller {
             String brugerInput = ui.hovedMenuValg();
             switch (brugerInput) {
                 case "1":
-                    ui.administrerBrugere();
+                    ui.administrerBrugere(this);
                     break;
                 case "2":
                     ui.administrerBetaling();
@@ -92,7 +92,7 @@ public class Controller {
         }
         System.out.println(medlem.toString());
         System.out.println("\n");
-        ui.administrerBrugere();
+        ui.administrerBrugere(this);
     }
 
     

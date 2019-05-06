@@ -1,5 +1,6 @@
 package presentation;
 
+import businesslogic.Controller;
 import businesslogic.Leaderboard;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public void administrerBrugere() {
+    public void administrerBrugere(Controller ctrl) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

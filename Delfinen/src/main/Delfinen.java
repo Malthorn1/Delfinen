@@ -23,8 +23,8 @@ public class Delfinen {
         //DB.printRestance();
         //DB.printLeaderboard();;
         
-        //ctrl.start();
-        ui.printLeaderboard();
+        ctrl.start();
+        //ui.printLeaderboard();
         //ui.printSvømmehold();
         //ui.printRestance();
         

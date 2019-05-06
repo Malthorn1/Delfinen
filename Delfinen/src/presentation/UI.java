@@ -1,5 +1,6 @@
 package presentation;
 
+import businesslogic.Controller;
 import businesslogic.Leaderboard;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public interface UI {
 
     public String hovedMenuValg();
 
-    public void administrerBrugere();
+    public void administrerBrugere(Controller ctrl);
 
     public void administrerBetaling();
 

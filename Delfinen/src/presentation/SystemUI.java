@@ -27,7 +27,7 @@ public class SystemUI implements UI {
 
     DBFacade db = new DBFacade();
     Scanner scan = new Scanner(System.in);
-    Controller ctrl = new Controller();
+    //Controller ctrl = new Controller();
 
     @Override
     public void visHovedMenu() {
@@ -46,7 +46,7 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public void administrerBrugere() {
+    public void administrerBrugere(Controller ctrl) {
         try {
             System.out.println("");
             System.out.println("Vælg en af følgende valgmuligheder: ");
@@ -69,14 +69,14 @@ public class SystemUI implements UI {
                     System.out.println("Skriv q for at gå tilbage");
                     String nextInput = scan.next();
                     if (nextInput == "q"){
-                        administrerBrugere();
+                        administrerBrugere(ctrl);
                     }
                 case "4":
                     printSvømmehold();
                     System.out.println("Skriv q for at gå tilbage");
                     String nextInput1 = scan.next();
                     if (nextInput1 == "q"){
-                        administrerBrugere();
+                        administrerBrugere(ctrl);
                         break;
                     }
                 case "q":
