@@ -1,6 +1,7 @@
 package presentation;
 
 import businesslogic.Controller;
+import businesslogic.Konkurrencesvømmer;
 import businesslogic.Leaderboard;
 import businesslogic.Medlem;
 import businesslogic.Træner;
@@ -157,7 +158,7 @@ public class SystemUI implements UI {
 
     @Override
     public void printSvømmehold() throws SQLException {
-        ArrayList<Medlem> svømmehold = new ArrayList();
+        ArrayList<Konkurrencesvømmer> svømmehold = new ArrayList();
         svømmehold = db.hentSvømmeHold();
         Medlem medlem;
         for (int i = 0; i < svømmehold.size(); i++) {

@@ -23,7 +23,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "frb150195";
+            String password = "mixe91decoys";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -204,9 +204,9 @@ public class DBFacade implements Facade {
     
 
     @Override
-    public  ArrayList<Medlem> hentSvømmeHold() throws SQLException {
+    public  ArrayList<Konkurrencesvømmer> hentSvømmeHold() throws SQLException {
         Connection connection = connector();
-        ArrayList<Medlem> svømmehold = new ArrayList();
+        ArrayList<Konkurrencesvømmer> svømmehold = new ArrayList();
         try {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM delfinen.medlemmer where KONKURRENCESVØMMER = '1' order by alder asc;");
@@ -217,14 +217,12 @@ public class DBFacade implements Facade {
                 int medlemsNummer = result.getInt(4);
                 Timestamp datoprettet = result.getTimestamp(5);
                 boolean restance = result.getBoolean(6);
-                boolean konkurrencesvømmer = result.getBoolean(7);
+                boolean isKonkurrencesvømmer = result.getBoolean(7);
                 int trænerid = result.getInt(8);
                 
-                
-                Medlem medlem = new Medlem(medlemsNavn, alder, telefonnummer, restance);
-                medlem.setMedlemsnummer(medlemsNummer);
-                
-                svømmehold.add(medlem);
+                Konkurrencesvømmer konkurrencesvømmer = new Konkurrencesvømmer (medlemsNavn, alder, telefonnummer, restance, trænerid);
+                konkurrencesvømmer.setMedlemsnummer(medlemsNummer);
+                svømmehold.add(konkurrencesvømmer);
                 
             }
 

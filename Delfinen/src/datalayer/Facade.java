@@ -25,7 +25,7 @@ public interface Facade {
 
 //    public void printLeaderboard() throws SQLException;
 
-    public ArrayList<Medlem> hentSvømmeHold() throws SQLException;
+    public ArrayList<Konkurrencesvømmer> hentSvømmeHold() throws SQLException;
 
     public ArrayList<Træner> hentTrænere() throws SQLException;
 
