@@ -384,7 +384,6 @@ public class DBFacade implements Facade {
             statement.setInt(1, telefonnummer);
             statement.setInt(2, medlemsnummer);
             statement.executeUpdate();
-
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -398,10 +397,8 @@ public class DBFacade implements Facade {
             statement.setBoolean(1, bool);
             statement.setInt(2, medlemsnummer);
             statement.executeUpdate();
-
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
     }
 }
