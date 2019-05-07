@@ -83,7 +83,7 @@ public class SystemUI implements UI {
                     forkertInput();
             }
         } catch (Exception e) {
-        System.err.println("Got an exception! ");
+            System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
     }
@@ -215,17 +215,16 @@ public class SystemUI implements UI {
         System.out.println("Indtast medlemsnummeret på konkurrenesvømmer:  ");
         int medlemsnummer = scan.nextInt();
         System.out.print("Indtast træningstid HH:MM:SS: ");
-        
+
         DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern("H:mm:ss");
         String strTid = scan.next();
         LocalTime time = LocalTime.parse(strTid, parseFormat);
         LocalTime timePlusone = time.plusHours(1);
         Time tid = Time.valueOf(timePlusone);
-        
+
         System.out.println("Indtast navn på Disciplin");
         String disciplin = scan.next();
         db.indtastTræningstid(medlemsnummer, tid, disciplin);
-        
 
     }
 
@@ -241,17 +240,16 @@ public class SystemUI implements UI {
             int medlem_alder = restance1.getMedlem_alder();
             boolean passiv = restance1.isPassiv();
             int gæld = 500;
-            
-          if (passiv == false)
-                {
-                 if (medlem_alder < 18) {
+
+            if (passiv == false) {
+                if (medlem_alder < 18) {
                     gæld = 1000;
                 } else if (medlem_alder >= 18 && medlem_alder < 60) {
                     gæld = 1600;
                 } else if (medlem_alder >= 60) {
                     gæld = 1200;
                 }
-                }
+            }
 
             System.out.print("Navn: " + medlems_navn);
             System.out.print(", Medlemsnummer: " + medlems_Nummer);
@@ -398,29 +396,43 @@ public class SystemUI implements UI {
         db.sætMedlemRestanceNej(medlemsnummer);
         administrerBrugere();
     }
-    
+
     public void setPassivTilJa() {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         db.sætMedlemPassivJa(medlemsnummer);
         administrerBrugere();
     }
-    
+
     public void setPassivTilNej() {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         db.sætMedlemPassivNej(medlemsnummer);
         administrerBrugere();
     }
-    public void redigerNavn(){
+
+    public void redigerNavn() {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         String navn = getString("Indtast nyt navn på medlem: ");
         db.redigerNavn(medlemsnummer, navn);
     }
-    
-    public void redigerTelefonnummer(){
+
+    public void redigerTelefonnummer() {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         int telefonnummer = getInt("Indtast det nye telefonnummer: ");
         db.redigerTelefonnummer(medlemsnummer, telefonnummer);
     }
+    
+    public void setKonkurrenceSvømmer(){
+        int medlemsnummer = getInt("Indtast nummer på medlem: ");
+        boolean isKonkurrencesvømmer = true;
+        int input = getInt("Tryk 1 for at ændre medlem til konkurrencesvømmer"
+                + "\nTryk 2 for at ændre konkurrencesvømmer til medlem");
+        if(input==2){
+            isKonkurrencesvømmer = false;
+        }
+        
+        db.setKonkurrencesvømmer(medlemsnummer, isKonkurrencesvømmer);
+    }
+
     public void skrivQForAtKommeTilbage() {
         System.out.println("Skriv q for at gå tilbage");
     }
@@ -439,8 +451,7 @@ public class SystemUI implements UI {
         System.out.println("q: Tryk q for at gå tilbage");
     }
 
-        
-        public void udskrivAdministrerBetaling() {
+    public void udskrivAdministrerBetaling() {
         System.out.println("");
         System.out.println("Vælg en af følgende valgmuligheder: ");
         System.out.println("1: Tilføj ny betaling");
