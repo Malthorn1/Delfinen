@@ -233,23 +233,25 @@ public class SystemUI implements UI {
             String medlems_navn = restance1.getMedlems_navn();
             int medlems_Nummer = restance1.getMedlems_Nummer();
             int medlem_alder = restance1.getMedlem_alder();
-            int gæld = 0;
-            if (medlem_alder < 18) {
-                gæld = 1000;
-            } else if (medlem_alder >= 18 && medlem_alder < 60) {
-                gæld = 1600;
-            } else if (medlem_alder >= 60) {
-                gæld = 1200;
-            } else {
-                gæld = 500;
-            }
+            boolean passiv = restance1.isPassiv();
+            int gæld = 500;
+            
+          if (passiv == false)
+                {
+                 if (medlem_alder < 18) {
+                    gæld = 1000;
+                } else if (medlem_alder >= 18 && medlem_alder < 60) {
+                    gæld = 1600;
+                } else if (medlem_alder >= 60) {
+                    gæld = 1200;
+                }
+                }
 
             System.out.print("Navn: " + medlems_navn);
             System.out.print(", Medlemsnummer: " + medlems_Nummer);
             System.out.print(", Skyldigt beløb : " + gæld + "\n");
 
         }
-
     }
 
     @Override

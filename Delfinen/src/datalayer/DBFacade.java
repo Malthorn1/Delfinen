@@ -25,7 +25,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "frb150195";
+            String password = "mixe91decoys";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -119,33 +119,24 @@ public class DBFacade implements Facade {
     @Override
         public ArrayList<Restance> hentRestance() throws SQLException {
             Connection connection = connector();
-            ArrayList<Restance> restance1 = new ArrayList();
-            try {
-                Statement statement = connection.createStatement();
-                ResultSet result = statement.executeQuery("SELECT * FROM delfinen.medlemmer where restance = '0';");
-                while (result.next()) {
-                    String medlems_navn = result.getNString(1);
-                    int medlems_Nummer = result.getInt(4);
-                    int medlem_alder = result.getInt(2);
-                    int gæld = 0;
-                    if (medlem_alder < 18) {
-                    gæld = 1000;
-                } else if (medlem_alder >= 18 && medlem_alder < 60) {
-                    gæld = 1600;
-                } else if (medlem_alder >= 60) {
-                    gæld = 1200;
-                } else {
-                    gæld = 500;
-                }
-                    Restance restance = new Restance(medlems_navn, medlems_Nummer, medlem_alder);
-                    restance1.add(restance);
-                }
-            }catch (SQLException e) {
+        ArrayList<Restance> restance1 = new ArrayList();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM delfinen.medlemmer where restance = '1';");
+            while (result.next()) {
+                String medlems_navn = result.getNString(1);
+                int medlems_Nummer = result.getInt(4);
+                int medlem_alder = result.getInt(2);
+                boolean passiv = result.getBoolean(9); 
+
+                Restance restance = new Restance(medlems_navn, medlems_Nummer, medlem_alder, passiv);
+                restance1.add(restance);
+            }
+        } catch (SQLException e) {
             System.out.println(e);
         }
-            return restance1;
-        }
-
+        return restance1;
+    }
 
 
     
