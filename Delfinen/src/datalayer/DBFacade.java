@@ -26,7 +26,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "mixe91decoys";
+            String password = "frb150195";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -77,7 +77,7 @@ public class DBFacade implements Facade {
 
         try {
             Statement st = connection.createStatement();
-            String sql = "INSERT INTO MEDLEMMER(NAVN, ALDER, TELEFONNUMMER, RESTANCE, DATOOPRETTET, KONKURRENCESVØMMER)VALUES(?,?,?,?,?,?)";
+            String sql = "INSERT INTO MEDLEMMER(NAVN, ALDER, TELEFONNUMMER, RESTANCE, DATOOPRETTET, KONKURRENCESVØMMER, passiv)VALUES(?,?,?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, medlem.getNavn());
             statement.setInt(2, medlem.getAge());
@@ -86,6 +86,7 @@ public class DBFacade implements Facade {
             java.sql.Timestamp sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
             statement.setTimestamp(5, sqlDate);
             statement.setBoolean(6, medlem.isKonkurrencesvømmer());
+            statement.setBoolean (7, false);
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -339,6 +340,36 @@ public class DBFacade implements Facade {
         try{
             Statement st = connection.createStatement();
             String query = "update medlemmer set RESTANCE = ? where MEDLEMSNUMMER = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(2, medlemsnummer);
+            statement.setBoolean(1, false);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+    }
+    
+        public void sætMedlemPassivJa(int medlemsnummer) {
+        Connection connection = connector();
+        try{
+            Statement st = connection.createStatement();
+            String query = "update medlemmer set PASSIV = ? where MEDLEMSNUMMER = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(2, medlemsnummer);
+            statement.setBoolean(1, true);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+    }
+        
+        public void sætMedlemPassivNej(int medlemsnummer) {
+        Connection connection = connector();
+        try{
+            Statement st = connection.createStatement();
+            String query = "update medlemmer set PASSIV = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(2, medlemsnummer);
             statement.setBoolean(1, false);

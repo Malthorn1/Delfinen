@@ -112,12 +112,18 @@ public class SystemUI implements UI {
                     break;
                 case "4":
                     setRestanceTilJa();
-                    skrivQForAtKommeTilbage();
                     udskrivAdministrerBetaling();
                     break;
                 case "5":
                     setRestanceTilNej();
-                    skrivQForAtKommeTilbage();
+                    udskrivAdministrerBetaling();
+                    break;
+                case "6":
+                    setPassivTilJa();
+                    udskrivAdministrerBetaling();
+                    break;
+                case "7":
+                    setPassivTilNej();
                     udskrivAdministrerBetaling();
                     break;
                 case "q":
@@ -384,6 +390,18 @@ public class SystemUI implements UI {
         db.sætMedlemRestanceNej(medlemsnummer);
         administrerBrugere();
     }
+    
+    public void setPassivTilJa() {
+        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        db.sætMedlemPassivJa(medlemsnummer);
+        administrerBrugere();
+    }
+    
+    public void setPassivTilNej() {
+        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        db.sætMedlemPassivNej(medlemsnummer);
+        administrerBrugere();
+    }
 
     public void skrivQForAtKommeTilbage() {
         System.out.println("Skriv q for at gå tilbage");
@@ -412,6 +430,8 @@ public class SystemUI implements UI {
         System.out.println("3: Udskriv medlemmere i restance");
         System.out.println("4: Tilføj restance til et medlem");
         System.out.println("5: Fjern restance fra et medlem");
+        System.out.println("6: Sæt medlem til passiv");
+        System.out.println("7: Fjern medlem fra passiv");
         System.out.println("q: Afslut");
     }
 
