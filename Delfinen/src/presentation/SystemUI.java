@@ -59,20 +59,23 @@ public class SystemUI implements UI {
                     //
                     break;
                 case "3":
-                    printtrænere();
+                    printTrænere();
                     skrivQForAtKommeTilbage();
                     String nextInput = scan.next();
+                    udskrivAdministrerBrugere();
                     if (nextInput == "q") {
                         administrerBrugere();
                     }
+                    break;
                 case "4":
                     printSvømmehold();
                     skrivQForAtKommeTilbage();
                     String nextInput1 = scan.next();
+                    udskrivAdministrerBrugere();
                     if (nextInput1 == "q") {
                         administrerBrugere();
-                        break;
                     }
+                    break;
                 case "q":
                     visHovedMenu();
                     break;
@@ -99,23 +102,24 @@ public class SystemUI implements UI {
                     //
                     break;
                 case "3":
-                //
+                    printRestance();
+                    skrivQForAtKommeTilbage();
+                    String nextInput0 = scan.next();
+                    udskrivAdministrerBetaling();
+                    if (nextInput0 == "q") {
+                        administrerBetaling();
+                    }
+                    break;
                 case "4":
                     setRestanceTilJa();
                     skrivQForAtKommeTilbage();
-                    String nextInput1 = scan.next();
-                    if (nextInput1 == "q") {
-                        administrerBetaling();
-                        break;
-                    }
+                    udskrivAdministrerBetaling();
+                    break;
                 case "5":
                     setRestanceTilNej();
                     skrivQForAtKommeTilbage();
-                    String nextInput2 = scan.next();
-                    if (nextInput2 == "q") {
-                        administrerBetaling();
-                        break;
-                    }
+                    udskrivAdministrerBetaling();
+                    break;
                 case "q":
                     visHovedMenu();
                     break;
@@ -243,7 +247,7 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public void printtrænere() throws SQLException {
+    public void printTrænere() throws SQLException {
         ArrayList<Træner> trænere = new ArrayList();
         trænere = db.hentTrænere();
         Træner træner;
@@ -358,7 +362,7 @@ public class SystemUI implements UI {
         }
         String isKonkurrencesvømmer = getBoolean("Skal medlem være konkurrencesvømmer? y/n");
         if (isKonkurrencesvømmer.contains("y")) {
-            printtrænere();
+            printTrænere();
             trænerID = getInt("Indtast ID på trænernen");
             Konkurrencesvømmer konkurrencesvømmer = new Konkurrencesvømmer(navn, age, telefonnummer, isRestance, trænerID);
             db.opretKonkurrenceSvømmer(konkurrencesvømmer);

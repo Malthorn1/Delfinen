@@ -46,9 +46,9 @@ public class Controller {
                     ui.skrivQForAtKommeTilbage();
                     Scanner scan = new Scanner(System.in);
                     String nextInput = scan.next();
+                    ui.visHovedMenu();
                     if (nextInput == "q"){
                         start();
-                        break;
                     }
                     break;
                 case "4":

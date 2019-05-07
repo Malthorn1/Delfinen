@@ -27,7 +27,7 @@ public interface UI {
 
     public String getBoolean(String str);
 
-    public void printtrænere() throws SQLException;
+    public void printTrænere() throws SQLException;
 
     public void printLeaderboard() throws SQLException;
     
