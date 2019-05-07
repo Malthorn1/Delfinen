@@ -404,7 +404,8 @@ public class SystemUI implements UI {
         System.out.println("q: Tryk q for at gå tilbage");
     }
 
-    public void udskrivAdministrerBetaling() {
+        
+        public void udskrivAdministrerBetaling() {
         System.out.println("");
         System.out.println("Vælg en af følgende valgmuligheder: ");
         System.out.println("1: Tilføj ny betaling");
