@@ -274,44 +274,40 @@ public class SystemUI implements UI {
         for (int i = 0; i < Leaderboard.size(); i++) {
             leaderboard1 = Leaderboard.get(i);
             String disciplin = leaderboard1.getDisciplin();
-            int disciplinId = leaderboard1.getDisciplinId();
             LocalTime bedsteTid = leaderboard1.getBedsteTid();
             int medlemsnummer = leaderboard1.getMedlemsnummer();
             bedsteTid = bedsteTid.minusHours(1);
-            printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
+            printLnsvømmetid(bedsteTid, disciplin, medlemsnummer);
         }
         Leaderboard = getRyg();
         Leaderboard leaderboard2;
         for (int i = 0; i < Leaderboard.size(); i++) {
             leaderboard2 = Leaderboard.get(i);
             String disciplin = leaderboard2.getDisciplin();
-            int disciplinId = leaderboard2.getDisciplinId();
             LocalTime bedsteTid = leaderboard2.getBedsteTid();
             int medlemsnummer = leaderboard2.getMedlemsnummer();
             bedsteTid = bedsteTid.minusHours(1);
-            printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
+            printLnsvømmetid(bedsteTid, disciplin, medlemsnummer);
         }
         Leaderboard = getBryst();
         Leaderboard leaderboard3;
         for (int i = 0; i < Leaderboard.size(); i++) {
             leaderboard3 = Leaderboard.get(i);
             String disciplin = leaderboard3.getDisciplin();
-            int disciplinId = leaderboard3.getDisciplinId();
             LocalTime bedsteTid = leaderboard3.getBedsteTid();
             int medlemsnummer = leaderboard3.getMedlemsnummer();
             bedsteTid = bedsteTid.minusHours(1);
-            printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
+            printLnsvømmetid(bedsteTid, disciplin, medlemsnummer);
         }
         Leaderboard = getFly();
         Leaderboard leaderboard4;
         for (int i = 0; i < Leaderboard.size(); i++) {
             leaderboard4 = Leaderboard.get(i);
             String disciplin = leaderboard4.getDisciplin();
-            int disciplinId = leaderboard4.getDisciplinId();
             LocalTime bedsteTid = leaderboard4.getBedsteTid();
             bedsteTid = bedsteTid.minusHours(1);
             int medlemsnummer = leaderboard4.getMedlemsnummer();
-            printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
+            printLnsvømmetid(bedsteTid, disciplin, medlemsnummer);
         }
     }
 
@@ -343,10 +339,9 @@ public class SystemUI implements UI {
         return Leaderboard;
     }
 
-    public void printLnsvømmetid(LocalTime bedsteTid, String disciplin, int disciplinId, int medlemsnummer) {
+    public void printLnsvømmetid(LocalTime bedsteTid, String disciplin, int medlemsnummer) {
         System.out.print("Bedste tid:" + bedsteTid);
         System.out.print(", disciplin: " + disciplin);
-        System.out.print(", disciplinID: " + disciplinId);
         System.out.print(", medlemsnummer: " + medlemsnummer + "\n");
     }
 
