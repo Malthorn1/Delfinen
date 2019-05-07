@@ -43,6 +43,13 @@ public class Controller {
                     break;
                 case "3":
                     ui.printLeaderboard();
+                    ui.skrivQForAtKommeTilbage();
+                    Scanner scan = new Scanner(System.in);
+                    String nextInput = scan.next();
+                    if (nextInput == "q"){
+                        start();
+                        break;
+                    }
                     break;
                 case "4":
                     //visAktiveOrdrer();

@@ -41,5 +41,7 @@ public interface UI {
 
     public ArrayList<Leaderboard> getFly() throws SQLException;
     
-    public void opretMedlem1() throws SQLException;
+    public void opretMedlem() throws SQLException;
+    
+    public void skrivQForAtKommeTilbage();
 }

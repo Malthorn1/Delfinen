@@ -27,6 +27,7 @@ public class Delfinen {
         //ui.printLeaderboard();
         //ui.printSvømmehold();
         //ui.printRestance();
+        //ui.printSvømmehold();
         
         
     }

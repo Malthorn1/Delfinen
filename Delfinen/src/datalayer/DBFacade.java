@@ -258,7 +258,7 @@ public class DBFacade implements Facade {
         
     
             @Override
-        public ArrayList<Leaderboard> hentLeaderboardCrawl () throws SQLException {
+        public ArrayList<Leaderboard> hentLeaderboardCrawl() throws SQLException {
         Connection connection = connector();
         ArrayList<Leaderboard> leaderboards = new ArrayList();
         try {
@@ -378,6 +378,7 @@ public class DBFacade implements Facade {
             System.out.println(e);
         }
     }
+    
     public void sætMedlemRestanceJa(int medlemsnummer) {
         Connection connection = connector();
         try{

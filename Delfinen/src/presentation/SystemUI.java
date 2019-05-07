@@ -52,7 +52,7 @@ public class SystemUI implements UI {
             String brugerInput = scan.nextLine();
             switch (brugerInput) {
                 case "1":
-                    opretMedlem1();
+                    opretMedlem();
                     break;
                 case "2":
                     //
@@ -306,12 +306,14 @@ public class SystemUI implements UI {
         }
     }
 
+    @Override
     public ArrayList<Leaderboard> getCrawl() throws SQLException {
         ArrayList<Leaderboard> Leaderboard = new ArrayList();
         Leaderboard = db.hentLeaderboardCrawl();
         return Leaderboard;
     }
 
+    @Override
     public ArrayList<Leaderboard> getRyg() throws SQLException {
         ArrayList<Leaderboard> Leaderboard = new ArrayList();
         Leaderboard = db.hentLeaderboardRyg();
@@ -337,8 +339,9 @@ public class SystemUI implements UI {
             System.out.print(", disciplin: " + disciplin);
             System.out.print(", disciplinID: " + disciplinId);
             System.out.print(", medlemsnummer: " + medlemsnummer + "\n");
-}
-        public void opretMedlem1() throws SQLException{
+    }
+    
+    public void opretMedlem() throws SQLException{
         boolean isRestance = false;
         int trænerID = 0;
         String navn = getString("Indtast medlemmes navn: ");
