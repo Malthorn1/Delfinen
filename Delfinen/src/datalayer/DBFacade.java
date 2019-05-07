@@ -18,7 +18,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-
 public class DBFacade implements Facade {
 
     public Connection connector() {
@@ -63,8 +62,6 @@ public class DBFacade implements Facade {
         }
     }
 
-
-
     /*
     opretMedlem metoden tager variablerne fra et medlemsobjekt som argument,
     og bruger herefter disse variabler i prepared statements
@@ -85,13 +82,13 @@ public class DBFacade implements Facade {
             java.sql.Timestamp sqlDate = new java.sql.Timestamp(new java.util.Date().getTime());
             statement.setTimestamp(5, sqlDate);
             statement.setBoolean(6, medlem.isKonkurrencesvømmer());
-            statement.setBoolean (7, false);
+            statement.setBoolean(7, false);
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    
+
     @Override
     public void opretKonkurrenceSvømmer(Konkurrencesvømmer konkurrencesvømmer) throws SQLException {
         DBFacade db = new DBFacade();
@@ -109,7 +106,7 @@ public class DBFacade implements Facade {
             statement.setTimestamp(5, sqlDate);
             statement.setBoolean(6, true);
             statement.setInt(7, konkurrencesvømmer.getTrænerID());
-            
+
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -117,8 +114,8 @@ public class DBFacade implements Facade {
     }
 
     @Override
-        public ArrayList<Restance> hentRestance() throws SQLException {
-            Connection connection = connector();
+    public ArrayList<Restance> hentRestance() throws SQLException {
+        Connection connection = connector();
         ArrayList<Restance> restance1 = new ArrayList();
         try {
             Statement statement = connection.createStatement();
@@ -127,7 +124,7 @@ public class DBFacade implements Facade {
                 String medlems_navn = result.getNString(1);
                 int medlems_Nummer = result.getInt(4);
                 int medlem_alder = result.getInt(2);
-                boolean passiv = result.getBoolean(9); 
+                boolean passiv = result.getBoolean(9);
 
                 Restance restance = new Restance(medlems_navn, medlems_Nummer, medlem_alder, passiv);
                 restance1.add(restance);
@@ -138,11 +135,8 @@ public class DBFacade implements Facade {
         return restance1;
     }
 
-
-    
-
     @Override
-    public  ArrayList<Konkurrencesvømmer> hentSvømmeHold() throws SQLException {
+    public ArrayList<Konkurrencesvømmer> hentSvømmeHold() throws SQLException {
         Connection connection = connector();
         ArrayList<Konkurrencesvømmer> svømmehold = new ArrayList();
         try {
@@ -157,11 +151,11 @@ public class DBFacade implements Facade {
                 boolean restance = result.getBoolean(6);
                 boolean isKonkurrencesvømmer = result.getBoolean(7);
                 int trænerid = result.getInt(8);
-                
-                Konkurrencesvømmer konkurrencesvømmer = new Konkurrencesvømmer (medlemsNavn, alder, telefonnummer, restance, trænerid);
+
+                Konkurrencesvømmer konkurrencesvømmer = new Konkurrencesvømmer(medlemsNavn, alder, telefonnummer, restance, trænerid);
                 konkurrencesvømmer.setMedlemsnummer(medlemsNummer);
                 svømmehold.add(konkurrencesvømmer);
-                
+
             }
 
         } catch (SQLException e) {
@@ -170,8 +164,8 @@ public class DBFacade implements Facade {
         }
         return svømmehold;
     }
-    
-        public ArrayList<Træner> hentTrænere() throws SQLException {
+
+    public ArrayList<Træner> hentTrænere() throws SQLException {
         Connection connection = connector();
         ArrayList<Træner> trænere = new ArrayList();
         try {
@@ -181,19 +175,18 @@ public class DBFacade implements Facade {
                 String træner_navn = result.getNString(2);
                 int træner_id = result.getInt(1);
                 Træner træner = new Træner(træner_navn, træner_id);
-                
+
                 trænere.add(træner);
-                
+
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
         return trænere;
     }
-        
-    
-            @Override
-        public ArrayList<Leaderboard> hentLeaderboardCrawl() throws SQLException {
+
+    @Override
+    public ArrayList<Leaderboard> hentLeaderboardCrawl() throws SQLException {
         Connection connection = connector();
         ArrayList<Leaderboard> leaderboards = new ArrayList();
         try {
@@ -201,21 +194,20 @@ public class DBFacade implements Facade {
             ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplin = 'crawl' group by medlemsnummer order by tid ASC LIMIT 5");
             while (result.next()) {
                 String disciplin = result.getNString(3);
-                Time tid = result.getTime(1); 
+                Time tid = result.getTime(1);
                 LocalTime bedsteTid = tid.toLocalTime();
                 int medlemsNummer = result.getInt(2);
                 Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin);
-                
-                leaderboards.add(leaderboard1); 
-                
-                
+
+                leaderboards.add(leaderboard1);
+
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
         return leaderboards;
 
-}
+    }
 
     @Override
     public ArrayList<Leaderboard> hentLeaderboardRyg() throws SQLException {
@@ -226,14 +218,13 @@ public class DBFacade implements Facade {
             ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplin = 'Rygcrawl' group by medlemsnummer order by tid ASC LIMIT 5");
             while (result.next()) {
                 String disciplin = result.getNString(3);
-                Time tid = result.getTime(1); 
+                Time tid = result.getTime(1);
                 LocalTime bedsteTid = tid.toLocalTime();
                 int medlemsNummer = result.getInt(2);
                 Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin);
-                
-                leaderboards.add(leaderboard1); 
-                
-                
+
+                leaderboards.add(leaderboard1);
+
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -251,14 +242,13 @@ public class DBFacade implements Facade {
             ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplin = 'Bryst' group by medlemsnummer order by tid ASC LIMIT 5");
             while (result.next()) {
                 String disciplin = result.getNString(3);
-                Time tid = result.getTime(1); 
+                Time tid = result.getTime(1);
                 LocalTime bedsteTid = tid.toLocalTime();
                 int medlemsNummer = result.getInt(2);
                 Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin);
-                
-                leaderboards.add(leaderboard1); 
-                
-                
+
+                leaderboards.add(leaderboard1);
+
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -276,14 +266,13 @@ public class DBFacade implements Facade {
             ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplin = 'butterfly' group by medlemsnummer order by tid ASC LIMIT 5");
             while (result.next()) {
                 String disciplin = result.getNString(3);
-                Time tid = result.getTime(1); 
+                Time tid = result.getTime(1);
                 LocalTime bedsteTid = tid.toLocalTime();
                 int medlemsNummer = result.getInt(2);
                 Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin);
-                
-                leaderboards.add(leaderboard1); 
-                
-                
+
+                leaderboards.add(leaderboard1);
+
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -291,7 +280,7 @@ public class DBFacade implements Facade {
         return leaderboards;
 
     }
-        
+
     public void indtastTræningstid(int medlemsnummer, Time tid, String disciplin) {
 
         Connection connection = connector();
@@ -309,10 +298,10 @@ public class DBFacade implements Facade {
             System.out.println(e);
         }
     }
-    
+
     public void sætMedlemRestanceJa(int medlemsnummer) {
         Connection connection = connector();
-        try{
+        try {
             Statement st = connection.createStatement();
             String query = "update medlemmer set RESTANCE = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -324,10 +313,10 @@ public class DBFacade implements Facade {
             System.err.println(e.getMessage());
         }
     }
-    
+
     public void sætMedlemRestanceNej(int medlemsnummer) {
         Connection connection = connector();
-        try{
+        try {
             Statement st = connection.createStatement();
             String query = "update medlemmer set RESTANCE = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -339,10 +328,10 @@ public class DBFacade implements Facade {
             System.err.println(e.getMessage());
         }
     }
-    
-        public void sætMedlemPassivJa(int medlemsnummer) {
+
+    public void sætMedlemPassivJa(int medlemsnummer) {
         Connection connection = connector();
-        try{
+        try {
             Statement st = connection.createStatement();
             String query = "update medlemmer set PASSIV = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -354,10 +343,10 @@ public class DBFacade implements Facade {
             System.err.println(e.getMessage());
         }
     }
-        
-        public void sætMedlemPassivNej(int medlemsnummer) {
+
+    public void sætMedlemPassivNej(int medlemsnummer) {
         Connection connection = connector();
-        try{
+        try {
             Statement st = connection.createStatement();
             String query = "update medlemmer set PASSIV = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
