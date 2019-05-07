@@ -404,7 +404,17 @@ public class SystemUI implements UI {
         db.sætMedlemPassivNej(medlemsnummer);
         administrerBrugere();
     }
-
+    public void redigerNavn(){
+        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        String navn = getString("Indtast nyt navn på medlem: ");
+        db.redigerNavn(medlemsnummer, navn);
+    }
+    
+    public void redigerTelefonnummer(){
+        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        int telefonnummer = getInt("Indtast det nye telefonnummer: ");
+        db.redigerTelefonnummer(medlemsnummer, telefonnummer);
+    }
     public void skrivQForAtKommeTilbage() {
         System.out.println("Skriv q for at gå tilbage");
     }
