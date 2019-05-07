@@ -171,24 +171,30 @@ public class SystemUI implements UI {
     @Override
     public String getString(String str) {
         System.out.println(str);
-        boolean isString = true;
-        String input = scan.next();
+        String emptyString;
+        emptyString = scan.nextLine();
         do {
-            if (input.matches(".*[1-9].*")) {
-                System.err.print("Fejl ved indtastning af input. Fejl: Der blev indtasted andet end bokstaver.");
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                System.out.println("\n" + "Prøv igen: ");
-                input = scan.nextLine();
-                //isString = false;
-            } else {
-                isString = true;
-            }
-        } while (!(isString));
-        return input;
+            System.err.print("Fejl ved indtastning af input. Fejl: Der blev indtasted andet end bokstaver.");
+            emptyString = scan.nextLine();
+        } while (emptyString.matches(".*[1-9].*"));
+        return emptyString;
+//        boolean isString = true;
+//        String input = scan.next();
+//        do {
+//            if (input.matches(".*[1-9].*")) {
+//                System.err.print("Fejl ved indtastning af input. Fejl: Der blev indtasted andet end bokstaver.");
+//                try {
+//                    TimeUnit.SECONDS.sleep(1);
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                System.out.println("\n" + "Prøv igen: ");
+//                input = scan.nextLine();
+//            } else {
+//                isString = true;
+//            }
+//        } while (!(isString));
+//        return input;
     }
 
     @Override
