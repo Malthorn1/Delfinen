@@ -383,6 +383,7 @@ public class SystemUI implements UI {
         }
         
         
+        @Override
         public void skrivQForAtKommeTilbage() {
             System.out.println("Skriv q for at gå tilbage");
         }
