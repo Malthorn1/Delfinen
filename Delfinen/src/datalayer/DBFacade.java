@@ -24,7 +24,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "frb150195";
+            String password = "rootprejler";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -356,6 +356,37 @@ public class DBFacade implements Facade {
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
+        }
+    }
+
+    public void redigerNavn(int medlemsnummer, String navn) {
+        Connection connection = connector();
+        try {
+            String sqlUpdate = "UPDATE MEDLEMMER "
+                    + "SET NAVN = ?"
+                    + "WHERE MEDLEMSNUMMER = ?";
+            PreparedStatement statement = connection.prepareStatement(sqlUpdate);
+            statement.setString(1, navn);
+            statement.setInt(2, medlemsnummer);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public void redigerTelefonnummer(int medlemsnummer, int telefonnummer) {
+        Connection connection = connector();
+        try {
+            String sqlUpdate = "UPDATE MEDLEMMER SET TELEFONNUMMER=? WHERE MEDLEMSNUMMER=? ";
+            PreparedStatement statement = connection.prepareStatement(sqlUpdate);
+            statement.setInt(1, telefonnummer);
+            statement.setInt(2, medlemsnummer);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
         }
     }
 }
