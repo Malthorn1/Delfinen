@@ -44,4 +44,6 @@ public interface UI {
     public void opretMedlem() throws SQLException;
     
     public void skrivQForAtKommeTilbage();
+    
+    public void indtastTræningstid();
 }

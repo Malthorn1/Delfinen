@@ -26,7 +26,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "frb150195";
+            String password = "rootprejler";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -367,7 +367,7 @@ public class DBFacade implements Facade {
 
         try {
             Statement st = connection.createStatement();
-            String sql = "INSERT INTO MEDLEM_DISCILIN(MEDLEMSNUMMER, TID, DISCIPLIN)VALUES(?,?,?)";
+            String sql = "INSERT INTO MEDLEM_DISCIPLIN(MEDLEMSNUMMER, TID, DISCIPLIN)VALUES(?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, medlemsnummer);
             statement.setTime(2, tid);
