@@ -11,7 +11,6 @@ import java.util.ArrayList;
  * @author Malthorn
  */
 public class Leaderboard {
-    private int disciplinId; 
     private int medlemsnummer; 
     private String disciplin; 
     private LocalTime bedsteTid; 
@@ -19,8 +18,7 @@ public class Leaderboard {
 
    
     
-    public Leaderboard (LocalTime bedsteTid, int medlemsnummer, String disciplin, int disciplinId) {
-        this.disciplinId = disciplinId; 
+    public Leaderboard (LocalTime bedsteTid, int medlemsnummer, String disciplin) {
         this.disciplin = disciplin;
         this.medlemsnummer = medlemsnummer; 
         this.bedsteTid = bedsteTid;
@@ -29,14 +27,7 @@ public class Leaderboard {
     
 }
 
-    public int getDisciplinId() {
-        return disciplinId;
-    }
-
-    public void setDisciplinId(int disciplinId) {
-        this.disciplinId = disciplinId;
-    }
-
+    
     public int getMedlemsnummer() {
         return medlemsnummer;
     }

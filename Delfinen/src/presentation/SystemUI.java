@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -58,20 +59,23 @@ public class SystemUI implements UI {
                     //
                     break;
                 case "3":
-                    printtrænere();
+                    printTrænere();
                     skrivQForAtKommeTilbage();
                     String nextInput = scan.next();
-                    if (nextInput == "q"){
+                    udskrivAdministrerBrugere();
+                    if (nextInput == "q") {
                         administrerBrugere();
                     }
+                    break;
                 case "4":
                     printSvømmehold();
                     skrivQForAtKommeTilbage();
                     String nextInput1 = scan.next();
-                    if (nextInput1 == "q"){
+                    udskrivAdministrerBrugere();
+                    if (nextInput1 == "q") {
                         administrerBrugere();
-                        break;
                     }
+                    break;
                 case "q":
                     visHovedMenu();
                     break;
@@ -86,7 +90,7 @@ public class SystemUI implements UI {
 
     @Override
     public void administrerBetaling() {
-       try {
+        try {
             udskrivAdministrerBetaling();
             Scanner scan = new Scanner(System.in);
             String brugerInput = scan.nextLine();
@@ -98,44 +102,41 @@ public class SystemUI implements UI {
                     //
                     break;
                 case "3":
-                    //
+                    printRestance();
+                    skrivQForAtKommeTilbage();
+                    String nextInput0 = scan.next();
+                    udskrivAdministrerBetaling();
+                    if (nextInput0 == "q") {
+                        administrerBetaling();
+                    }
+                    break;
                 case "4":
                     setRestanceTilJa();
                     skrivQForAtKommeTilbage();
-                    String nextInput1 = scan.next();
-                    if (nextInput1 == "q"){
-                        administrerBetaling();
-                        break;
-                    }
+                    udskrivAdministrerBetaling();
+                    break;
                 case "5":
                     setRestanceTilNej();
                     skrivQForAtKommeTilbage();
-                    String nextInput2 = scan.next();
-                    if (nextInput2 == "q"){
-                        administrerBetaling();
-                        break;
-                    }
+                    udskrivAdministrerBetaling();
+                    break;
                 case "q":
                     visHovedMenu();
                     break;
                 default:
                     forkertInput();
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
     }
-    
-    
 
     /*
     Metoden laver et medlemsobjekt med variabler fra scanner input. 
     Herefter opretter vi på samme tid medlemmet i databasen som tager scanner variablerne som argumenter. 
     
      */
-
-
     @Override
     public void printSvømmehold() throws SQLException {
         ArrayList<Konkurrencesvømmer> svømmehold = new ArrayList();
@@ -195,16 +196,24 @@ public class SystemUI implements UI {
         System.out.println(str);
         return scan.next();
     }
-    
-    public void indtastTræningstid() throws ParseException {
+
+    @Override
+    public void indtastTræningstid() {
+
         System.out.println("Indtast medlemsnummeret på konkurrenesvømmer:  ");
         int medlemsnummer = scan.nextInt();
         System.out.print("Indtast træningstid HH:MM:SS: ");
+        
+        DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern("H:mm:ss");
         String strTid = scan.next();
-        Time tid = Time.valueOf(strTid);
+        LocalTime time = LocalTime.parse(strTid, parseFormat);
+        LocalTime timePlusone = time.plusHours(1);
+        Time tid = Time.valueOf(timePlusone);
+        
         System.out.println("Indtast navn på Disciplin");
         String disciplin = scan.next();
         db.indtastTræningstid(medlemsnummer, tid, disciplin);
+        
 
     }
 
@@ -213,33 +222,32 @@ public class SystemUI implements UI {
         ArrayList<Restance> Restance = new ArrayList();
         Restance = db.hentRestance();
         Restance restance1;
-                for (int i = 0; i < Restance.size(); i++) {           
-                restance1 = Restance.get(i);
-                String medlems_navn = restance1.getMedlems_navn();
-                int medlems_Nummer = restance1.getMedlems_Nummer();
-                int medlem_alder = restance1.getMedlem_alder();
-                int gæld = 0;
-                if (medlem_alder < 18) {
-                    gæld = 1000;
-                } else if (medlem_alder >= 18 && medlem_alder < 60) {
-                    gæld = 1600;
-                } else if (medlem_alder >= 60) {
-                    gæld = 1200;
-                } else {
-                    gæld = 500;
-                }
+        for (int i = 0; i < Restance.size(); i++) {
+            restance1 = Restance.get(i);
+            String medlems_navn = restance1.getMedlems_navn();
+            int medlems_Nummer = restance1.getMedlems_Nummer();
+            int medlem_alder = restance1.getMedlem_alder();
+            int gæld = 0;
+            if (medlem_alder < 18) {
+                gæld = 1000;
+            } else if (medlem_alder >= 18 && medlem_alder < 60) {
+                gæld = 1600;
+            } else if (medlem_alder >= 60) {
+                gæld = 1200;
+            } else {
+                gæld = 500;
+            }
 
-                System.out.print("Navn: " + medlems_navn);
-                System.out.print(", Medlemsnummer: " + medlems_Nummer);
-                System.out.print(", Skyldigt beløb : " + gæld + "\n");
-        
-                }
+            System.out.print("Navn: " + medlems_navn);
+            System.out.print(", Medlemsnummer: " + medlems_Nummer);
+            System.out.print(", Skyldigt beløb : " + gæld + "\n");
+
+        }
 
     }
-    
 
     @Override
-    public void printtrænere() throws SQLException {
+    public void printTrænere() throws SQLException {
         ArrayList<Træner> trænere = new ArrayList();
         trænere = db.hentTrænere();
         Træner træner;
@@ -266,43 +274,40 @@ public class SystemUI implements UI {
         for (int i = 0; i < Leaderboard.size(); i++) {
             leaderboard1 = Leaderboard.get(i);
             String disciplin = leaderboard1.getDisciplin();
-            int disciplinId = leaderboard1.getDisciplinId();
             LocalTime bedsteTid = leaderboard1.getBedsteTid();
             int medlemsnummer = leaderboard1.getMedlemsnummer();
             bedsteTid = bedsteTid.minusHours(1);
-            printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
+            printLnsvømmetid(bedsteTid, disciplin, medlemsnummer);
         }
         Leaderboard = getRyg();
         Leaderboard leaderboard2;
         for (int i = 0; i < Leaderboard.size(); i++) {
             leaderboard2 = Leaderboard.get(i);
             String disciplin = leaderboard2.getDisciplin();
-            int disciplinId = leaderboard2.getDisciplinId();
             LocalTime bedsteTid = leaderboard2.getBedsteTid();
             int medlemsnummer = leaderboard2.getMedlemsnummer();
-            printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
+            bedsteTid = bedsteTid.minusHours(1);
+            printLnsvømmetid(bedsteTid, disciplin, medlemsnummer);
         }
         Leaderboard = getBryst();
         Leaderboard leaderboard3;
         for (int i = 0; i < Leaderboard.size(); i++) {
             leaderboard3 = Leaderboard.get(i);
             String disciplin = leaderboard3.getDisciplin();
-            int disciplinId = leaderboard3.getDisciplinId();
             LocalTime bedsteTid = leaderboard3.getBedsteTid();
             int medlemsnummer = leaderboard3.getMedlemsnummer();
-            printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
+            bedsteTid = bedsteTid.minusHours(1);
+            printLnsvømmetid(bedsteTid, disciplin, medlemsnummer);
         }
         Leaderboard = getFly();
         Leaderboard leaderboard4;
         for (int i = 0; i < Leaderboard.size(); i++) {
             leaderboard4 = Leaderboard.get(i);
             String disciplin = leaderboard4.getDisciplin();
-            int disciplinId = leaderboard4.getDisciplinId();
             LocalTime bedsteTid = leaderboard4.getBedsteTid();
             bedsteTid = bedsteTid.minusHours(1);
-            
             int medlemsnummer = leaderboard4.getMedlemsnummer();
-            printLnsvømmetid(bedsteTid, disciplin, disciplinId, medlemsnummer);
+            printLnsvømmetid(bedsteTid, disciplin, medlemsnummer);
         }
     }
 
@@ -322,42 +327,40 @@ public class SystemUI implements UI {
 
     @Override
     public ArrayList<Leaderboard> getBryst() throws SQLException {
-    ArrayList<Leaderboard> Leaderboard = new ArrayList();
-    Leaderboard = db.hentLeaderboardBryst();
-    return Leaderboard;
+        ArrayList<Leaderboard> Leaderboard = new ArrayList();
+        Leaderboard = db.hentLeaderboardBryst();
+        return Leaderboard;
     }
 
     @Override
-    public ArrayList<Leaderboard> getFly() throws SQLException {  
+    public ArrayList<Leaderboard> getFly() throws SQLException {
         ArrayList<Leaderboard> Leaderboard = new ArrayList();
         Leaderboard = db.hentLeaderboardFly();
         return Leaderboard;
     }
-    
-    public void printLnsvømmetid (LocalTime bedsteTid, String disciplin, int disciplinId, int medlemsnummer) {
-            System.out.print("Bedste tid:" + bedsteTid);
-            System.out.print(", disciplin: " + disciplin);
-            System.out.print(", disciplinID: " + disciplinId);
-            System.out.print(", medlemsnummer: " + medlemsnummer + "\n");
+
+    public void printLnsvømmetid(LocalTime bedsteTid, String disciplin, int medlemsnummer) {
+        System.out.print("Bedste tid:" + bedsteTid);
+        System.out.print(", disciplin: " + disciplin);
+        System.out.print(", medlemsnummer: " + medlemsnummer + "\n");
     }
-    
-    public void opretMedlem() throws SQLException{
+
+    public void opretMedlem() throws SQLException {
         boolean isRestance = false;
         int trænerID = 0;
         String navn = getString("Indtast medlemmes navn: ");
         int age = getInt("Indtast medlemmets alder: ");
         int telefonnummer = getInt("Indtast medlemmets telefonnummer: ");
         String restance = getBoolean("Har medlem betalt? y/n ");
-        if(restance.contains("y")){
+        if (restance.contains("y")) {
             isRestance = true;
         }
         String isKonkurrencesvømmer = getBoolean("Skal medlem være konkurrencesvømmer? y/n");
-        if(isKonkurrencesvømmer.contains("y")){
-            printtrænere();
+        if (isKonkurrencesvømmer.contains("y")) {
+            printTrænere();
             trænerID = getInt("Indtast ID på trænernen");
-            Medlem medlem = new Medlem(navn, age, telefonnummer, isRestance);
-            Konkurrencesvømmer konkurrencesvømmer = new Konkurrencesvømmer(navn, age , telefonnummer, isRestance, trænerID);
-            db.opretKonkurrenceSvømmer(konkurrencesvømmer); 
+            Konkurrencesvømmer konkurrencesvømmer = new Konkurrencesvømmer(navn, age, telefonnummer, isRestance, trænerID);
+            db.opretKonkurrenceSvømmer(konkurrencesvømmer);
         }
         Medlem medlem = new Medlem(navn, age, telefonnummer, isRestance);
         try {
@@ -368,39 +371,38 @@ public class SystemUI implements UI {
         System.out.println(medlem.toString());
         System.out.println("\n");
         administrerBrugere();
-        }
-        
-        public void setRestanceTilJa() {
-            int medlemsnummer = getInt("Indtast medlemmets nummer");
-            db.sætMedlemRestanceJa(medlemsnummer); 
-            administrerBrugere();
-        }
-        
-        public void setRestanceTilNej() {
-            int medlemsnummer = getInt("Indtast medlemmets nummer");
-            db.sætMedlemRestanceNej(medlemsnummer); 
-            administrerBrugere();
-        }
-        
-        
-        @Override
-        public void skrivQForAtKommeTilbage() {
-            System.out.println("Skriv q for at gå tilbage");
-        }
-        
-        public void forkertInput() {
-            System.err.print("Input forkert, prøv igen: ");
-        }
-        
-        public void udskrivAdministrerBrugere() {
-            System.out.println("");
-            System.out.println("Vælg en af følgende valgmuligheder: ");
-            System.out.println("1: Opret bruger");
-            System.out.println("2: Rediger bruger");
-            System.out.println("3: Udskriv trænere");
-            System.out.println("4: Udskriv svømmehold");
-            System.out.println("q: Tryk q for at gå tilbage");
-        }
+    }
+
+    public void setRestanceTilJa() {
+        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        db.sætMedlemRestanceJa(medlemsnummer);
+        administrerBrugere();
+    }
+
+    public void setRestanceTilNej() {
+        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        db.sætMedlemRestanceNej(medlemsnummer);
+        administrerBrugere();
+    }
+
+    public void skrivQForAtKommeTilbage() {
+        System.out.println("Skriv q for at gå tilbage");
+    }
+
+    public void forkertInput() {
+        System.err.print("Input forkert, prøv igen: ");
+    }
+
+    public void udskrivAdministrerBrugere() {
+        System.out.println("");
+        System.out.println("Vælg en af følgende valgmuligheder: ");
+        System.out.println("1: Opret bruger");
+        System.out.println("2: Rediger bruger");
+        System.out.println("3: Udskriv trænere");
+        System.out.println("4: Udskriv svømmehold");
+        System.out.println("q: Tryk q for at gå tilbage");
+    }
+
         
         public void udskrivAdministrerBetaling() {
         System.out.println("");
@@ -411,9 +413,6 @@ public class SystemUI implements UI {
         System.out.println("4: Tilføj restance til et medlem");
         System.out.println("5: Fjern restance fra et medlem");
         System.out.println("q: Afslut");
-        }
-        
     }
 
-
-
+}
