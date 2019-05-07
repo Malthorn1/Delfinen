@@ -51,17 +51,19 @@ public class MockFacade implements Facade {
                     String medlems_navn = result.getNString(1);
                     int medlems_Nummer = result.getInt(4);
                     int medlem_alder = result.getInt(2);
+                    boolean passiv = result.getBoolean(9);
                     int gæld = 0;
-                    if (medlem_alder < 18) {
+                    if (passiv == false)
+                {
+                 if (medlem_alder < 18) {
                     gæld = 1000;
                 } else if (medlem_alder >= 18 && medlem_alder < 60) {
                     gæld = 1600;
                 } else if (medlem_alder >= 60) {
                     gæld = 1200;
-                } else {
-                    gæld = 500;
                 }
-                    Restance restance = new Restance(medlems_navn, medlems_Nummer, medlem_alder);
+                }
+                    Restance restance = new Restance(medlems_navn, medlems_Nummer, medlem_alder, passiv);
                     restance1.add(restance);
                 }
             }catch (SQLException e) {
@@ -130,11 +132,10 @@ public class MockFacade implements Facade {
             ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '1' group by medlemsnummer order by tid ASC LIMIT 5");
             while (result.next()) {
                 String disciplin = result.getNString(3);
-                Time tid = result.getTime(1);
+                Time tid = result.getTime(1); 
                 LocalTime bedsteTid = tid.toLocalTime();
                 int medlemsNummer = result.getInt(2);
-                int disciplinId = result.getInt(4);
-                Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
+                Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin);
 
                 leaderboards.add(leaderboard1);
 
@@ -155,11 +156,10 @@ public class MockFacade implements Facade {
             ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '2' group by medlemsnummer order by tid ASC LIMIT 5");
             while (result.next()) {
                 String disciplin = result.getNString(3);
-                Time tid = result.getTime(1);
+                Time tid = result.getTime(1); 
                 LocalTime bedsteTid = tid.toLocalTime();
                 int medlemsNummer = result.getInt(2);
-                int disciplinId = result.getInt(4);
-                Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
+                Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin);
 
                 leaderboards.add(leaderboard1);
 
@@ -180,11 +180,10 @@ public class MockFacade implements Facade {
             ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '3' group by medlemsnummer order by tid ASC LIMIT 5");
             while (result.next()) {
                 String disciplin = result.getNString(3);
-                Time tid = result.getTime(1);
+                Time tid = result.getTime(1); 
                 LocalTime bedsteTid = tid.toLocalTime();
                 int medlemsNummer = result.getInt(2);
-                int disciplinId = result.getInt(4);
-                Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin, disciplinId);
+                Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin);
 
                 leaderboards.add(leaderboard1);
 
@@ -204,11 +203,10 @@ public class MockFacade implements Facade {
             ResultSet result = statement.executeQuery("SELECT * FROM delfinen.MEDLEM_DISCIPLIN where disciplinID = '4' group by medlemsnummer order by tid ASC LIMIT 5");
             while (result.next()) {
                 String disciplin = result.getNString(3);
-                Time tid = result.getTime(1);
+                Time tid = result.getTime(1); 
                 LocalTime bedsteTid = tid.toLocalTime();
                 int medlemsNummer = result.getInt(2);
-                int disciplinId = result.getInt(4);
-                Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin,);
+                Leaderboard leaderboard1 = new Leaderboard(bedsteTid, medlemsNummer, disciplin);
 
                 leaderboards.add(leaderboard1);
 
