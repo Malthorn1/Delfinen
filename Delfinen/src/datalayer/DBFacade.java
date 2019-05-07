@@ -1,6 +1,5 @@
 package datalayer;
 
-//import businesslogic.Pizza;
 import businesslogic.Konkurrencesvømmer;
 import businesslogic.Leaderboard;
 import businesslogic.Medlem;

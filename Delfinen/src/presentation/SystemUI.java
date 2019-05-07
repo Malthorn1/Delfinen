@@ -83,7 +83,7 @@ public class SystemUI implements UI {
                     forkertInput();
             }
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
+        System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
     }
@@ -171,7 +171,7 @@ public class SystemUI implements UI {
     @Override
     public String getString(String str) {
         System.out.println(str);
-        boolean isString;
+        boolean isString = true;
         String input = scan.next();
         do {
             if (input.matches(".*[1-9].*")) {
@@ -183,7 +183,7 @@ public class SystemUI implements UI {
                 }
                 System.out.println("\n" + "Prøv igen: ");
                 input = scan.nextLine();
-                isString = false;
+                //isString = false;
             } else {
                 isString = true;
             }
@@ -352,14 +352,14 @@ public class SystemUI implements UI {
     }
 
     public void opretMedlem() throws SQLException {
-        boolean isRestance = false;
+        boolean isRestance = true;
         int trænerID = 0;
         String navn = getString("Indtast medlemmes navn: ");
         int age = getInt("Indtast medlemmets alder: ");
         int telefonnummer = getInt("Indtast medlemmets telefonnummer: ");
         String restance = getBoolean("Har medlem betalt? y/n ");
         if (restance.contains("y")) {
-            isRestance = true;
+            isRestance = false;
         }
         String isKonkurrencesvømmer = getBoolean("Skal medlem være konkurrencesvømmer? y/n");
         if (isKonkurrencesvømmer.contains("y")) {
