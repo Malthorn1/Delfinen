@@ -33,13 +33,13 @@ CREATE TABLE MEDLEMMER (
     FOREIGN KEY (træner_ID) REFERENCES TRÆNER(træner_ID)
 );
 
-insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv)  values ("Robert", 57, 55555555, 1, now(), 1, 1, 0);
-insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv)  values ("Rasmus", 17, 12151212, 0, now(), 1, 1, 1);
-insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv)  values ("Kasper", 20, 18171981, 0, now(), 0, 1, 0);
-insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv)  values ("Casper", 17, 30205145, 0, now(), 0, 1, 1);
-insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv)  values ("Jonathan", 17, 30205145, 0, now(), 0, 1, 1);
-insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv)  values ("Tina", 25, 77664455, 0, now(), 0, 1, 0);
-insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv)  values ("Mikkel", 27, 34536543, 0, now(), 0, 1, 0);
+insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv, træner_ID)  values ("Robert", 57, 55555555, 1, now(), 1, 1, 0, 10001);
+insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv, træner_ID)  values ("Rasmus", 17, 12151212, 0, now(), 1, 1, 1, 10003);
+insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv, træner_ID)  values ("Kasper", 20, 18171981, 0, now(), 0, 0, 0, null);
+insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv, træner_ID)  values ("Casper", 17, 30205145, 0, now(), 0, 0, 1, null);
+insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv, træner_ID)  values ("Jonathan", 17, 30205145, 0, now(), 0, 0, 1, null);
+insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv, træner_ID)  values ("Tina", 25, 77664455, 0, now(), 0, 0, 0, null);
+insert into MEDLEMMER (navn, alder, TELEFONNUMMER, MEDLEMSNUMMER, DATOOPRETTET, RESTANCE, KONKURRENCESVØMMER, passiv, træner_ID)  values ("Mikkel", 27, 34536543, 0, now(), 0, 0, 0, null);
 
 
 
