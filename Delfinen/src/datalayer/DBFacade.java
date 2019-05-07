@@ -389,4 +389,19 @@ public class DBFacade implements Facade {
             System.out.println(e);
         }
     }
+    
+    public void setKonkurrencesvømmer(int medlemsnummer, boolean bool){
+        Connection connection = connector();
+        try {
+            String sqlUpdate = "UPDATE MEDLEMMER SET KONKURRENCESVØMMER=? WHERE MEDLEMSNUMMER=? ";
+            PreparedStatement statement = connection.prepareStatement(sqlUpdate);
+            statement.setBoolean(1, bool);
+            statement.setInt(2, medlemsnummer);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
+    }
 }
