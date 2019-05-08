@@ -443,13 +443,15 @@ public class SystemUI implements UI {
 
     public void redigerNavn() {
         String navn = getString("Indtast nyt navn på medlem: ");
+        System.out.print("");
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         db.redigerNavn(medlemsnummer, navn);
-        redigerBruger();
+        //redigerBruger();
     }
 
     public void redigerTelefonnummer() {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
+        System.out.print("");
         int telefonnummer = getInt("Indtast det nye telefonnummer: ");
         db.redigerTelefonnummer(medlemsnummer, telefonnummer);
         redigerBruger();
