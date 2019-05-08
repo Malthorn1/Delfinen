@@ -44,141 +44,141 @@ public class SystemUI implements UI {
 
     @Override
     public void administrerBrugere() {
-        try {
-            udskrivAdministrerBrugere();
-            Scanner scan = new Scanner(System.in);
-            String brugerInput = scan.next();
-            switch (brugerInput) {
-                case "1":
-                    opretMedlem();
-                    break;
-                case "2":
-                    redigerBruger();
-                    break;
-                case "3":
-                    printTrænere();
-                    skrivQForAtKommeTilbage();
-                    String nextInput = scan.next();
-                    udskrivAdministrerBrugere();
-                    if (nextInput == "q") {
-                        administrerBrugere();
-                    }
-                    break;
-                case "4":
-                    printSvømmehold();
-                    skrivQForAtKommeTilbage();
-                    String nextInput1 = scan.next();
-                    udskrivAdministrerBrugere();
-                    if (nextInput1 == "q") {
-                        administrerBrugere();
-                    }
-                    break;
-                case "q":
-                    visHovedMenu();
-                    break;
-                default:
-                    forkertInput();
-            }
-        } catch (Exception e) {
-            System.err.println("Fejl ved input. Retunerer tilbage til menu.");
-            System.err.println("Fejl: "+e.getMessage());
-            try {
-                TimeUnit.SECONDS.sleep(2);
-                } catch (InterruptedException ex) {
-                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            administrerBrugere();
-        }
+//        try {
+//            udskrivAdministrerBrugere();
+//            Scanner scan = new Scanner(System.in);
+//            String brugerInput = scan.next();
+//            switch (brugerInput) {
+//                case "1":
+//                    opretMedlem();
+//                    break;
+//                case "2":
+//                    redigerBruger();
+//                    break;
+//                case "3":
+//                    printTrænere();
+//                    skrivQForAtKommeTilbage();
+//                    String nextInput = scan.next();
+//                    udskrivAdministrerBrugere();
+//                    if (nextInput == "q") {
+//                        administrerBrugere();
+//                    }
+//                    break;
+//                case "4":
+//                    printSvømmehold();
+//                    skrivQForAtKommeTilbage();
+//                    String nextInput1 = scan.next();
+//                    udskrivAdministrerBrugere();
+//                    if (nextInput1 == "q") {
+//                        administrerBrugere();
+//                    }
+//                    break;
+//                case "q":
+//                    visHovedMenu();
+//                    break;
+//                default:
+//                    forkertInput();
+//            }
+//        } catch (Exception e) {
+//            System.err.println("Fejl ved input. Retunerer tilbage til menu.");
+//            System.err.println("Fejl: "+e.getMessage());
+//            try {
+//                TimeUnit.SECONDS.sleep(2);
+//                } catch (InterruptedException ex) {
+//                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            administrerBrugere();
+//        }
     }
     
     @Override
     public void redigerBruger() {
-        try {
-            udskrivRedigerBruger();
-            Scanner scan = new Scanner(System.in);
-            String brugerInput = scan.nextLine();
-            switch (brugerInput) {
-                case "1":
-                    redigerTelefonnummer();
-                    break;
-                case "2":
-                    setKonkurrenceSvømmerJa();
-                    break;
-                case "3":
-                    setKonkurrenceSvømmerNej();
-                case "4":
-                    redigerNavn();
-                    break;
-                case "q":
-                    visHovedMenu();
-                    break;
-                default:
-                    forkertInput();
-            }
-        } catch (Exception e) {
-            System.err.println("Fejl ved input. Retunerer tilbage til menu.");
-            System.err.println("Fejl: "+e.getMessage());
-            try {
-                TimeUnit.SECONDS.sleep(2);
-                } catch (InterruptedException ex) {
-                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            redigerBruger();
-        }
+//        try {
+//            udskrivRedigerBruger();
+//            Scanner scan = new Scanner(System.in);
+//            String brugerInput = scan.nextLine();
+//            switch (brugerInput) {
+//                case "1":
+//                    redigerTelefonnummer();
+//                    break;
+//                case "2":
+//                    setKonkurrenceSvømmerJa();
+//                    break;
+//                case "3":
+//                    setKonkurrenceSvømmerNej();
+//                case "4":
+//                    redigerNavn();
+//                    break;
+//                case "q":
+//                    visHovedMenu();
+//                    break;
+//                default:
+//                    forkertInput();
+//            }
+//        } catch (Exception e) {
+//            System.err.println("Fejl ved input. Retunerer tilbage til menu.");
+//            System.err.println("Fejl: "+e.getMessage());
+//            try {
+//                TimeUnit.SECONDS.sleep(2);
+//                } catch (InterruptedException ex) {
+//                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            redigerBruger();
+//        }
         }
 
     @Override
     public void administrerBetaling() {
-        try {
-            udskrivAdministrerBetaling();
-            Scanner scan = new Scanner(System.in);
-            String brugerInput = scan.nextLine();
-            switch (brugerInput) {
-                case "1":
-                    annulerAbonnement();
-                    udskrivAdministrerBetaling();
-                    break;
-                case "2":
-                    printRestance();
-                    skrivQForAtKommeTilbage();
-                    String nextInput0 = scan.next();
-                    udskrivAdministrerBetaling();
-                    if (nextInput0 == "q") {
-                        administrerBetaling();
-                    }
-                    break;
-                case "3":
-                    setRestanceTilJa();
-                    udskrivAdministrerBetaling();
-                    break;
-                case "4":
-                    setRestanceTilNej();
-                    udskrivAdministrerBetaling();
-                    break;
-                case "5":
-                    setPassivTilJa();
-                    udskrivAdministrerBetaling();
-                    break;
-                case "6":
-                    setPassivTilNej();
-                    udskrivAdministrerBetaling();
-                    break;
-                case "q":
-                    visHovedMenu();
-                    break;
-                default:
-                    forkertInput();
-            }
-        } catch (Exception e) {
-            System.err.println("Fejl ved input. Retunerer tilbage til menu.");
-            System.err.println("Fejl: "+e.getMessage());
-            try {
-                TimeUnit.SECONDS.sleep(2);
-                } catch (InterruptedException ex) {
-                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            administrerBetaling();
-        }
+//        try {
+//            udskrivAdministrerBetaling();
+//            Scanner scan = new Scanner(System.in);
+//            String brugerInput = scan.nextLine();
+//            switch (brugerInput) {
+//                case "1":
+//                    annulerAbonnement();
+//                    udskrivAdministrerBetaling();
+//                    break;
+//                case "2":
+//                    printRestance();
+//                    skrivQForAtKommeTilbage();
+//                    String nextInput0 = scan.next();
+//                    udskrivAdministrerBetaling();
+//                    if (nextInput0 == "q") {
+//                        administrerBetaling();
+//                    }
+//                    break;
+//                case "3":
+//                    setRestanceTilJa();
+//                    udskrivAdministrerBetaling();
+//                    break;
+//                case "4":
+//                    setRestanceTilNej();
+//                    udskrivAdministrerBetaling();
+//                    break;
+//                case "5":
+//                    setPassivTilJa();
+//                    udskrivAdministrerBetaling();
+//                    break;
+//                case "6":
+//                    setPassivTilNej();
+//                    udskrivAdministrerBetaling();
+//                    break;
+//                case "q":
+//                    visHovedMenu();
+//                    break;
+//                default:
+//                    forkertInput();
+//            }
+//        } catch (Exception e) {
+//            System.err.println("Fejl ved input. Retunerer tilbage til menu.");
+//            System.err.println("Fejl: "+e.getMessage());
+//            try {
+//                TimeUnit.SECONDS.sleep(2);
+//                } catch (InterruptedException ex) {
+//                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            administrerBetaling();
+//        }
     }
 
     /*
@@ -227,14 +227,39 @@ public class SystemUI implements UI {
     @Override
     public int getInt(String str) {
         System.out.println(str);
-        return scan.nextInt();
-    }
+        String nextInput = scan.next();
+       try {
+           int input = Integer.parseInt(nextInput);
+           if(input >=0) {
+               return input;
+           }
+       } catch (NumberFormatException e) {
+           System.err.println("Skriv et tal");
+           getInt(str);
+       }
+       return 0;
+    }  
 
     @Override
     public String getBoolean(String str) {
         System.out.println(str);
-        return scan.next();
+        String emptyString;
+        emptyString = scan.next();
+        while (emptyString.matches(".*[0-9].*")) {
+            
+            System.err.println("Fejl ved indtastning af input. Fejl: Skriv enten y for ja  eller n for nej  ");
+            emptyString = scan.next();
+        } if (emptyString.matches("y")) {
+            return "y"; 
+        } else if (emptyString.matches("n")) {
+            return "n"; 
+        }else {
+            System.err.println("Fejl ved indtastning af input. Fejl: Skriv enten y for ja  eller n for nej  ");
+            getBoolean(str);
+        }
+        return emptyString;
     }
+    
 
     @Override
     public void indtastTræningstid() {
@@ -406,44 +431,37 @@ public class SystemUI implements UI {
         }
         System.out.println(medlem.toString());
         System.out.println("\n");
-        administrerBrugere();
     }
 
     public void setRestanceTilJa() {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         db.sætMedlemRestanceJa(medlemsnummer);
-        administrerBrugere();
     }
 
     public void setRestanceTilNej() {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         db.sætMedlemRestanceNej(medlemsnummer);
-        administrerBrugere();
     }
 
     public void setPassivTilJa() {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         db.sætMedlemPassivJa(medlemsnummer);
-        administrerBrugere();
     }
 
     public void setPassivTilNej() {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         db.sætMedlemPassivNej(medlemsnummer);
-        administrerBrugere();
     }
     
     public void annulerAbonnement() {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         db.annulerAbonnement(medlemsnummer);
-        administrerBetaling();
     }
 
     public void redigerNavn() {
         String navn = getString("Indtast nyt navn på medlem: ");
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         db.redigerNavn(medlemsnummer, navn);
-        redigerBruger();
     }
 
     public void redigerTelefonnummer() {
@@ -451,7 +469,7 @@ public class SystemUI implements UI {
         System.out.print("");
         int telefonnummer = getInt("Indtast det nye telefonnummer: ");
         db.redigerTelefonnummer(medlemsnummer, telefonnummer);
-        redigerBruger();
+        
     }
     
     public void setKonkurrenceSvømmerJa() throws SQLException{
@@ -460,21 +478,25 @@ public class SystemUI implements UI {
         System.out.println("");
         int træner_id = getInt("Indtast træner ID: ");
         db.setKonkurrencesvømmerJa(medlemsnummer, træner_id);
-        redigerBruger();
     }
     
     public void setKonkurrenceSvømmerNej(){
         int medlemsnummer = getInt("Indtast nummer på medlem: ");      
         db.setKonkurrencesvømmerNej(medlemsnummer);
-        redigerBruger();
     }
 
+    @Override
     public void skrivQForAtKommeTilbage() {
         System.out.println("Skriv q for at gå tilbage");
+        String nextInput0 = scan.next();
+            while (!nextInput0.contains("q")) {
+            forkertInput();
+            nextInput0 = scan.next();
+    }
     }
 
     public void forkertInput() {
-        System.err.print("Input forkert, prøv igen: ");
+        System.err.print("Input forkert, prøv igen: \n");
     }
 
     public void udskrivAdministrerBrugere() {
