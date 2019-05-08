@@ -286,7 +286,6 @@ public class DBFacade implements Facade {
         Connection connection = connector();
 
         try {
-            Statement st = connection.createStatement();
             String sql = "INSERT INTO MEDLEM_DISCIPLIN(MEDLEMSNUMMER, TID, DISCIPLIN)VALUES(?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, medlemsnummer);
@@ -302,7 +301,6 @@ public class DBFacade implements Facade {
     public void sætMedlemRestanceJa(int medlemsnummer) {
         Connection connection = connector();
         try {
-            Statement st = connection.createStatement();
             String query = "update medlemmer set RESTANCE = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(2, medlemsnummer);
@@ -317,7 +315,6 @@ public class DBFacade implements Facade {
     public void sætMedlemRestanceNej(int medlemsnummer) {
         Connection connection = connector();
         try {
-            Statement st = connection.createStatement();
             String query = "update medlemmer set RESTANCE = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(2, medlemsnummer);
@@ -332,7 +329,6 @@ public class DBFacade implements Facade {
     public void sætMedlemPassivJa(int medlemsnummer) {
         Connection connection = connector();
         try {
-            Statement st = connection.createStatement();
             String query = "update medlemmer set PASSIV = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(2, medlemsnummer);
@@ -347,7 +343,6 @@ public class DBFacade implements Facade {
     public void sætMedlemPassivNej(int medlemsnummer) {
         Connection connection = connector();
         try {
-            Statement st = connection.createStatement();
             String query = "update medlemmer set PASSIV = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(2, medlemsnummer);
@@ -356,6 +351,22 @@ public class DBFacade implements Facade {
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
+        }
+    }
+    
+    public void annulerAbonnement(int medlemsnummer) {
+        Connection connection = connector();
+        try {
+            String query = "UPDATE MEDLEMMER SET NAVN = ?, TRÆNER_ID = null, PASSIV = ?, RESTANCE = ? WHERE MEDLEMSNUMMER = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, "Abonnement annuleret");
+            statement.setBoolean(2, false);
+            statement.setBoolean(3, false);
+            statement.setInt(4, medlemsnummer);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
         }
     }
 
@@ -389,13 +400,27 @@ public class DBFacade implements Facade {
         }
     }
     
-    public void setKonkurrencesvømmer(int medlemsnummer, boolean bool){
+    public void setKonkurrencesvømmerNej(int medlemsnummer){
         Connection connection = connector();
         try {
-            String sqlUpdate = "UPDATE MEDLEMMER SET KONKURRENCESVØMMER=? WHERE MEDLEMSNUMMER=? ";
+            String sqlUpdate = "UPDATE MEDLEMMER SET KONKURRENCESVØMMER=?, TRÆNER_ID = null WHERE MEDLEMSNUMMER=? ";
             PreparedStatement statement = connection.prepareStatement(sqlUpdate);
-            statement.setBoolean(1, bool);
+            statement.setBoolean(1, false);
             statement.setInt(2, medlemsnummer);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void setKonkurrencesvømmerJa(int medlemsnummer, int træner_ID){
+        Connection connection = connector();
+        try {
+            String sqlUpdate = "UPDATE MEDLEMMER SET KONKURRENCESVØMMER=?, TRÆNER_ID = ? WHERE MEDLEMSNUMMER=? ";
+            PreparedStatement statement = connection.prepareStatement(sqlUpdate);
+            statement.setBoolean(1, true);
+            statement.setInt(2, træner_ID);
+            statement.setInt(3, medlemsnummer);
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

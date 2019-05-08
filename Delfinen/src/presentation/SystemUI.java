@@ -101,9 +101,11 @@ public class SystemUI implements UI {
                     redigerTelefonnummer();
                     break;
                 case "2":
-                    setKonkurrenceSvømmer();
+                    setKonkurrenceSvømmerJa();
                     break;
                 case "3":
+                    setKonkurrenceSvømmerNej();
+                case "4":
                     redigerNavn();
                     break;
                 case "q":
@@ -135,7 +137,8 @@ public class SystemUI implements UI {
                     //
                     break;
                 case "2":
-                    //
+                    annulerAbonnement();
+                    udskrivAdministrerBetaling();
                     break;
                 case "3":
                     printRestance();
@@ -434,6 +437,12 @@ public class SystemUI implements UI {
         db.sætMedlemPassivNej(medlemsnummer);
         administrerBrugere();
     }
+    
+    public void annulerAbonnement() {
+        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        db.annulerAbonnement(medlemsnummer);
+        administrerBetaling();
+    }
 
     public void redigerNavn() {
         String navn = getString("Indtast nyt navn på medlem: ");
@@ -449,16 +458,18 @@ public class SystemUI implements UI {
         redigerBruger();
     }
     
-    public void setKonkurrenceSvømmer(){
+    public void setKonkurrenceSvømmerJa() throws SQLException{
         int medlemsnummer = getInt("Indtast nummer på medlem: ");
-        boolean isKonkurrencesvømmer = true;
-        int input = getInt("Tryk 1 for at ændre medlem til konkurrencesvømmer"
-                + "\nTryk 2 for at ændre konkurrencesvømmer til medlem");
-        if(input==2){
-            isKonkurrencesvømmer = false;
-        }
-        
-        db.setKonkurrencesvømmer(medlemsnummer, isKonkurrencesvømmer);
+        printTrænere();
+        System.out.println("");
+        int træner_id = getInt("Indtast træner ID: ");
+        db.setKonkurrencesvømmerJa(medlemsnummer, træner_id);
+        redigerBruger();
+    }
+    
+    public void setKonkurrenceSvømmerNej(){
+        int medlemsnummer = getInt("Indtast nummer på medlem: ");      
+        db.setKonkurrencesvømmerNej(medlemsnummer);
         redigerBruger();
     }
 
@@ -484,9 +495,10 @@ public class SystemUI implements UI {
         System.out.println("");
         System.out.println("Vælg en af følgende valgmuligheder: ");
         System.out.println("1: Rediger telefonnummer");
-        System.out.println("2: Fjern eller tilføj en bruger til at være konkurrencesvømmer");
+        System.out.println("2: Tilføj medlem til at være konkurrencesvømmer");
+        System.out.println("3: Fjern medlem fra konkurrencesvømmer");
         System.out.println("3: Rediger navn");
-        System.out.println("q: Afslut");
+        System.out.println("q: Tryk q for at gå tilbage");
     }
 
     public void udskrivAdministrerBetaling() {
@@ -499,7 +511,7 @@ public class SystemUI implements UI {
         System.out.println("5: Fjern restance fra et medlem");
         System.out.println("6: Sæt medlem til passiv");
         System.out.println("7: Fjern medlem fra passiv");
-        System.out.println("q: Afslut");
+        System.out.println("q: Tryk q for at gå tilbage");
     }
 
 }
