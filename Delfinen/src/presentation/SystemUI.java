@@ -8,6 +8,7 @@ import businesslogic.Restance;
 import datalayer.DBFacade;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -506,6 +507,49 @@ public class SystemUI implements UI {
         System.out.println("5: Sæt medlem til passiv");
         System.out.println("6: Fjern medlem fra passiv");
         System.out.println("q: Tryk q for at gå tilbage");
+    }
+
+    @Override
+    public void printMedlemmer() throws SQLException {
+        ArrayList<Medlem> medlemmer = new ArrayList();
+        medlemmer = db.hentMedlemmer();
+        Medlem medlem;
+        for (int i = 0; i < medlemmer.size(); i++) {
+            medlem = medlemmer.get(i);
+            String medlem_navn = medlem.getNavn();
+            int medlem_alder = medlem.getAge();
+            int medlemsNummer = medlem.getMedlemsnummer(); 
+            int medlem_telefonNummer = medlem.getTelefonnummer();
+            Timestamp datoOprettet = medlem.getDatoOprettet();
+            boolean restance = medlem.isRestance();
+            boolean konkurrenceSvømmer = medlem.isKonkurrencesvømmer();
+            boolean passiv = medlem.isPassiv();
+
+            
+            int kontigent = 500;
+            if (passiv == false) {
+                if (medlem_alder < 18) {
+                    kontigent = 1000;
+                } else if (medlem_alder >= 18 && medlem_alder < 60) {
+                    kontigent = 1600;
+                } else if (medlem_alder >= 60) {
+                    kontigent = 1200;
+                }
+            }
+
+            String SRestance = "er ikke "; 
+            if (restance == true) {
+                SRestance= "ER "; 
+            }
+            System.out.print("Medlemsnummer: " + medlemsNummer +"\n"); 
+            System.out.print("Oprettet d. " +datoOprettet + "\n"); 
+            System.out.print("Navn: " + medlem_navn + "\n" ) ;
+            System.out.print("Telefonnummer: "+ medlem_telefonNummer + "\n");
+            System.out.print("Medlemsskabets årlige kontigent er: " + kontigent +"kr."+"\n" );
+            System.out.print("Konkurrence Svømmer: " + konkurrenceSvømmer +"\n"); 
+            System.out.print("Medlemet " + SRestance +"i restance");  
+            System.out.print("\n \n");
+        }
     }
 
 }

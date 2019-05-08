@@ -37,4 +37,7 @@ public interface Facade {
     public ArrayList<Leaderboard> hentLeaderboardBryst() throws SQLException;
 
     public ArrayList<Leaderboard> hentLeaderboardFly() throws SQLException;
+    
+    public ArrayList<Medlem> hentMedlemmer() throws SQLException ; 
 }
+

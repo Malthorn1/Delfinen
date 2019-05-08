@@ -24,7 +24,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "frb150195";
+            String password = "mixe91decoys";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
@@ -423,5 +423,32 @@ public class DBFacade implements Facade {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    @Override
+    public ArrayList<Medlem> hentMedlemmer() throws SQLException {
+                Connection connection = connector();
+        ArrayList<Medlem> medlem1 = new ArrayList();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM MEDLEMMER");
+            while (result.next()) {
+                String navn = result.getNString(1);
+                int alder = result.getInt(2);
+                int telefonnummer = result.getInt(3);
+                int medlemsnummer = result.getInt(4);
+                Timestamp datoOprettet= result.getTimestamp(5); 
+                boolean restance = result.getBoolean(6); 
+                boolean konkurrenceSvømmer = result.getBoolean(7); 
+                boolean passiv = result.getBoolean(9); 
+                
+                Medlem medlem = new Medlem (navn, alder, telefonnummer, medlemsnummer, datoOprettet, restance, konkurrenceSvømmer, passiv ) ; 
+                
+                medlem1.add(medlem);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        } 
+        return medlem1; 
     }
 }

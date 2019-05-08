@@ -48,4 +48,6 @@ public interface UI {
     public void skrivQForAtKommeTilbage();
     
     public void indtastTræningstid();
+    
+    public void printMedlemmer() throws SQLException ; 
 }

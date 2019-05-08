@@ -1,5 +1,7 @@
 package businesslogic;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author prejl
@@ -12,6 +14,8 @@ public class Medlem {
     private boolean restance;
     private boolean konkurrencesvømmer;
     private int medlemsnummer;
+    private boolean passiv; 
+    private Timestamp datoOprettet; 
     
     public Medlem(String navn, int age, int telefonnummer, boolean restance) {
         this.navn = navn;
@@ -22,6 +26,17 @@ public class Medlem {
     
      public Medlem() {
         // tom constructor
+    }
+     
+          //medlem constructor til hent/print medlem
+    public Medlem(String navn, int age, int telefonnummer, int medlemmsnummer, Timestamp datoOprettet,   boolean restance, boolean konkurrenceSvømmer, boolean passiv) {
+        this.navn = navn;
+        this.age = age;
+        this.telefonnummer = telefonnummer;
+        this.medlemsnummer = medlemmsnummer; 
+        this.restance = restance;
+        this.konkurrencesvømmer = konkurrenceSvømmer; 
+        this.passiv = passiv; 
     }
 
 
@@ -92,4 +107,21 @@ public class Medlem {
         return medlemsnummer;
     }
 
+    public boolean isPassiv() {
+        return passiv;
+    }
+
+    public void setPassiv(boolean passiv) {
+        this.passiv = passiv;
+    }
+
+    public Timestamp getDatoOprettet() {
+        return datoOprettet;
+    }
+
+    public void setDatoOprettet(Timestamp datoOprettet) {
+        this.datoOprettet = datoOprettet;
+    }
+
+    
 }
