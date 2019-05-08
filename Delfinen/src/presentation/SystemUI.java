@@ -281,7 +281,6 @@ public class SystemUI implements UI {
             System.out.print(", Medlemsnummer: " + medlems_Nummer);
             System.out.print(", Skyldigt beløb : " + gæld + "\n");
         }
-        administrerBetaling();
     }
 
     @Override
@@ -298,7 +297,6 @@ public class SystemUI implements UI {
             System.out.print(" Træner ID: " + træner_id + " \n");
 
         }
-        administrerBrugere();
     }
 
     @Override
