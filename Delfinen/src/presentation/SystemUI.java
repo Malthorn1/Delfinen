@@ -134,13 +134,10 @@ public class SystemUI implements UI {
             String brugerInput = scan.nextLine();
             switch (brugerInput) {
                 case "1":
-                    //
-                    break;
-                case "2":
                     annulerAbonnement();
                     udskrivAdministrerBetaling();
                     break;
-                case "3":
+                case "2":
                     printRestance();
                     skrivQForAtKommeTilbage();
                     String nextInput0 = scan.next();
@@ -149,19 +146,19 @@ public class SystemUI implements UI {
                         administrerBetaling();
                     }
                     break;
-                case "4":
+                case "3":
                     setRestanceTilJa();
                     udskrivAdministrerBetaling();
                     break;
-                case "5":
+                case "4":
                     setRestanceTilNej();
                     udskrivAdministrerBetaling();
                     break;
-                case "6":
+                case "5":
                     setPassivTilJa();
                     udskrivAdministrerBetaling();
                     break;
-                case "7":
+                case "6":
                     setPassivTilNej();
                     udskrivAdministrerBetaling();
                     break;
@@ -504,13 +501,12 @@ public class SystemUI implements UI {
     public void udskrivAdministrerBetaling() {
         System.out.println("");
         System.out.println("Vælg en af følgende valgmuligheder: ");
-        System.out.println("1: Tilføj ny betaling");
-        System.out.println("2: Annuler abonnement");
-        System.out.println("3: Udskriv medlemmere i restance");
-        System.out.println("4: Tilføj restance til et medlem");
-        System.out.println("5: Fjern restance fra et medlem");
-        System.out.println("6: Sæt medlem til passiv");
-        System.out.println("7: Fjern medlem fra passiv");
+        System.out.println("1: Annuler abonnement");
+        System.out.println("2: Udskriv medlemmere i restance");
+        System.out.println("3: Tilføj restance til et medlem");
+        System.out.println("4: Fjern restance fra et medlem");
+        System.out.println("5: Sæt medlem til passiv");
+        System.out.println("6: Fjern medlem fra passiv");
         System.out.println("q: Tryk q for at gå tilbage");
     }
 
