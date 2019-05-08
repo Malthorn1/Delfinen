@@ -47,7 +47,7 @@ public class SystemUI implements UI {
         try {
             udskrivAdministrerBrugere();
             Scanner scan = new Scanner(System.in);
-            String brugerInput = scan.nextLine();
+            String brugerInput = scan.next();
             switch (brugerInput) {
                 case "1":
                     opretMedlem();
