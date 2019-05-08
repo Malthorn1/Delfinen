@@ -18,6 +18,8 @@ public interface UI {
     public void administrerBrugere();
 
     public void administrerBetaling();
+    
+    public void redigerBruger();
 
     public void printSvømmehold() throws SQLException;
 

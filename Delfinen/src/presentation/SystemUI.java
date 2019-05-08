@@ -53,7 +53,7 @@ public class SystemUI implements UI {
                     opretMedlem();
                     break;
                 case "2":
-                    //
+                    redigerBruger();
                     break;
                 case "3":
                     printTrænere();
@@ -84,6 +84,34 @@ public class SystemUI implements UI {
             System.err.println(e.getMessage());
         }
     }
+    
+    @Override
+    public void redigerBruger() {
+        try {
+            udskrivRedigerBruger();
+            Scanner scan = new Scanner(System.in);
+            String brugerInput = scan.nextLine();
+            switch (brugerInput) {
+                case "1":
+                    redigerTelefonnummer();
+                    break;
+                case "2":
+                    setKonkurrenceSvømmer();
+                    break;
+                case "3":
+                    redigerNavn();
+                    break;
+                case "q":
+                    visHovedMenu();
+                    break;
+                default:
+                    forkertInput();
+            }
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        }
 
     @Override
     public void administrerBetaling() {
@@ -164,36 +192,20 @@ public class SystemUI implements UI {
         }
 
     }
-
+    
     @Override
     public String getString(String str) {
         System.out.println(str);
         String emptyString;
         emptyString = scan.nextLine();
-        do {
+        if (emptyString.matches(".*[0-9].*")) {
+            do {
             System.err.print("Fejl ved indtastning af input. Fejl: Der blev indtasted andet end bokstaver.");
             emptyString = scan.nextLine();
-        } while (emptyString.matches(".*[1-9].*"));
-        return emptyString;
-//        boolean isString = true;
-//        String input = scan.next();
-//        do {
-//            if (input.matches(".*[1-9].*")) {
-//                System.err.print("Fejl ved indtastning af input. Fejl: Der blev indtasted andet end bokstaver.");
-//                try {
-//                    TimeUnit.SECONDS.sleep(1);
-//                } catch (InterruptedException ex) {
-//                    Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                System.out.println("\n" + "Prøv igen: ");
-//                input = scan.nextLine();
-//            } else {
-//                isString = true;
-//            }
-//        } while (!(isString));
-//        return input;
+        } while (emptyString.matches(".*[0-9].*"));
+        } return emptyString;
     }
-
+    
     @Override
     public int getInt(String str) {
         System.out.println(str);
@@ -410,12 +422,14 @@ public class SystemUI implements UI {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         String navn = getString("Indtast nyt navn på medlem: ");
         db.redigerNavn(medlemsnummer, navn);
+        redigerBruger();
     }
 
     public void redigerTelefonnummer() {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         int telefonnummer = getInt("Indtast det nye telefonnummer: ");
         db.redigerTelefonnummer(medlemsnummer, telefonnummer);
+        redigerBruger();
     }
     
     public void setKonkurrenceSvømmer(){
@@ -428,6 +442,7 @@ public class SystemUI implements UI {
         }
         
         db.setKonkurrencesvømmer(medlemsnummer, isKonkurrencesvømmer);
+        redigerBruger();
     }
 
     public void skrivQForAtKommeTilbage() {
@@ -446,6 +461,15 @@ public class SystemUI implements UI {
         System.out.println("3: Udskriv trænere");
         System.out.println("4: Udskriv svømmehold");
         System.out.println("q: Tryk q for at gå tilbage");
+    }
+    
+    public void udskrivRedigerBruger(){
+        System.out.println("");
+        System.out.println("Vælg en af følgende valgmuligheder: ");
+        System.out.println("1: Rediger telefonnummer");
+        System.out.println("2: Fjern eller tilføj en bruger til at være konkurrencesvømmer");
+        System.out.println("3: Rediger navn");
+        System.out.println("q: Afslut");
     }
 
     public void udskrivAdministrerBetaling() {
