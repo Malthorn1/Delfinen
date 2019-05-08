@@ -79,8 +79,14 @@ public class SystemUI implements UI {
                     forkertInput();
             }
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
+            System.err.println("Fejl ved input. Retunerer tilbage til menu.");
+            System.err.println("Fejl: "+e.getMessage());
+            try {
+                TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException ex) {
+                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            administrerBrugere();
         }
     }
     
@@ -107,8 +113,14 @@ public class SystemUI implements UI {
                     forkertInput();
             }
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
+            System.err.println("Fejl ved input. Retunerer tilbage til menu.");
+            System.err.println("Fejl: "+e.getMessage());
+            try {
+                TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException ex) {
+                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            redigerBruger();
         }
         }
 
@@ -157,8 +169,14 @@ public class SystemUI implements UI {
                     forkertInput();
             }
         } catch (Exception e) {
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
+            System.err.println("Fejl ved input. Retunerer tilbage til menu.");
+            System.err.println("Fejl: "+e.getMessage());
+            try {
+                TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException ex) {
+                Logger.getLogger(SystemUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            administrerBetaling();
         }
     }
 
@@ -199,7 +217,7 @@ public class SystemUI implements UI {
         emptyString = scan.nextLine();
         if (emptyString.matches(".*[0-9].*")) {
             do {
-            System.err.print("Fejl ved indtastning af input. Fejl: Der blev indtasted andet end bokstaver.");
+            System.err.print("Fejl ved indtastning af input. Fejl: Der blev indtasted andet end bokstaver. Prøv igen:   ");
             emptyString = scan.nextLine();
         } while (emptyString.matches(".*[0-9].*"));
         } return emptyString;
