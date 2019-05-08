@@ -303,7 +303,6 @@ public class SystemUI implements UI {
     public void printLeaderboard() throws SQLException {
         ArrayList<Leaderboard> Leaderboard = new ArrayList();
 
-        //Leaderboard = db.hentLeaderboardCrawl(); 
         Leaderboard = getCrawl();
 
         Leaderboard leaderboard1;
