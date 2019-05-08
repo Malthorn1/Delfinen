@@ -1,6 +1,5 @@
 package presentation;
 
-import businesslogic.Controller;
 import businesslogic.Konkurrencesvømmer;
 import businesslogic.Leaderboard;
 import businesslogic.Medlem;
@@ -419,8 +418,8 @@ public class SystemUI implements UI {
     }
 
     public void redigerNavn() {
-        int medlemsnummer = getInt("Indtast medlemmets nummer");
         String navn = getString("Indtast nyt navn på medlem: ");
+        int medlemsnummer = getInt("Indtast medlemmets nummer");
         db.redigerNavn(medlemsnummer, navn);
         redigerBruger();
     }
