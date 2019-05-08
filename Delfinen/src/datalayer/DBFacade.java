@@ -357,12 +357,10 @@ public class DBFacade implements Facade {
     public void annulerAbonnement(int medlemsnummer) {
         Connection connection = connector();
         try {
-            String query = "UPDATE MEDLEMMER SET NAVN = ?, TRÆNER_ID = null, PASSIV = ?, RESTANCE = ? WHERE MEDLEMSNUMMER = ?";
+            String query = "UPDATE MEDLEMMER SET NAVN = ?, TRÆNER_ID = null, PASSIV = null, RESTANCE = null, KONKURRENCESVØMMER = null, ALDER = 0 WHERE MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, "Abonnement annuleret");
-            statement.setBoolean(2, false);
-            statement.setBoolean(3, false);
-            statement.setInt(4, medlemsnummer);
+            statement.setInt(2, medlemsnummer);
             statement.executeUpdate();
 
         } catch (SQLException e) {
