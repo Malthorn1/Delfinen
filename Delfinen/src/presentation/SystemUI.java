@@ -47,7 +47,7 @@ public class SystemUI implements UI {
         try {
             udskrivAdministrerBrugere();
             Scanner scan = new Scanner(System.in);
-            String brugerInput = scan.next();
+            String brugerInput = scan.nextLine();
             switch (brugerInput) {
                 case "1":
                     opretMedlem();
@@ -215,11 +215,11 @@ public class SystemUI implements UI {
     public String getString(String str) {
         System.out.println(str);
         String emptyString;
-        emptyString = scan.next();
+        emptyString = scan.nextLine();
         if (emptyString.matches(".*[0-9].*")) {
             do {
             System.err.print("Fejl ved indtastning af input. Fejl: Der blev indtasted andet end bokstaver. Prøv igen:   ");
-            emptyString = scan.next();
+            emptyString = scan.nextLine();
         } while (emptyString.matches(".*[0-9].*"));
         } return emptyString;
     }
