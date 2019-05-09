@@ -44,12 +44,6 @@ public class MenuUI {
                     ui.skrivQForAtKommeTilbage();
                     start(); 
                     break;
-                case "4":
-                    //visAktiveOrdrer();
-                    break;
-                case "5":
-                    //visOrdreHistorik();
-                    break;
                 case "q":
                     Runtime.getRuntime().exit(0);
                     break;
@@ -117,21 +111,21 @@ public class MenuUI {
             switch (brugerInput) {
                 case "1":
                     ui.redigerTelefonnummer();
-                    start();
+                    redigerBruger();
                     break;
                 case "2":
                     ui.setKonkurrenceSvømmerJa();
-                    start();
+                    redigerBruger();
                     break;
                 case "3":
                     ui.setKonkurrenceSvømmerNej();
-                    start();
+                    redigerBruger();
                 case "4":
                     ui.redigerNavn();
-                    start();
+                    redigerBruger();
                     break;
                 case "q":
-                    start();
+                    administrerBrugere();
                     break;
                 default:
                     ui.forkertInput();
@@ -153,7 +147,6 @@ public class MenuUI {
     public void administrerBrugere() {
         try {
             ui.udskrivAdministrerBrugere();
-            
             Scanner scan = new Scanner(System.in);
             String brugerInput = scan.next();
             switch (brugerInput) {
