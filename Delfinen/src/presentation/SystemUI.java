@@ -423,13 +423,25 @@ public class SystemUI implements UI {
             trænerID = getInt("Indtast ID på trænernen");
             Konkurrencesvømmer konkurrencesvømmer = new Konkurrencesvømmer(navn, age, telefonnummer, isRestance, trænerID);
             db.opretKonkurrenceSvømmer(konkurrencesvømmer);
+                   
+        if (isRestance == false) {
+           isRestance =true; 
+            
+        } else if (isRestance == true) {
+            isRestance= false; 
         }
+        konkurrencesvømmer.setRestance(isRestance);
+        System.out.println(konkurrencesvømmer.toString());
+        System.out.println("\n");
+        }
+        else if (isKonkurrencesvømmer.contains("n")) {
         Medlem medlem = new Medlem(navn, age, telefonnummer, isRestance);
         try {
             db.opretMedlem(medlem);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+        
         if (isRestance == false) {
            isRestance =true; 
             
@@ -439,8 +451,9 @@ public class SystemUI implements UI {
         medlem.setRestance(isRestance);
         System.out.println(medlem.toString());
         System.out.println("\n");
+        }
     }
-
+    
     public void setRestanceTilJa() {
         int medlemsnummer = getInt("Indtast medlemmets nummer");
         db.sætMedlemRestanceJa(medlemsnummer);
