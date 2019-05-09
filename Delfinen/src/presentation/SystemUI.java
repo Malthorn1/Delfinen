@@ -79,7 +79,7 @@ public class SystemUI implements UI {
         emptyString = scan.next();
         if (emptyString.matches(".*[0-9].*")) {
             do {
-            System.err.print("Fejl ved indtastning af input. Fejl: Der blev indtasted andet end bokstaver. Prøv igen:   ");
+            System.err.print("Fejl ved indtastning af input. Fejl: Der blev indtasted andet end bogstaver. Prøv igen:   ");
             emptyString = scan.next();
         } while (emptyString.matches(".*[0-9].*"));
         } return emptyString;
@@ -122,14 +122,14 @@ public class SystemUI implements UI {
         emptyString = scan.next();
         while (emptyString.matches(".*[0-9].*")) {
             
-            System.err.println("Fejl ved indtastning af input. Fejl: Skriv enten y for ja  eller n for nej  ");
+            System.err.println("Fejl ved indtastning af input. Fejl: Skriv enten y for ja  eller n for nej");
             emptyString = scan.next();
         } if (emptyString.matches("y")) {
             return "y"; 
         } else if (emptyString.matches("n")) {
             return "n"; 
         }else {
-            System.err.println("Fejl ved indtastning af input. Fejl: Skriv enten y for ja  eller n for nej  ");
+            System.err.println("Fejl ved indtastning af input. Fejl: Skriv enten y for ja  eller n for nej");
             getBoolean(str);
         }
         return emptyString;
@@ -139,7 +139,7 @@ public class SystemUI implements UI {
     @Override
     public void indtastTræningstid() {
 
-        System.out.println("Indtast medlemsnummeret på konkurrenesvømmer:  ");
+        System.out.println("Indtast medlemsnummeret på konkurrenesvømmeren: ");
         int medlemsnummer = scan.nextInt();
         System.out.print("Indtast træningstid HH:MM:SS: ");
 
@@ -303,14 +303,14 @@ public class SystemUI implements UI {
         boolean isRestance = true;
         int trænerID = 0;
         
-        String navn = getString("Indtast medlemmes navn: ");
+        String navn = getString("Indtast medlemmets navn: ");
         int age = getInt("Indtast medlemmets alder: ");
         int telefonnummer = getInt("Indtast medlemmets telefonnummer: ");
-        String restance = getBoolean("Har medlem betalt? y/n ");
+        String restance = getBoolean("Har medlemmet betalt? y/n ");
         if (restance.contains("y")) {
             isRestance = false;
         }
-        String isKonkurrencesvømmer = getBoolean("Skal medlem være konkurrencesvømmer? y/n");
+        String isKonkurrencesvømmer = getBoolean("Skal medlemmet være konkurrencesvømmer? y/n");
         if (isKonkurrencesvømmer.contains("y")) {
             printTrænere();
             trænerID = getIntTræner("Indtast ID på trænernen");
@@ -348,38 +348,38 @@ public class SystemUI implements UI {
     }
     
     public void setRestanceTilJa() {
-        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        int medlemsnummer = getInt("Indtast medlemsnummer");
         db.sætMedlemRestanceJa(medlemsnummer);
     }
 
     public void setRestanceTilNej() {
-        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        int medlemsnummer = getInt("Indtast medlemsnummer");
         db.sætMedlemRestanceNej(medlemsnummer);
     }
 
     public void setPassivTilJa() {
-        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        int medlemsnummer = getInt("Indtast medlemsnummer");
         db.sætMedlemPassivJa(medlemsnummer);
     }
 
     public void setPassivTilNej() {
-        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        int medlemsnummer = getInt("Indtast medlemsnummer");
         db.sætMedlemPassivNej(medlemsnummer);
     }
     
     public void annulerAbonnement() {
-        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        int medlemsnummer = getInt("Indtast medlemsnummer");
         db.annulerAbonnement(medlemsnummer);
     }
 
     public void redigerNavn() {
-        String navn = getString("Indtast nyt navn på medlem: ");
-        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        String navn = getString("Indtast medlemmets nye navn: ");
+        int medlemsnummer = getInt("Indtast medlemsnummer");
         db.redigerNavn(medlemsnummer, navn);
     }
 
     public void redigerTelefonnummer() {
-        int medlemsnummer = getInt("Indtast medlemmets nummer");
+        int medlemsnummer = getInt("Indtast medlemsnummer");
         System.out.print("");
         int telefonnummer = getInt("Indtast det nye telefonnummer: ");
         db.redigerTelefonnummer(medlemsnummer, telefonnummer);
@@ -387,7 +387,7 @@ public class SystemUI implements UI {
     }
     
     public void setKonkurrenceSvømmerJa() throws SQLException{
-        int medlemsnummer = getInt("Indtast nummer på medlem: ");
+        int medlemsnummer = getInt("Indtast medlemsnummer: ");
         printTrænere();
         System.out.println("");
         int træner_id = getInt("Indtast træner ID: ");
@@ -395,7 +395,7 @@ public class SystemUI implements UI {
     }
     
     public void setKonkurrenceSvømmerNej(){
-        int medlemsnummer = getInt("Indtast nummer på medlem: ");      
+        int medlemsnummer = getInt("Indtast medlemsnummer: ");      
         db.setKonkurrencesvømmerNej(medlemsnummer);
     }
 
@@ -476,10 +476,9 @@ public class SystemUI implements UI {
 
             String SRestance = "er ikke "; 
             if (restance == true) {
-                SRestance= "ER "; 
+                SRestance= "er "; 
             }
             System.out.print("Medlemsnummer: " + medlemsNummer +"\n"); 
-            System.out.print("Oprettet d. " +datoOprettet + "\n"); 
             System.out.print("Navn: " + medlem_navn + "\n" ) ;
             System.out.print("Telefonnummer: "+ medlem_telefonNummer + "\n");
             System.out.print("Medlemsskabets årlige kontigent er: " + kontigent +"kr."+"\n" );
