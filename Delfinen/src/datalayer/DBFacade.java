@@ -41,26 +41,6 @@ public class DBFacade implements Facade {
         return connection;
     }
 
-    @Override
-    public void printMedlemmer() throws SQLException {
-        Connection connection = connector();
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM MEDLEMMER");
-            while (result.next()) {
-                String navn = result.getNString(1);
-                int alder = result.getInt(2);
-                int telefonnummer = result.getInt(3);
-                int medlemsnummer = result.getInt(4);
-                System.out.print("Navn: " + navn);
-                System.out.print(", Alder: " + alder);
-                System.out.print(", Telefonnummer: " + telefonnummer);
-                System.out.print(", Medlemsnummer: " + medlemsnummer + "\n");
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
 
     /*
     opretMedlem metoden tager variablerne fra et medlemsobjekt som argument,

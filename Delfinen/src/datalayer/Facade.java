@@ -15,7 +15,6 @@ import java.util.ArrayList;
  */
 public interface Facade {
 
-    public void printMedlemmer() throws SQLException;
 
     public void opretMedlem(Medlem medlem) throws SQLException;
     

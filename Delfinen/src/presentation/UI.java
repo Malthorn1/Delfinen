@@ -15,17 +15,12 @@ public interface UI {
 
     public String hovedMenuValg();
 
-    public void administrerBrugere();
-
-    public void administrerBetaling();
-    
-    public void redigerBruger();
-
     public void printSvømmehold() throws SQLException;
 
     public String getString(String str);
 
     public int getInt(String str);
+      public int getIntTræner(String str);
 
     public String getBoolean(String str);
 

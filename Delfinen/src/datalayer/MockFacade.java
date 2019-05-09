@@ -24,11 +24,7 @@ public class MockFacade implements Facade {
     public ArrayList<Medlem> database = new ArrayList();
     DBFacade db = new DBFacade();
 
-    @Override
-    public void printMedlemmer() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public void opretMedlem(Medlem medlem) throws SQLException {
         database.add(medlem);

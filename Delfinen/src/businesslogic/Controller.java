@@ -29,41 +29,5 @@ public class Controller {
         medlemmer = new ArrayList<Medlem>();
     }
 
-    public void start() throws SQLException {
-        boolean quite = false;
-        ui.visHovedMenu();
-        do {
-            String brugerInput = ui.hovedMenuValg();
-            switch (brugerInput) {
-                case "1":
-                    ui.administrerBrugere();
-                    break;
-                case "2":
-                    ui.administrerBetaling();
-                    break;
-                case "3":
-                    ui.printLeaderboard();
-                    ui.skrivQForAtKommeTilbage();
-                    Scanner scan = new Scanner(System.in);
-                    String nextInput = scan.next();
-                    ui.visHovedMenu();
-                    if (nextInput == "q"){
-                        start();
-                    }
-                    break;
-                case "4":
-                    //visAktiveOrdrer();
-                    break;
-                case "5":
-                    //visOrdreHistorik();
-                    break;
-                case "q":
-                    Runtime.getRuntime().exit(0);
-                    break;
-                default:
-                    System.err.print("Input forkert, prøv igen: ");
-            }
-        } while (!quite);
-
-    }
+  
 }
