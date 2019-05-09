@@ -215,11 +215,11 @@ public class SystemUI implements UI {
     public String getString(String str) {
         System.out.println(str);
         String emptyString;
-        emptyString = scan.nextLine();
+        emptyString = scan.next();
         if (emptyString.matches(".*[0-9].*")) {
             do {
             System.err.print("Fejl ved indtastning af input. Fejl: Der blev indtasted andet end bokstaver. Prøv igen:   ");
-            emptyString = scan.nextLine();
+            emptyString = scan.next();
         } while (emptyString.matches(".*[0-9].*"));
         } return emptyString;
     }
@@ -409,6 +409,7 @@ public class SystemUI implements UI {
     public void opretMedlem() throws SQLException {
         boolean isRestance = true;
         int trænerID = 0;
+        
         String navn = getString("Indtast medlemmes navn: ");
         int age = getInt("Indtast medlemmets alder: ");
         int telefonnummer = getInt("Indtast medlemmets telefonnummer: ");

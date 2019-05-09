@@ -24,7 +24,7 @@ public class DBFacade implements Facade {
         Connection connection = null;
         try {
             String user = "root";
-            String password = "frb150195";
+            String password = "mixe91decoys";
             String IP = "localhost";
             String PORT = "3306";
             String DATABASE = "delfinen";
