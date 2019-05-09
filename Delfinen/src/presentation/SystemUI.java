@@ -150,7 +150,25 @@ public class SystemUI implements UI {
         Time tid = Time.valueOf(timePlusone);
 
         System.out.println("Indtast navn på Disciplin");
-        String disciplin = scan.next();
+        printDicipliner();
+        String disciplin = "";
+        int disciplinid = getInt("");
+        switch (disciplinid) {
+            case 1:
+                disciplin = "Rygcrawl";
+                break;
+            case 2:
+                disciplin = "Butterfly";
+                break;
+            case 3:
+                   disciplin = "Crawl";
+                   break;
+            case 4:
+                disciplin = "Brystsvømning";
+                break;
+            default:
+                forkertInput();
+        }
         db.indtastTræningstid(medlemsnummer, tid, disciplin);
 
     }
@@ -402,6 +420,7 @@ public class SystemUI implements UI {
         System.out.println("2: Rediger bruger");
         System.out.println("3: Udskriv trænere");
         System.out.println("4: Udskriv svømmehold");
+        System.out.println("5: Indtast konkurrence tid");
         System.out.println("q: Tryk q for at gå tilbage");
     }
     
@@ -412,7 +431,6 @@ public class SystemUI implements UI {
         System.out.println("2: Tilføj medlem til at være konkurrencesvømmer");
         System.out.println("3: Fjern medlem fra konkurrencesvømmer");
         System.out.println("4: Rediger navn");
-        System.out.println("5: Indtast konkurrence tid");
         System.out.println("q: Tryk q for at gå tilbage");
     }
 
@@ -469,6 +487,14 @@ public class SystemUI implements UI {
             System.out.print("Medlemet " + SRestance +"i restance");  
             System.out.print("\n \n");
         }
+    }
+    
+    public void printDicipliner() {
+        System.out.println("Tast 1 for Rygcrawl");
+        System.out.println("Tast 2 for Butterfly");
+        System.out.println("Tast 3 for Crawl");
+        System.out.println("Tast 4 for Brystsvømning");
+        System.out.println("");
     }
 
 
