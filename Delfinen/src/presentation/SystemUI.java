@@ -7,6 +7,7 @@ import businesslogic.Træner;
 import businesslogic.Restance;
 import datalayer.DBFacade;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalTime;
@@ -112,6 +113,8 @@ public class SystemUI implements UI {
        } catch (NumberFormatException e) {
             System.err.println("Skriv et korrekt træner id.");
        }
+        
+       
         return getIntTræner(str);
     }
 
@@ -169,7 +172,12 @@ public class SystemUI implements UI {
             default:
                 forkertInput();
         }
-        db.indtastTræningstid(medlemsnummer, tid, disciplin);
+        int count = db.indtastTræningstid(medlemsnummer, tid, disciplin);
+               if (count == 0) {
+            System.err.println("forkert medlemsnummer");
+            System.out.println("");
+            
+        }
 
     }
 
@@ -349,40 +357,77 @@ public class SystemUI implements UI {
     
     public void setRestanceTilJa() {
         int medlemsnummer = getInt("Indtast medlemsnummer");
-        db.sætMedlemRestanceJa(medlemsnummer);
+        int count = db.sætMedlemRestanceJa(medlemsnummer);
+               if (count == 0) {
+            System.err.println("forkert medlemsnummer");
+            System.out.println("");
+            
+        }
     }
 
     public void setRestanceTilNej() {
         int medlemsnummer = getInt("Indtast medlemsnummer");
-        db.sætMedlemRestanceNej(medlemsnummer);
+        int count = db.sætMedlemRestanceNej(medlemsnummer);
+               if (count == 0) {
+            System.err.println("forkert medlemsnummer");
+            System.out.println("");
+            
+        }
     }
 
     public void setPassivTilJa() {
         int medlemsnummer = getInt("Indtast medlemsnummer");
-        db.sætMedlemPassivJa(medlemsnummer);
+        int count = db.sætMedlemPassivJa(medlemsnummer);
+               if (count == 0) {
+            System.err.println("forkert medlemsnummer");
+            System.out.println("");
+            
+        }
     }
 
     public void setPassivTilNej() {
         int medlemsnummer = getInt("Indtast medlemsnummer");
-        db.sætMedlemPassivNej(medlemsnummer);
+        int count = db.sætMedlemPassivNej(medlemsnummer);
+               if (count == 0) {
+            System.err.println("forkert medlemsnummer");
+            System.out.println("");
+            
+        }
     }
     
     public void annulerAbonnement() {
         int medlemsnummer = getInt("Indtast medlemsnummer");
-        db.annulerAbonnement(medlemsnummer);
+        int count = db.annulerAbonnement(medlemsnummer);
+               if (count == 0) {
+            System.err.println("forkert medlemsnummer");
+            System.out.println("");
+            
+        }
     }
 
     public void redigerNavn() {
         String navn = getString("Indtast medlemmets nye navn: ");
         int medlemsnummer = getInt("Indtast medlemsnummer");
-        db.redigerNavn(medlemsnummer, navn);
+        int count = db.redigerNavn(medlemsnummer, navn);
+        
+        if (count == 0) {
+            System.err.println("forkert medlemsnummer");
+            System.out.println("");
+            
+        }
     }
 
     public void redigerTelefonnummer() {
         int medlemsnummer = getInt("Indtast medlemsnummer");
         System.out.print("");
         int telefonnummer = getInt("Indtast det nye telefonnummer: ");
-        db.redigerTelefonnummer(medlemsnummer, telefonnummer);
+        int count = db.redigerTelefonnummer(medlemsnummer, telefonnummer);
+        
+               if (count == 0) {
+            System.err.println("forkert medlemsnummer");
+            System.out.println("");
+            
+        }
         
     }
     
@@ -391,12 +436,22 @@ public class SystemUI implements UI {
         printTrænere();
         System.out.println("");
         int træner_id = getInt("Indtast træner ID: ");
-        db.setKonkurrencesvømmerJa(medlemsnummer, træner_id);
+        int count = db.setKonkurrencesvømmerJa(medlemsnummer, træner_id);
+               if (count == 0) {
+            System.err.println("forkert medlemsnummer");
+            System.out.println("");
+            
+        }
     }
     
     public void setKonkurrenceSvømmerNej(){
         int medlemsnummer = getInt("Indtast medlemsnummer: ");      
-        db.setKonkurrencesvømmerNej(medlemsnummer);
+        int count = db.setKonkurrencesvømmerNej(medlemsnummer);
+               if (count == 0) {
+            System.err.println("forkert medlemsnummer");
+            System.out.println("");
+            
+        }
     }
 
     @Override

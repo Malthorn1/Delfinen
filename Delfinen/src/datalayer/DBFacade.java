@@ -262,7 +262,8 @@ public class DBFacade implements Facade {
 
     }
 
-    public void indtastTræningstid(int medlemsnummer, Time tid, String disciplin) {
+    public int indtastTræningstid(int medlemsnummer, Time tid, String disciplin) {
+        int count = 0; 
 
         Connection connection = connector();
 
@@ -273,84 +274,90 @@ public class DBFacade implements Facade {
             statement.setTime(2, tid);
             statement.setString(3, disciplin);
 
-            statement.executeUpdate();
+            count =statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e);
-        }
+//            System.out.println(e);
+        } return count; 
     }
 
-    public void sætMedlemRestanceJa(int medlemsnummer) {
+    public int sætMedlemRestanceJa(int medlemsnummer) {
+        int count = 0;
         Connection connection = connector();
         try {
             String query = "update medlemmer set RESTANCE = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(2, medlemsnummer);
             statement.setBoolean(1, true);
-            statement.executeUpdate();
+            count = statement.executeUpdate();
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
-        }
+        } return count;
     }
 
-    public void sætMedlemRestanceNej(int medlemsnummer) {
+    public int sætMedlemRestanceNej(int medlemsnummer) {
+        int count = 0; 
         Connection connection = connector();
         try {
             String query = "update medlemmer set RESTANCE = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(2, medlemsnummer);
             statement.setBoolean(1, false);
-            statement.executeUpdate();
+            count = statement.executeUpdate();
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
-        }
+        } return count;
     }
 
-    public void sætMedlemPassivJa(int medlemsnummer) {
+    public int sætMedlemPassivJa(int medlemsnummer) {
+        int count = 0;
         Connection connection = connector();
         try {
             String query = "update medlemmer set PASSIV = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(2, medlemsnummer);
             statement.setBoolean(1, true);
-            statement.executeUpdate();
+            count = statement.executeUpdate();
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
-        }
+        } return count; 
     }
 
-    public void sætMedlemPassivNej(int medlemsnummer) {
+    public int sætMedlemPassivNej(int medlemsnummer) {
+        int count =0;
         Connection connection = connector();
         try {
             String query = "update medlemmer set PASSIV = ? where MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(2, medlemsnummer);
             statement.setBoolean(1, false);
-            statement.executeUpdate();
+            count = statement.executeUpdate();
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
-        }
+        } return count;
     }
     
-    public void annulerAbonnement(int medlemsnummer) {
+    public int annulerAbonnement(int medlemsnummer) {
+        int count = 0;
         Connection connection = connector();
         try {
             String query = "UPDATE MEDLEMMER SET NAVN = ?, TRÆNER_ID = null, PASSIV = null, RESTANCE = null, KONKURRENCESVØMMER = null, ALDER = 0 WHERE MEDLEMSNUMMER = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, "Abonnement annuleret");
             statement.setInt(2, medlemsnummer);
-            statement.executeUpdate();
+            count =statement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println(e);
-        }
+//            System.out.println(e);
+        }return count;
     }
 
-    public void redigerNavn(int medlemsnummer, String navn) {
+    public int redigerNavn(int medlemsnummer, String navn) {
         Connection connection = connector();
+        int count = 0;
         try {
             String sqlUpdate = "UPDATE MEDLEMMER "
                     + "SET NAVN = ?"
@@ -358,41 +365,43 @@ public class DBFacade implements Facade {
             PreparedStatement statement = connection.prepareStatement(sqlUpdate);
             statement.setString(1, navn);
             statement.setInt(2, medlemsnummer);
-            statement.executeUpdate();
-
+            count = statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e);
-        }
-
+//            System.out.println(e);
+        } 
+        return count;
     }
 
-    public void redigerTelefonnummer(int medlemsnummer, int telefonnummer) {
+    public int redigerTelefonnummer(int medlemsnummer, int telefonnummer) {
+        int count = 0;
         Connection connection = connector();
         try {
             String sqlUpdate = "UPDATE MEDLEMMER SET TELEFONNUMMER=? WHERE MEDLEMSNUMMER=? ";
             PreparedStatement statement = connection.prepareStatement(sqlUpdate);
             statement.setInt(1, telefonnummer);
             statement.setInt(2, medlemsnummer);
-            statement.executeUpdate();
+            count = statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e);
-        }
+//            System.out.println(e);
+        }return count;
     }
     
-    public void setKonkurrencesvømmerNej(int medlemsnummer){
+    public int setKonkurrencesvømmerNej(int medlemsnummer){
+        int count = 0; 
         Connection connection = connector();
         try {
             String sqlUpdate = "UPDATE MEDLEMMER SET KONKURRENCESVØMMER=?, TRÆNER_ID = null WHERE MEDLEMSNUMMER=? ";
             PreparedStatement statement = connection.prepareStatement(sqlUpdate);
             statement.setBoolean(1, false);
             statement.setInt(2, medlemsnummer);
-            statement.executeUpdate();
+            count = statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e);
-        }
+//            System.out.println(e);
+        } return count;
     }
     
-    public void setKonkurrencesvømmerJa(int medlemsnummer, int træner_ID){
+    public int setKonkurrencesvømmerJa(int medlemsnummer, int træner_ID){
+        int count =0;
         Connection connection = connector();
         try {
             String sqlUpdate = "UPDATE MEDLEMMER SET KONKURRENCESVØMMER=?, TRÆNER_ID = ? WHERE MEDLEMSNUMMER=? ";
@@ -400,10 +409,10 @@ public class DBFacade implements Facade {
             statement.setBoolean(1, true);
             statement.setInt(2, træner_ID);
             statement.setInt(3, medlemsnummer);
-            statement.executeUpdate();
+            count = statement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e);
-        }
+//            System.out.println(e);
+        } return count;
     }
 
     @Override

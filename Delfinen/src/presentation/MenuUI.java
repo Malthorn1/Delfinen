@@ -180,7 +180,7 @@ public class MenuUI {
             }
         } catch (Exception e) {
             System.err.println("Fejl ved input. Retunerer tilbage til menu.");
-            System.err.println("Fejl: "+e.getMessage());
+            //System.err.println("Fejl: "+e.getMessage());
             try {
                 TimeUnit.SECONDS.sleep(2);
                 } catch (InterruptedException ex) {
