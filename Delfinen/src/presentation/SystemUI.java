@@ -430,6 +430,13 @@ public class SystemUI implements UI {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+        if (isRestance == false) {
+           isRestance =true; 
+            
+        } else if (isRestance == true) {
+            isRestance= false; 
+        }
+        medlem.setRestance(isRestance);
         System.out.println(medlem.toString());
         System.out.println("\n");
     }
