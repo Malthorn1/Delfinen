@@ -167,6 +167,11 @@ public class MenuUI {
                      ui.skrivQForAtKommeTilbage();
                     administrerBrugere();
                     break;
+                case "5":
+                ui.indtastTræningstid();
+                administrerBrugere();
+                break;
+                
                 case "q":
                      start();
                     break;

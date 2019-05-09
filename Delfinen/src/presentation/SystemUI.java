@@ -412,6 +412,7 @@ public class SystemUI implements UI {
         System.out.println("2: Tilføj medlem til at være konkurrencesvømmer");
         System.out.println("3: Fjern medlem fra konkurrencesvømmer");
         System.out.println("4: Rediger navn");
+        System.out.println("5: Indtast konkurrence tid");
         System.out.println("q: Tryk q for at gå tilbage");
     }
 
