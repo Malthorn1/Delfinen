@@ -162,7 +162,7 @@ public class MenuUI {
                     administrerBrugere();
                     break;
                 case "2":
-                    ui.redigerBruger();
+                    redigerBruger();
                     break;
                 case "3":
                     ui.printTrænere();
